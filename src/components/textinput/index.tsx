@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-export interface Props{
+export interface Props {
     testid?: string,
     pattern?: any,
     type?: string,
@@ -26,6 +26,7 @@ export interface Props{
     intl?: any,
     aff?: any,
     required?: boolean
+    formProps?: any
 }
 
 export default function TextInput({
@@ -51,7 +52,8 @@ export default function TextInput({
     min,
     intl,
     aff,
-    required
+    required,
+    formProps = {}
 }: Props) {
 
 
@@ -108,6 +110,7 @@ export default function TextInput({
 
         element === 'text-area' ?
             <textarea
+                {...formProps}
                 required={required}
                 id={id}
                 dir={dir}
@@ -126,6 +129,7 @@ export default function TextInput({
                 placeholder={placeholder} />
             :
             <input
+                {...formProps}
                 required={required}
                 id={id}
                 dir={dir}

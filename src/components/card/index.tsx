@@ -39,10 +39,10 @@ export default function Card({ testid, children, onClick, className, tailwind, r
                 <div className='p-4 border-b border-gray-200'>
                     <Text
                         color
-                        tailwind='font-bold text-gray-800'>{header.heading}</Text>
+                        className='font-bold text-gray-800'>{header.heading}</Text>
                     <Text
                         textSize
-                        tailwind=' text-xs'
+                        className=' text-xs'
                         type='text-small'>{header.subHeading}</Text>
                 </div>
             }

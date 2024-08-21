@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TextInput from '../textinput';
 import styled from 'styled-components';
 import Text from '../text';

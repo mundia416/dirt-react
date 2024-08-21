@@ -34,7 +34,7 @@ function ContentController({
                 loading ?
                     <div
                         className={'w-full h-full flex justify-center items-center ' + loadingClassName}>
-                        <Loading screen={loadingFullscreen} />
+                        <Loading fullscreen={loadingFullscreen} />
                     </div>
                     :
                     <>

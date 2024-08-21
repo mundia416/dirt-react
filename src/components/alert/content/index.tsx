@@ -95,11 +95,11 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
             <div className='my-4 mr-4'>
                 <Text
                     type='text-small'
-                    tailwind={`text-gray-900 font-medium ${titleStyle}`}
+                    className={`text-gray-900 font-medium ${titleStyle}`}
                     color>{title}</Text>
 
                 <Text
-                    tailwind={`${contentStyle}`}
+                    className={`${contentStyle}`}
                     type='text-small'
                 >{content}</Text>
 

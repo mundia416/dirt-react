@@ -13,7 +13,7 @@ export interface Props {
     variant?: 'light' | 'dark',
     element?: 'input' | 'text-area',
     value?: string | number,
-    onChange: (value: string) => void,
+    onChange?: (value: string) => void,
     disabled?: boolean,
     id?: any,
     dir?: any,
@@ -101,7 +101,7 @@ export default function TextInput({
     }
 
     const onChangeAndValidate = (e: any, type?: string) => {
-        onChange(e.target.value);
+        onChange && onChange(e.target.value);
 
         validate(e, type);
     }
@@ -110,7 +110,6 @@ export default function TextInput({
 
         element === 'text-area' ?
             <textarea
-                {...formProps}
                 required={required}
                 id={id}
                 dir={dir}
@@ -126,10 +125,11 @@ export default function TextInput({
                     (typeof onChange !== 'undefined') && onChange(e.target.value)
                 }
                 }
-                placeholder={placeholder} />
+                placeholder={placeholder}
+                {...formProps}
+            />
             :
             <input
-                {...formProps}
                 required={required}
                 id={id}
                 dir={dir}
@@ -152,7 +152,9 @@ export default function TextInput({
                 className={style}
                 type={type}
                 onInvalid={(e) => validate(e, type)}
-                placeholder={placeholder} />
+                placeholder={placeholder}
+                {...formProps}
+            />
 
     )
 

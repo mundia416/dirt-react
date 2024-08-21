@@ -1,3 +1,4 @@
+import './output.css'
 import ContentController from "./components/content-controller"
 import Loading from "./components/loading"
 import ErrorAlert from './components/alert/error'

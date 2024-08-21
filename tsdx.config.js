@@ -9,7 +9,15 @@ module.exports = {
 
         config.plugins = [
             images({ incude: ['**/*.png', '**/*.jpg', '**/*.webp'] }),
-            postcss(),
+            postcss({
+                extensions: ['.css'],
+                inject: true, // Inject the CSS into the JavaScript bundle
+                extract: false, // Extract CSS to a separate file
+                plugins: [
+                  require('tailwindcss'),
+                  require('autoprefixer'),
+                ],
+              }),
             ...config.plugins,
         ]
 

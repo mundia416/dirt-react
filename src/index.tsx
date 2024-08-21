@@ -11,8 +11,7 @@ import Icon from "./components/icon"
 import IconButton from "./components/iconbutton"
 import Alert from "./components/alert"
 import SuccessAlert from "./components/alert/success"
-import Wrapper from "./components/wrapper"
-
+import FieldInput from './components/fieldinput'
 
 
 
@@ -31,5 +30,5 @@ export {
   IconButton,
   Alert,
   SuccessAlert,
-  Wrapper
+  FieldInput
 }

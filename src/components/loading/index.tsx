@@ -2,20 +2,14 @@ import React from 'react';
 import Spinner from 'react-spinkit'
 
 interface Props {
-    /**
-     * @deprecated use className
-     */
-    tailwind?: string,
     className?: string,
-    screen?: boolean,
-    testid?: string
+    fullscreen?: boolean,
 }
 
-const Loading: React.FC<Props> = ({ className, screen, testid, tailwind }) => {
+const Loading: React.FC<Props> = ({ className, fullscreen }) => {
     return (
         <div
-            data-testid={testid}
-            className={`w-full h-full flex  ${screen && 'w-screen h-screen'} items-center justify-center ${tailwind} ${className}`}>
+            className={`w-full h-full flex  ${fullscreen && 'w-screen h-screen'} items-center justify-center ${className}`}>
             <Spinner name="three-bounce" color="steelblue" />
 
         </div>

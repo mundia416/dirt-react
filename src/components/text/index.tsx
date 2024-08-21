@@ -10,10 +10,6 @@ export interface TextProps {
     span?: boolean,
     className?: string,
     children?: any,
-    /**
-     * @deprecated use className instead
-     */
-    tailwind?: string,
     color?: boolean,
     font?: boolean,
     textSize?: boolean,
@@ -29,7 +25,6 @@ const Text: React.FC<TextProps> = ({
     span = false,
     className,
     children,
-    tailwind,
     color = false,
     font = false,
     textSize = false,
@@ -86,7 +81,7 @@ const Text: React.FC<TextProps> = ({
             break
     }
 
-    const styles = ` ${!font && 'font-sans'} ${textStyle} ${tailwind} ${className}`
+    const styles = ` ${!font && 'font-sans'} ${textStyle} ${className}`
 
     return (
         span ?

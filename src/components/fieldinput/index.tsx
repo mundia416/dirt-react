@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextInput, { proptypes as textInputPropTypes } from '../textinput';
+import TextInput from '../textinput';
 import styled from 'styled-components';
 import Text from '../text';
 import WarningPNG from './images/warning.png'
 import Icon from '../icon';
+import { Props as TextInputProps } from '../textinput'
 
-const errorFocus = (theme) => {
+const errorFocus = (theme: any) => {
 
     return `
     border-color: ${theme.red600};
@@ -18,24 +19,41 @@ const errorFocus = (theme) => {
 }
 `};
 
-const Input = styled(TextInput)`
+const Input = styled(TextInput) <{ error: any }>`
 ${({ error, theme }) => error && errorFocus(theme)}
 `
 
+
+
+interface Props extends TextInputProps {
+    leadingIcon?: any,
+    trailingIcon?: any,
+    cornerHelpText?: string,
+    inputClassName?: string,
+    helpText?: string,
+    trailingContent?: any,
+    leadingText?: string,
+    type?: string,
+    pattern?: string,
+    label?: string,
+    name?: string,
+    error?: boolean,
+    leadingClassName?: string
+}
 
 /**
  * 
  *  when adding leading and trailing content, adjust the padding in the x-axis using tailwind to move
  * the input to fit the content you are adding 
  */
-const FieldInput = ({ testid, pattern, label, leadingText, tailwind, leadingTailwind, trailingContent, className, error,
+const FieldInput = ({ testid, pattern, label, leadingText, trailingContent, className, error,
     helpText, inputClassName, cornerHelpText, placeholder, type, leadingIcon, trailingIcon, variant, id,
-    disabled, onChange, step, value, element, name, onFocus, onBlur, inputPadding, aff, max, min, required }) => {
+    disabled, onChange, step, value, element = 'input', name, onFocus, onBlur, aff, max, min, required, leadingClassName }: Props) => {
 
     const isDarkVariant = (variant === 'dark')
 
     return (
-        <div className={`${tailwind} ${className}`}>
+        <div className={className}>
             {(label || cornerHelpText) &&
                 < div className='w-full flex justify-between mb-2'>
                     <label
@@ -45,7 +63,7 @@ const FieldInput = ({ testid, pattern, label, leadingText, tailwind, leadingTail
 
                     <Text
                         type='text-small'
-                        tailwind='' >{cornerHelpText}</Text>
+                    >{cornerHelpText}</Text>
                 </div>
             }
             <div className='flex items-center relative'>
@@ -53,12 +71,12 @@ const FieldInput = ({ testid, pattern, label, leadingText, tailwind, leadingTail
                     <Icon
                         color
                         hasBackground={false}
-                        tailwind='ml-1 text-gray-500 absolute p-3 '
+                        className='ml-1 text-gray-500 absolute p-3 '
                         src={leadingIcon}
                     />
                 }
 
-                <span className={`absolute  z-10 text-gray-600 sm:text-sm sm:leading-5 ${leadingTailwind}`}>
+                <span className={`absolute  z-10 text-gray-600 sm:text-sm sm:leading-5 ${leadingClassName}`}>
                     {leadingText}
                 </span>
 
@@ -75,7 +93,6 @@ const FieldInput = ({ testid, pattern, label, leadingText, tailwind, leadingTail
                     focus
                     min={min}
                     max={max}
-                    padding={inputPadding}
                     name={name}
                     value={value}
                     variant={variant}
@@ -84,7 +101,7 @@ const FieldInput = ({ testid, pattern, label, leadingText, tailwind, leadingTail
                     error={error}
                     step={step}
                     element={element}
-                    tailwind={` ${leadingText && 'pl-0'} ${leadingIcon && 'pl-12'}
+                    className={` ${leadingText && 'pl-0'} ${leadingIcon && 'pl-12'}
                      ${(trailingIcon || error) && 'pr-10'} w-full
                       ${error ? 'text-red-900 ' +
                             (!isDarkVariant && ' border-red-300 border-px focus:border-red-300') :
@@ -100,7 +117,7 @@ const FieldInput = ({ testid, pattern, label, leadingText, tailwind, leadingTail
                         png
                         color
                         hasBackground={false}
-                        tailwind={`p-3 ${error ? 'text-red-600' : 'text-gray-500'} 
+                        className={`p-3 ${error ? 'text-red-600' : 'text-gray-500'} 
                              ml-1 `}
                         src={error ? WarningPNG : trailingIcon}
                     />
@@ -113,7 +130,7 @@ const FieldInput = ({ testid, pattern, label, leadingText, tailwind, leadingTail
                 helpText &&
                 <Text
                     color
-                    tailwind={`mt-2 ${error ? 'text-red-600' : 'text-gray-400'} `}
+                    className={`mt-2 ${error ? 'text-red-600' : 'text-gray-400'} `}
                     type='text-small'>{helpText}</Text>
             }
 
@@ -126,22 +143,5 @@ FieldInput.defaultProps = {
     element: 'input',
     inputPadding: false,
 }
-
-FieldInput.propTypes = {
-    leadingIcon: PropTypes.object,
-    trailingIcon: PropTypes.object,
-    cornerHelpText: PropTypes.string,
-    inputClassName: PropTypes.string,
-    helpText: PropTypes.string,
-    trailingContent: PropTypes.object,
-    leadingTailwind: PropTypes.string,
-    leadingText: PropTypes.string,
-    type: PropTypes.string,
-    pattern: PropTypes.string,
-    label: PropTypes.string,
-    name: PropTypes.string,
-
-    ...textInputPropTypes,
-};
 
 export default FieldInput;

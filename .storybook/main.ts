@@ -14,25 +14,30 @@ const config: StorybookConfig = {
 
       options: {
         rules: [{
-      test: /\.css$/,
-      sideEffects: true,
-      use: [
-          require.resolve("style-loader"),
-          {
+          test: /\.css$/,
+          sideEffects: true,
+          use: [
+            require.resolve("style-loader"),
+            {
               loader: require.resolve("css-loader"),
               options: {
-                  
-                  
+
+
               },
-          },
-      ],
-    },],
+            },
+          ],
+        },],
       }
     })
   ],
   framework: {
     name: '@storybook/react-webpack5',
-    options: {},
+    // name: '@storybook/nextjs',
+    options: {
+      // builder: {
+      //   useSWC: true, // Enables SWC support
+      // },
+    },
   },
 };
 export default config;

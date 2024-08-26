@@ -12,6 +12,8 @@ import IconButton from "./components/iconbutton"
 import Alert from "./components/alert"
 import SuccessAlert from "./components/alert/success"
 import FieldInput from './components/fieldinput'
+import StackedLayout from './layouts/stacked-layout'
+
 
 
 
@@ -30,5 +32,6 @@ export {
   IconButton,
   Alert,
   SuccessAlert,
-  FieldInput
+  FieldInput,
+  StackedLayout
 }

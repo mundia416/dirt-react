@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { usePathname } from 'next/navigation';
-type Props = {
-    navigationOptions?: {
-        name: string,
-        href: string,
-    }[]
 
-    userNavigationOptions?: {
+export type NavItemProps = {
+    //the name of the nav item, showing on the navigation list
+    name: string,
+    //an optional title to use as the heading for the nav item, defaults to name if null
+    title?: string
+    href: string,
+}
+
+
+type Props = {
+    navigationOptions?: NavItemProps[]
+
+    userDropdownOptions?: {
         name: string,
-        href: string
+        //an optional href to redirect to a different page
+        href?: string
+        //an optional onClick listener to perform an action when a user dropdown option is clicked
+        onClick?: () => void
     }[],
     children: any,
     user: {
@@ -29,15 +39,17 @@ function classNames(...classes: any) {
 
 export default function StackedLayout({
     navigationOptions,
-    userNavigationOptions,
+    userDropdownOptions,
     user,
     logoSrc,
     children }: Props) {
-
-
+    const [activeNavItem, setActiveNavItem] = useState<NavItemProps>()
 
     const pathname = usePathname();
-    console.log({ pathname })
+
+    useEffect(() => {
+        setActiveNavItem(navigationOptions?.filter(item => item.href === pathname)[0])
+    }, [pathname, navigationOptions])
 
     return (
         <>
@@ -47,17 +59,21 @@ export default function StackedLayout({
                         <div className="flex h-16 justify-between">
                             <div className="flex">
                                 <div className="flex flex-shrink-0 items-center">
-                                    <img
-                                        alt="Company Name"
-                                        src={logoSrc}
-                                        className="block h-8 w-auto lg:hidden"
-                                    />
+                                    {logoSrc &&
+                                        <>
+                                            <img
+                                                alt="Company Name"
+                                                src={logoSrc}
+                                                className="block h-8 w-auto lg:hidden"
+                                            />
 
-                                    <img
-                                        alt="Company Name"
-                                        src={logoSrc}
-                                        className="hidden h-8 w-auto lg:block"
-                                    />
+                                            <img
+                                                alt="Company Name"
+                                                src={logoSrc}
+                                                className="hidden h-8 w-auto lg:block"
+                                            />
+                                        </>
+                                    }
                                 </div>
                                 <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                                     {navigationOptions?.map((item) => (
@@ -100,9 +116,11 @@ export default function StackedLayout({
                                         transition
                                         className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                                     >
-                                        {userNavigationOptions?.map((item) => (
+                                        {userDropdownOptions?.map((item) => (
                                             <MenuItem key={item.name}>
-                                                <a href={item.href} className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                                                <a
+                                                    onClick={item.onClick}
+                                                    href={item.href} className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                                                     {item.name}
                                                 </a>
                                             </MenuItem>
@@ -163,8 +181,9 @@ export default function StackedLayout({
 
                             </div>
                             <div className="mt-3 space-y-1">
-                                {userNavigationOptions?.map((item) => (
+                                {userDropdownOptions?.map((item) => (
                                     <DisclosureButton
+                                        onClick={item.onClick}
                                         key={item.name}
                                         as="a"
                                         href={item.href}
@@ -181,7 +200,7 @@ export default function StackedLayout({
                 <div className="py-10">
                     <header>
                         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                            <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">Dashboard</h1>
+                            <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">{activeNavItem?.title || activeNavItem?.name}</h1>
                         </div>
                     </header>
                     <main>

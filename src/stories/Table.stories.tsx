@@ -110,20 +110,5 @@ export const ActionButton: Story = {
 };
 
 
-export const InCard: Story = {
-  args: {
-    heading: 'Users',
-    subHeading: 'A list of all the users in your account including their name, title, email and role.',
-    actionButton: {
-      text: 'Add Users',
-      onClick: fn()
-    },
-    columnTitles,
-    rowData
-  },
-};
-
-
-
 
 

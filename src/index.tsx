@@ -15,7 +15,7 @@ import FieldInput from './components/fieldinput'
 import StackedLayout from './layouts/stacked-layout'
 import useAuth from './hooks/useAuth'
 import Stat from "./components/stat"
-
+import Table from "./components/table"
 
 
 
@@ -37,5 +37,6 @@ export {
   FieldInput,
   StackedLayout,
   useAuth,
-  Stat
+  Stat,
+  Table
 }

@@ -13,6 +13,8 @@ import Alert from "./components/alert"
 import SuccessAlert from "./components/alert/success"
 import FieldInput from './components/fieldinput'
 import StackedLayout from './layouts/stacked-layout'
+import useAuth from './hooks/useAuth'
+import Stat from "./components/stat"
 
 
 
@@ -33,5 +35,7 @@ export {
   Alert,
   SuccessAlert,
   FieldInput,
-  StackedLayout
+  StackedLayout,
+  useAuth,
+  Stat
 }

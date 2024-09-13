@@ -15,7 +15,7 @@ export type RowsProps = {
 type Props = {
     heading?: string
     subHeading?: string
-    actionButton: {
+    actionButton?: {
         text: string,
         onClick: () => void
     },

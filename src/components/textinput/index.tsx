@@ -14,6 +14,7 @@ export interface Props {
     element?: 'input' | 'text-area',
     value?: string | number,
     onChange?: (value: string) => void,
+    onFilesChange?: (files: FileList) => void,
     disabled?: boolean,
     id?: any,
     dir?: any,
@@ -41,6 +42,7 @@ export default function TextInput({
     element = 'input',
     value,
     onChange,
+    onFilesChange,
     disabled = false,
     id,
     dir,
@@ -102,6 +104,7 @@ export default function TextInput({
 
     const onChangeAndValidate = (e: any, type?: string) => {
         onChange && onChange(e.target.value);
+        onFilesChange && onFilesChange(e.target.files)
 
         validate(e, type);
     }
@@ -122,7 +125,7 @@ export default function TextInput({
                 className={style}
                 {...valueProps}
                 onChange={(e) => {
-                    (typeof onChange !== 'undefined') && onChange(e.target.value)
+                    (typeof onChange !== 'undefined' || typeof onFilesChange !== 'undefined') && onChangeAndValidate(e, type)
                 }
                 }
                 placeholder={placeholder}
@@ -145,8 +148,7 @@ export default function TextInput({
                 disabled={disabled}
                 {...valueProps}
                 onChange={(e) => {
-                    (typeof onChange !== 'undefined') && onChangeAndValidate(e, type)
-                    // onChange(e.target.value)
+                    (typeof onChange !== 'undefined' || typeof onFilesChange !== 'undefined') && onChangeAndValidate(e, type)
                 }
                 }
                 className={style}

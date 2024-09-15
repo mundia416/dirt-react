@@ -36,3 +36,10 @@ export const TextArea: Story = {
     element: 'text-area',
   },
 };
+
+export const FileUpload: Story = {
+  args: {
+    type: 'file',
+    onFilesChange: (files)=>console.log({files})
+  },
+};

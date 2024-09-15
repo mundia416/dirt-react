@@ -8,8 +8,7 @@ type Props = {
     children?: any,
     onClick?: () => void,
     className?: string,
-    /**@deprecated */
-    tailwind?: string,
+    contentClassName?: string,
     rounded?: boolean,
     onAnimationEnd?: () => void,
     shadow?: boolean,
@@ -20,7 +19,7 @@ type Props = {
     mobileFlat?: boolean
 }
 
-export default function Card({ testid, children, onClick, className, tailwind, rounded = false, onAnimationEnd, shadow = false, header, mobileFlat = false }: Props) {
+export default function Card({ testid, children, onClick, className, contentClassName, rounded = false, onAnimationEnd, shadow = false, header, mobileFlat = false }: Props) {
     let styles
 
     if (mobileFlat) {
@@ -33,7 +32,7 @@ export default function Card({ testid, children, onClick, className, tailwind, r
         <div
             data-testid={testid}
             onAnimationEnd={onAnimationEnd}
-            className={`${styles} ${tailwind} ${className}`}
+            className={`${styles} ${className}`}
             onClick={onClick}>
             {header &&
                 <div className='p-4 border-b border-gray-200'>
@@ -46,8 +45,9 @@ export default function Card({ testid, children, onClick, className, tailwind, r
                         type='text-small'>{header.subHeading}</Text>
                 </div>
             }
-
-            {children}
+            <div className={`` + contentClassName}>
+                {children}
+            </div>
         </div>
     );
 };

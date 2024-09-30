@@ -16,6 +16,7 @@ import StackedLayout from './layouts/stacked-layout'
 import useAuth from './hooks/useAuth'
 import Stat from "./components/stat"
 import Table from "./components/table"
+import SidebarLayout from './layouts/sidebar-layout'
 
 
 
@@ -36,6 +37,7 @@ export {
   SuccessAlert,
   FieldInput,
   StackedLayout,
+  SidebarLayout,
   useAuth,
   Stat,
   Table

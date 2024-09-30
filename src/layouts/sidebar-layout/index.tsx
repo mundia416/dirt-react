@@ -1,19 +1,5 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 'use client'
-import React, { useEffect } from 'react'
+import React, {  } from 'react'
 import { useState } from 'react'
 import {
     Dialog,
@@ -97,15 +83,15 @@ export default function SidebarLayout({
     showNotificationIcon = true,
     settingsNavItem }: Props) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    const [activeNavItem, setActiveNavItem] = useState<NavItemProps>()
+    // const [activeNavItem, setActiveNavItem] = useState<NavItemProps>()
 
     const pathname = usePathname();
 
-    useEffect(() => {
-        navigationGroups?.forEach(navOptions => {
-            setActiveNavItem(navOptions?.navigationOptions?.filter(item => item.href === pathname)[0])
-        })
-    }, [pathname, navigationGroups])
+    // useEffect(() => {
+    //     navigationGroups?.forEach(navOptions => {
+    //         setActiveNavItem(navOptions?.navigationOptions?.filter(item => item.href === pathname)[0])
+    //     })
+    // }, [pathname, navigationGroups])
 
     return (
         <>
@@ -143,14 +129,10 @@ export default function SidebarLayout({
                                             <img
                                                 alt="Company Name"
                                                 src={logoSrc}
-                                                className="block h-8 w-auto lg:hidden"
+                                                className="block h-8 w-auto "
                                             />
 
-                                            {/* <img
-                                                alt="Company Name"
-                                                src={logoSrc}
-                                                className="hidden h-8 w-auto lg:block"
-                                            /> */}
+                                            
                                         </>
                                     }
                                 </div>
@@ -216,14 +198,9 @@ export default function SidebarLayout({
                                     <img
                                         alt="Company Name"
                                         src={logoSrc}
-                                        className="block h-8 w-auto lg:hidden"
+                                        className="block h-8 w-auto"
                                     />
-
-                                    {/* <img
-                                                alt="Company Name"
-                                                src={logoSrc}
-                                                className="hidden h-8 w-auto lg:block"
-                                            /> */}
+                                  
                                 </>
                             }
                         </div>

@@ -117,7 +117,8 @@ export const WithClassname: Story = {
     change: { value: '3.5%', type: 'increase' },
     tooltip: "This is an example tooltip with helpful information",
     actionButtonOnClick: fn(),
-    className: 'h-28'
+    wordWrap: 'wrap',
+    className: 'h-60'
   },
 };
 

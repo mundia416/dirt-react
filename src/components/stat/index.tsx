@@ -34,11 +34,11 @@ type Props = {
 
 export default function Stat(props: Props) {
     return (
-        <div>
+        <>
             <Tooltip id={tooltipId} className='z-50' />
 
             <div
-                className={'rounded-lg bg-white shadow ' + props.className}
+                className={'relative rounded-lg bg-white shadow ' + props.className}
             >
                 <div
                     className="relative overflow-hidden  px-4  py-5  sm:px-6 sm:py-6"
@@ -88,16 +88,19 @@ export default function Stat(props: Props) {
 
                 </div>
                 {props.actionButtonOnClick &&
-                    <div className="inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
-                        <div className="text-sm">
-                            <a onClick={props.actionButtonOnClick} className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500">
-                                {props.actionButtonText || 'View all'}
-                            </a>
+                    <div className='relative flex items-end h-full bg-white rounded-b-lg shadow'>
+
+                        <div className="inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6 w-full shadow rounded-b-lg">
+                            <div className="text-sm">
+                                <a onClick={props.actionButtonOnClick} className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-500">
+                                    {props.actionButtonText || 'View all'}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 }
             </div>
 
-        </div>
+        </>
     )
 }

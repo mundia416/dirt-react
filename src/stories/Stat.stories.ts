@@ -108,4 +108,17 @@ export const NameTruncated: Story = {
   },
 };
 
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const WithClassname: Story = {
+  args: {
+    name: 'Very Long Title For Total Subscribers',
+    value: '71,897',
+    icon: UsersIcon,
+    change: { value: '3.5%', type: 'increase' },
+    tooltip: "This is an example tooltip with helpful information",
+    actionButtonOnClick: fn(),
+    className: 'h-28'
+  },
+};
+
 

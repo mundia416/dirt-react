@@ -17,7 +17,7 @@ import useAuth from './hooks/useAuth'
 import Stat from "./components/stat"
 import Table from "./components/table"
 import SidebarLayout from './layouts/sidebar-layout'
-
+import stringUtils from './utils/string-utils'
 
 
 
@@ -40,5 +40,6 @@ export {
   SidebarLayout,
   useAuth,
   Stat,
-  Table
+  Table,
+  stringUtils
 }

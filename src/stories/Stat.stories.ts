@@ -70,3 +70,42 @@ export const All: Story = {
   },
 };
 
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const InfoTooltip: Story = {
+  args: {
+    name: 'Total Subscribers',
+    value: '71,897',
+    icon: UsersIcon,
+    change: { value: '3.5%', type: 'increase' },
+    tooltip: "This is an example tooltip with helpful information",
+    actionButtonOnClick: fn(),
+  },
+};
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const NameWordWrap: Story = {
+  args: {
+    name: 'Very Long Title For Total Subscribers',
+    value: '71,897',
+    icon: UsersIcon,
+    change: { value: '3.5%', type: 'increase' },
+    tooltip: "This is an example tooltip with helpful information",
+    actionButtonOnClick: fn(),
+    wordWrap: 'wrap'
+  },
+};
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const NameTruncated: Story = {
+  args: {
+    name: 'Very Long Title For Total Subscribers',
+    value: '71,897',
+    icon: UsersIcon,
+    change: { value: '3.5%', type: 'increase' },
+    tooltip: "This is an example tooltip with helpful information",
+    actionButtonOnClick: fn(),
+  },
+};
+
+

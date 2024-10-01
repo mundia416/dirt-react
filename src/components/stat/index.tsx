@@ -1,6 +1,11 @@
 import React from 'react'
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
+import { InformationCircleIcon } from '@heroicons/react/24/outline'
+import { Tooltip } from 'react-tooltip'
+import stringUtils from '../../utils/string-utils'
 
+
+const tooltipId = stringUtils.generateRandomString(8)
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -20,15 +25,18 @@ type Props = {
         value: string,
         type: 'increase' | 'decrease'
     },
-
+    tooltip?: string
     actionButtonOnClick?: () => void
     actionButtonText?: string
+    wordWrap?: 'wrap' | 'truncate'
 
 }
 
 export default function Stat(props: Props) {
     return (
         <div>
+            <Tooltip id={tooltipId}  className='z-50'/>
+
             <div
                 className='rounded-lg bg-white shadow '
             >
@@ -39,7 +47,21 @@ export default function Stat(props: Props) {
                         <div className={`absolute rounded-md ${props.iconBackgroundColor || 'bg-indigo-500'} p-3`}>
                             <props.icon aria-hidden="true" className="h-6 w-6 text-white" />
                         </div>
-                        <p className="ml-16 truncate text-sm font-medium text-gray-500">{props.name}</p>
+                        <div className='flex justify-between '>
+                            <p className={`ml-16  text-sm font-medium text-gray-500 ${props.wordWrap !== 'wrap' && 'truncate'}`}>{props.name}</p>
+
+                            {props.tooltip &&
+                                <div className='pl-2'>
+                                    <InformationCircleIcon
+                                        data-tooltip-id={tooltipId}
+                                        data-tooltip-content={props.tooltip}
+                                        className='h-5 w-5 text-gray-500'
+                                    />
+
+                                </div>
+                            }
+
+                        </div>
                     </div>
 
                     <div className="ml-16 flex items-baseline   relative">

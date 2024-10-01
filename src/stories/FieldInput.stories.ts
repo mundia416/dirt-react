@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { FieldInput } from '..';
+import { LockClosedIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof FieldInput> = {
@@ -37,5 +38,27 @@ export const TextArea: Story = {
     element: 'text-area',
     label: 'Description'
 
+  },
+};
+
+export const LeadingIcon: Story = {
+  args: {
+    placeholder: 'Search',
+    leadingIcon: MagnifyingGlassIcon
+  },
+};
+
+export const TrailingIcon: Story = {
+  args: {
+    trailingIcon: LockClosedIcon,
+    placeholder: "Password",
+    type: 'password'
+  },
+};
+
+export const Error: Story = {
+  args: {
+    error: true,
+    helpText: 'This field cannot be empty'
   },
 };

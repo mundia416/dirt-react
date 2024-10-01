@@ -1,20 +1,11 @@
-import React from 'react';
 import Spinner from 'react-spinkit'
+import React, { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';
 
 export interface ButtonProps {
-    loadingTestid?: string,
-    testid?: string,
     className?: string,
-    iconClassName?: string
-    /**
-     * @deprecated use className instead
-     */
-    tailwind?: string,
     size?: 'large' | 'default' | 'small' | 'extra-small',
     variant?: 'primary' | 'secondary' | 'outline' | 'dark' | 'text',
     onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined) => void,
-    iconLeft?: any,
-    iconRight?: any,
     children?: string,
     color?: boolean,
     hover?: boolean,
@@ -27,37 +18,41 @@ export interface ButtonProps {
     loading?: boolean,
     loadingId?: string,
     enabled?: boolean,
-    img?: boolean,
-    ref?: any
+    ref?: any,
+    leadingIcon?: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
+        title?: string;
+        titleId?: string;
+    } & RefAttributes<SVGSVGElement>>,
+    trailingIcon?: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
+        title?: string;
+        titleId?: string;
+    } & RefAttributes<SVGSVGElement>>,
 }
 
 
 
-const Button: React.FC<ButtonProps> = ({ loadingTestid,
-    testid,
-    className,
-    tailwind,
-    ref,
-    size = "default",
-    variant = 'primary',
-    onClick,
-    iconLeft,
-    iconRight,
-    children,
-    color = false,
-    hover = false,
-    bg = false,
-    focus = false,
-    padding = false,
-    textSize = false,
-    rounded = false,
-    typeSubmit = false,
-    loading = false,
-    loadingId = "button-loading",
-    enabled = true,
-    img,
-    iconClassName
-}) => {
+const Button: React.FC<ButtonProps> = (props) => {
+
+    const {
+        className,
+        ref,
+        size = "default",
+        variant = 'primary',
+        onClick,
+        children,
+        color = false,
+        hover = false,
+        bg = false,
+        focus = false,
+        padding = false,
+        textSize = false,
+        rounded = false,
+        typeSubmit = false,
+        loading = false,
+        loadingId = "button-loading",
+        enabled = true,
+    } = props
+
     let iconWrapper = ``
     let variantStyle;
     let sizeStyle;
@@ -80,8 +75,7 @@ const Button: React.FC<ButtonProps> = ({ loadingTestid,
     const darkVariant = `${shadowStyle}  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 ${!color && 'text-white'}  ${!bg && 'bg-gray-800'} 
     ${!hover && enabled && 'hover:text-gray-100 hover:bg-gray-900'}`
 
-    const outlineVariant = `${shadowStyle} ${focusStyle} ${!bg && 'bg-white'} ${!color && 'text-gray-700'} border border-gray-300 
-    ${!hover && enabled && 'hover:bg-gray-50 '}`
+    const outlineVariant = `${shadowStyle} ${focusStyle} ${!bg && 'bg-white'} ${!color && 'text-gray-700'} border border-gray-300 shadow ${!hover && enabled && 'hover:bg-gray-50 '}`
 
     const textVariant = ` ${!focus && 'focus:outline-none'} ${!bg && 'bg-transparent'}
      ${!color && 'text-gray-700'} ${!hover && enabled && 'hover:text-gray-900'}`
@@ -102,32 +96,28 @@ const Button: React.FC<ButtonProps> = ({ loadingTestid,
             break
         case 'large':
             iconWrapper = iconWrapper.concat(' h-6 w-6 ')
-            iconMargin = 3
+            iconMargin = 2
 
             sizeStyle = largeSize
             break
         default:
             iconWrapper = iconWrapper.concat(' h-6 w-6 ')
-            iconMargin = 3
+            iconMargin = 2
 
             sizeStyle = mediumSize
             break
 
     }
 
-    if (iconLeft) {
+    if (props.leadingIcon) {
         iconWrapper = iconWrapper.concat(` mr-${iconMargin} `)
     } else {
         iconWrapper = iconWrapper.concat(' mr-0')
     }
-    if (iconRight) {
+    if (props.trailingIcon) {
         iconWrapper = iconWrapper.concat(` ml-${iconMargin} `)
     } else {
         iconWrapper = iconWrapper.concat(' ml-0')
-    }
-
-    if (iconClassName) {
-        iconWrapper = iconClassName
     }
 
     switch (variant) {
@@ -152,10 +142,9 @@ const Button: React.FC<ButtonProps> = ({ loadingTestid,
     const styles = ` normal-case text-center border-transparent 
             ${enabled ? 'cursor-pointer' : 'cursor-default'} justify-center transition duration-150 items-center flex  
               ${!rounded && 'rounded-md'} leading-6 font-medium 
-             ${variantStyle} ${sizeStyle} ${tailwind} ${className}`
+             ${variantStyle} ${sizeStyle} ${className}`
 
     const button = () => <button
-        data-testid={testid}
         type='button'
         ref={ref}
         className={styles}
@@ -166,34 +155,24 @@ const Button: React.FC<ButtonProps> = ({ loadingTestid,
             }
         }}>
         {loading ?
-            <div id={loadingId} data-testid={loadingTestid}>
+            <div id={loadingId}>
 
                 <Spinner name="pulse" color={spinnerColor} />
 
             </div>
             :
             <div className='flex items-center'>
-                {iconLeft &&
+                {props.leadingIcon &&
                     <div className={iconWrapper}>
-                        {img ?
-                            <img
-                                className='w-full h-full'
-                                src={iconLeft} alt="icon left" />
-                            :
-                            iconLeft}
+                        <props.leadingIcon className='h-full w-full' />
                     </div>
                 }
 
                 {children}
 
-                {iconRight &&
+                {props.trailingIcon &&
                     <div className={iconWrapper}>
-                        {img ?
-                            <img
-                                className='w-full h-full'
-                                src={iconRight} alt="icon right" />
-                            :
-                            iconRight}
+                        <props.trailingIcon className='h-full w-full' />
                     </div>
                 }
             </div>
@@ -205,15 +184,33 @@ const Button: React.FC<ButtonProps> = ({ loadingTestid,
             loading ?
                 button()
                 :
-                <input
-                    ref={ref}
-                    data-testid={testid}
-                    value={children}
-                    type='submit'
-                    name="submit"
-                    className={styles}
-                />
 
+                <div
+                    className={styles}
+                >
+
+                    <div className='flex items-center'>
+                        {props.leadingIcon &&
+                            <div className={iconWrapper}>
+                                <props.leadingIcon className='h-full w-full' />
+                            </div>
+                        }
+
+                        <input
+                            ref={ref}
+                            value={children}
+                            type='submit'
+                            name="submit"
+                        />
+
+                        {props.trailingIcon &&
+                            <div className={iconWrapper}>
+                                <props.trailingIcon className='h-full w-full' />
+                            </div>
+                        }
+                    </div>
+
+                </div>
             :
             button()
 

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { Button } from '..';
+import { MagnifyingGlassCircleIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Button> = {
@@ -12,7 +13,7 @@ const meta: Meta<typeof Button> = {
     layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-//   tags: ['autodocs'],
+  //   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     // size: { control: 'color' },
@@ -54,8 +55,22 @@ export const Dark: Story = {
 };
 
 export const Text: Story = {
-    args: {
-      variant: 'text',
-      children: 'Button',
-    },
-  };
+  args: {
+    variant: 'text',
+    children: 'Button',
+  },
+};
+
+export const LeadingIcon: Story = {
+  args: {
+    children: 'Button',
+    leadingIcon: MagnifyingGlassIcon
+  },
+};
+
+export const TrailingIcon: Story = {
+  args: {
+    children: 'Button',
+    trailingIcon: MagnifyingGlassIcon
+  },
+};

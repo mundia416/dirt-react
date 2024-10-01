@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';
 import TextInput from '../textinput';
 import styled from 'styled-components';
 import Text from '../text';
-import WarningPNG from './images/warning.png'
 import Icon from '../icon';
 import { Props as TextInputProps } from '../textinput'
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 
 const errorFocus = (theme: any) => {
 
@@ -25,8 +25,6 @@ ${({ error, theme }) => error && errorFocus(theme)}
 
 
 interface Props extends TextInputProps {
-    leadingIcon?: any,
-    trailingIcon?: any,
     cornerHelpText?: string,
     inputClassName?: string,
     helpText?: string,
@@ -37,7 +35,15 @@ interface Props extends TextInputProps {
     label?: string,
     name?: string,
     error?: boolean,
-    leadingClassName?: string
+    leadingClassName?: string,
+    leadingIcon?: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
+        title?: string;
+        titleId?: string;
+    } & RefAttributes<SVGSVGElement>>,
+    trailingIcon?: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
+        title?: string;
+        titleId?: string;
+    } & RefAttributes<SVGSVGElement>>,
 }
 
 /**
@@ -45,10 +51,12 @@ interface Props extends TextInputProps {
  *  when adding leading and trailing content, adjust the padding in the x-axis using tailwind to move
  * the input to fit the content you are adding 
  */
-const FieldInput = ({ testid, pattern, label, leadingText, trailingContent, className, error,
-    helpText, inputClassName, cornerHelpText, placeholder, type, leadingIcon, trailingIcon, variant, id,
-    disabled, onChange, onFilesChange, step, value, element = 'input', name, onFocus, onBlur, aff, max, min, required, leadingClassName,
-    formProps }: Props) => {
+const FieldInput = (props: Props) => {
+
+    const { testid, pattern, label, leadingText, trailingContent, className, error,
+        helpText, inputClassName, cornerHelpText, placeholder, type, variant, id,
+        disabled, onChange, onFilesChange, step, value, element = 'input', name, onFocus, onBlur, aff, max, min, required, leadingClassName,
+        formProps } = props
 
     const isDarkVariant = (variant === 'dark')
 
@@ -67,13 +75,8 @@ const FieldInput = ({ testid, pattern, label, leadingText, trailingContent, clas
                 </div>
             }
             <div className='flex items-center relative'>
-                {leadingIcon &&
-                    <Icon
-                        color
-                        hasBackground={false}
-                        className='ml-1 text-gray-500 absolute p-3 '
-                        src={leadingIcon}
-                    />
+                {props.leadingIcon &&
+                    <props.leadingIcon className='ml-1 text-gray-500 absolute  h-6 w-6 ' />
                 }
 
                 <span className={`absolute  z-10 text-gray-600 sm:text-sm sm:leading-5 ${leadingClassName}`}>
@@ -103,8 +106,8 @@ const FieldInput = ({ testid, pattern, label, leadingText, trailingContent, clas
                     error={error}
                     step={step}
                     element={element}
-                    className={` ${leadingText && 'pl-0'} ${leadingIcon && 'pl-12'}
-                     ${(trailingIcon || error) && 'pr-10'} w-full
+                    className={` ${leadingText && 'pl-0'} ${props.leadingIcon && 'pl-8'}
+                     ${(props.trailingIcon || error) && 'pr-10'} w-full
                       ${error ? 'text-red-900 ' +
                             (!isDarkVariant && ' border-red-300 border-px focus:border-red-300') :
                             (!isDarkVariant && 'focus:border-blue-300')} 
@@ -114,17 +117,8 @@ const FieldInput = ({ testid, pattern, label, leadingText, trailingContent, clas
 
                 {trailingContent}
 
-                {(trailingIcon || error) &&
-                    <Icon
-                        png
-                        color
-                        hasBackground={false}
-                        className={`p-3 ${error ? 'text-red-600' : 'text-gray-500'} 
-                             ml-1 `}
-                        src={error ? WarningPNG : trailingIcon}
-                    />
-                }
 
+                {(props.trailingIcon || error) && (error ? <ExclamationCircleIcon className='text-red-600 h-8 w-8 p-1  absolute right-0' /> : props.trailingIcon && <props.trailingIcon className='text-gray-500 h-8 w-8 p-1  absolute right-0' />)}
 
             </div>
 

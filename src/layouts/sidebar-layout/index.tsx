@@ -1,5 +1,5 @@
 'use client'
-import React, {  } from 'react'
+import React, { } from 'react'
 import { useState } from 'react'
 import {
     Dialog,
@@ -63,7 +63,8 @@ type Props = {
             titleId?: string;
         } & React.RefAttributes<SVGSVGElement>>
     },
-    showSearchBar?: boolean
+    // change the content of where there is a search bar
+    customHeaderContent?: React.ReactNode
     showNotificationIcon?: boolean
 }
 
@@ -79,7 +80,7 @@ export default function SidebarLayout({
     user,
     logoSrc,
     children,
-    showSearchBar = true,
+    customHeaderContent,
     showNotificationIcon = true,
     settingsNavItem }: Props) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -132,7 +133,7 @@ export default function SidebarLayout({
                                                 className="block h-8 w-auto "
                                             />
 
-                                            
+
                                         </>
                                     }
                                 </div>
@@ -200,7 +201,7 @@ export default function SidebarLayout({
                                         src={logoSrc}
                                         className="block h-8 w-auto"
                                     />
-                                  
+
                                 </>
                             }
                         </div>
@@ -261,7 +262,11 @@ export default function SidebarLayout({
 
                         <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
 
-                            {showSearchBar ?
+                            {customHeaderContent ?
+                                <div className="relative flex flex-1">
+                                    {customHeaderContent}
+                                </div>
+                                :
                                 <form action="#" method="GET" className="relative flex flex-1">
                                     <label htmlFor="search-field" className="sr-only">
                                         Search
@@ -278,8 +283,8 @@ export default function SidebarLayout({
                                         className="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
                                     />
                                 </form>
-                                :
-                                <div className="relative flex flex-1"/>
+
+
                             }
                             <div className="flex items-center gap-x-4 lg:gap-x-6">
 

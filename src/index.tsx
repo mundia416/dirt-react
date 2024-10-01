@@ -18,6 +18,7 @@ import Stat from "./components/stat"
 import Table from "./components/table"
 import SidebarLayout from './layouts/sidebar-layout'
 import stringUtils from './utils/string-utils'
+import BrandedSelect from "./components/branded-select"
 
 
 
@@ -36,10 +37,15 @@ export {
   Alert,
   SuccessAlert,
   FieldInput,
-  StackedLayout,
-  SidebarLayout,
   useAuth,
   Stat,
   Table,
+  BrandedSelect,
+
+  //layouts
+  StackedLayout,
+  SidebarLayout,
+
+  //utils
   stringUtils
 }

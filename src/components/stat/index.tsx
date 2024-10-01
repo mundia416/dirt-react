@@ -29,16 +29,16 @@ type Props = {
     actionButtonOnClick?: () => void
     actionButtonText?: string
     wordWrap?: 'wrap' | 'truncate'
-
+    className?: string
 }
 
 export default function Stat(props: Props) {
     return (
         <div>
-            <Tooltip id={tooltipId}  className='z-50'/>
+            <Tooltip id={tooltipId} className='z-50' />
 
             <div
-                className='rounded-lg bg-white shadow '
+                className={'rounded-lg bg-white shadow ' + props.className}
             >
                 <div
                     className="relative overflow-hidden  px-4  py-5  sm:px-6 sm:py-6"

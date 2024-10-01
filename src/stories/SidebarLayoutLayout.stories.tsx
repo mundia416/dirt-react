@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-
+import React from 'react'
 import { SidebarLayout } from '..';
 import { HomeIcon, UserIcon } from '@heroicons/react/24/outline';
 
@@ -64,9 +64,59 @@ export const Main: Story = {
         }]
       }
     ],
-    settingsNavItem: {
+    userDropdownOptions: [{
+      name: 'Logout',
+      // href: '/logout',
       onClick: fn(),
+    }],
+    user: {
+      name: 'Jack Lane',
+      // email: 'jack@gmail.com',
+      imageUrl: ''
     },
+    logoSrc: 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
+  },
+};
+
+export const CustomHeaderContent: Story = {
+  args: {
+    navigationGroups: [
+      {
+        navigationOptions: [{
+          name: 'Home',
+          href: '/',
+          icon: HomeIcon
+        }, {
+          name: 'User',
+          href: '/',
+          icon: UserIcon
+        }]
+      },
+      {
+        navigationOptions: [{
+          name: 'Plugins',
+          href: '/',
+          icon: HomeIcon
+        }, {
+          name: 'Products',
+          href: '/',
+          icon: UserIcon
+        }]
+      },
+      {
+        heading: 'Borrowers',
+        navigationOptions: [{
+          name: 'View Borrowers',
+          href: '/',
+          icon: HomeIcon
+        }, {
+          name: 'View Loans',
+          href: '/',
+          icon: UserIcon
+        }]
+      }
+    ],
+    customHeaderContent: <div className='bg-red-500'>This is Custom Content</div>,
     userDropdownOptions: [{
       name: 'Logout',
       // href: '/logout',

@@ -1,17 +1,10 @@
-import React from 'react';
-import WarningSVG from '../images/warning.svg'
-import SuccessSVG from '../images/success.svg'
-import ErrorSVG from '../images/error.svg'
-import InfoSVG from '../images/info.svg'
-import DismissSVG from '../images/dismiss.svg'
-import ArrowRightSVG from '../images/arrow-right.svg'
+import React, { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';
 import Text from '../../text'
 import styled from 'styled-components'
 import { useFadeAnimChild } from '../../use-fade-anim'
 import Button from '../../button'
 import { AlertProps } from '../AlertProps';
-import IconButton from '../../iconbutton';
-import Icon from '../../icon';
+import { ArrowRightIcon, CheckCircleIcon, ExclamationCircleIcon, ExclamationTriangleIcon, InformationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Container = styled.div<{ fadeOut: any } >`
 ${({ fadeOut, theme }) => fadeOut ? theme.fadeOutSize : theme.fadeInSize};
@@ -26,7 +19,7 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
 
     const { close, fadeOut, onAnimationEnd } = useFadeAnimChild({ isShown, stopRender, onCloseComplete })
     let variantStyle
-    let icon
+    let icon: { icon: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & { title?: string | undefined; titleId?: string | undefined; } & RefAttributes<SVGSVGElement>> | undefined } | undefined = {icon: undefined}
     let iconStyle
     let titleStyle
     let contentStyle
@@ -36,7 +29,7 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
     switch (variant) {
         case 'warning':
             variantStyle = ` bg-yellow-100`
-            icon = <WarningSVG />
+            icon.icon = ExclamationTriangleIcon
             iconStyle = 'text-yellow-700'
             titleStyle = 'text-yellow-900'
             contentStyle = 'text-yellow-800'
@@ -46,7 +39,7 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
             break
         case 'error':
             variantStyle = ` bg-red-100`
-            icon = <ErrorSVG />
+            icon.icon = ExclamationCircleIcon
             iconStyle = 'text-red-700'
             titleStyle = 'text-red-900'
             contentStyle = 'text-red-800'
@@ -56,7 +49,7 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
             break
         case 'success':
             variantStyle = ` bg-green-100`
-            icon = <SuccessSVG />
+            icon.icon = CheckCircleIcon
             iconStyle = 'text-green-700'
             titleStyle = 'text-green-900'
             contentStyle = 'text-green-800'
@@ -66,13 +59,12 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
             break
         case 'info':
             variantStyle = ` bg-blue-100`
-            icon = <InfoSVG />
+            icon.icon = InformationCircleIcon
             iconStyle = 'text-blue-700'
             titleStyle = 'text-blue-900'
             contentStyle = 'text-blue-800'
             buttonStyle = 'text-blue-900 hover:text-blue-800'
             linkStyle = 'text-blue-800 hover:text-blue-700'
-
             break
     }
 
@@ -82,15 +74,9 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
             fadeOut={fadeOut}
             className={`flex p-2 rounded-md ${variantStyle} ${className}`}>
 
-
-            <Icon
-                color
-                hasBackground={false}
-                png
-                size
-                className={`mt-4 h-6 w-6 mx-2 ${iconStyle}`}
-                src={icon} />
-
+            {icon &&
+                <icon.icon className={`mt-4 h-6 w-6 mx-2 ${iconStyle}`} />
+            }
 
             <div className='my-4 mr-4'>
                 <Text
@@ -133,8 +119,8 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
                     size='extra-small'
                     hover
                     variant='text'
-                    iconRight={ArrowRightSVG}
-                    tailwind={`tracking-tight ml-6  ${linkStyle}`}
+                    trailingIcon={ArrowRightIcon}
+                    className={`tracking-tight ml-6  ${linkStyle}`}
                     onClick={() => console.log(/**TODO GO TO THE LINK SUPPLIED */)}
                 >{link.title}</Button>
             }
@@ -142,12 +128,9 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
 
             {showDismiss &&
                 <div className='h-full flex items-center'>
-                    <IconButton
-                        
-                        
-                        png
-                        hasBackground={false}
-                        src={DismissSVG}
+                    <Button
+                        variant='text'
+                        leadingIcon={XMarkIcon}
                         className={` ml-6 ${buttonStyle}`}
                         onClick={() => close()}
                     />

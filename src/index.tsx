@@ -7,8 +7,6 @@ import Container from "./components/container"
 import Form from "./components/form"
 import Text from "./components/text"
 import TextInput from "./components/textinput"
-import Icon from "./components/icon"
-import IconButton from "./components/iconbutton"
 import Alert from "./components/alert"
 import SuccessAlert from "./components/alert/success"
 import FieldInput from './components/fieldinput'
@@ -32,8 +30,6 @@ export {
   Form,
   Text,
   TextInput,
-  Icon,
-  IconButton,
   Alert,
   SuccessAlert,
   FieldInput,

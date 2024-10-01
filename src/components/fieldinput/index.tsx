@@ -2,7 +2,6 @@ import React, { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react
 import TextInput from '../textinput';
 import styled from 'styled-components';
 import Text from '../text';
-import Icon from '../icon';
 import { Props as TextInputProps } from '../textinput'
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 

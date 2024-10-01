@@ -26,15 +26,22 @@ type Story = StoryObj<typeof BrandedSelect>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
-    options: [{
-      id: 'a',
-      title: "Published",
-      description: "the job can be viewed by anyone with a link"
-    },
-    {
-      id: 'b',
-      title: 'Draft'
-    }],
+    options: [
+      {
+        id: 'b',
+        title: 'Draft',
+        description: "the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link",
+        descriptionMaxLines: 2
+      }, {
+        id: 'a',
+        title: "Published",
+        description: "the job can be viewed by anyone with a link"
+      },
+      {
+        id: 'b',
+        title: 'Draft'
+      },
+    ],
     onSelect: fn()
   },
 };

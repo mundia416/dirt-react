@@ -8,6 +8,7 @@ type Option = {
     id: string
     title: string
     description?: string
+    descriptionMaxLines?: 1 | 2 | 3 | 4 | 5 | 6
 }
 
 type Props = {
@@ -24,7 +25,7 @@ export default function BrandedSelect(props: Props) {
             setSelected(value)
             props.onSelect(value)
         }}>
-            <div className={"relative " + props.className}>
+            <div className={"relative" + props.className}>
                 <div className="inline-flex divide-x divide-indigo-700 rounded-md shadow-sm">
                     <div className="inline-flex items-center gap-x-1.5 rounded-l-md bg-indigo-600 px-3 py-2 text-white shadow-sm">
                         <CheckIcon aria-hidden="true" className="-ml-0.5 h-5 w-5" />
@@ -37,7 +38,7 @@ export default function BrandedSelect(props: Props) {
 
                 <ListboxOptions
                     transition
-                    className="absolute right-0 z-10 mt-2 w-72 origin-top-right divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in"
+                    className="absolute right-0 z-50 mt-2 w-72 origin-top-right divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in"
                 >
                     {props.options.map((option) => (
                         <ListboxOption
@@ -52,7 +53,7 @@ export default function BrandedSelect(props: Props) {
                                         <CheckIcon aria-hidden="true" className="h-5 w-5" />
                                     </span>
                                 </div>
-                                {option.description && <p className="mt-2 text-gray-500 group-data-[focus]:text-indigo-200">{option.description}</p>}
+                                {option.description && <p className={`mt-2 text-gray-500 group-data-[focus]:text-indigo-200 ${option.descriptionMaxLines && 'line-clamp-' + option.descriptionMaxLines}`}>{option.description}</p>}
                             </div>
                         </ListboxOption>
                     ))}

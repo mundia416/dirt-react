@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import React from 'react'
-import { SidebarLayout } from '..';
+import { BrandedSelect, SidebarLayout } from '..';
 import { HomeIcon, UserIcon } from '@heroicons/react/24/outline';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -116,7 +116,15 @@ export const CustomHeaderContent: Story = {
         }]
       }
     ],
-    customHeaderContent: <div className='bg-red-500'>This is Custom Content</div>,
+    customHeaderContent: <div className='flex items-center justify-start w-full relative'>
+      <BrandedSelect
+        className=''
+        options={[{
+          id: 'abc',
+          title: 'Main Branch'
+        }]}
+        onSelect={() => { }}
+      /></div>,
     userDropdownOptions: [{
       name: 'Logout',
       // href: '/logout',

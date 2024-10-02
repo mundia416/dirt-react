@@ -81,3 +81,11 @@ export const IconButton: Story = {
     variant: 'text'
   },
 };
+
+export const TypeSubmit: Story = {
+  args: {
+    children: 'Button',
+    typeSubmit: true,
+    onClick: fn()
+  },
+};

@@ -199,6 +199,7 @@ const Button: React.FC<ButtonProps> = (props) => {
                         <input
                             ref={ref}
                             value={children}
+                            className='cursor-pointer'
                             type='submit'
                             name="submit"
                         />

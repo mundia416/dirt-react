@@ -4,7 +4,6 @@ import ErrorAlert from './components/alert/error'
 import Button from "./components/button"
 import Card from "./components/card"
 import Container from "./components/container"
-import Form from "./components/form"
 import Text from "./components/text"
 import TextInput from "./components/textinput"
 import Alert from "./components/alert"
@@ -30,7 +29,6 @@ export {
   ErrorAlert,
   Card,
   Container,
-  Form,
   Text,
   TextInput,
   Alert,

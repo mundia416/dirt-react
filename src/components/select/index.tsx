@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
-type Option = {
+export type Option = {
     id: string
     title: string
 }

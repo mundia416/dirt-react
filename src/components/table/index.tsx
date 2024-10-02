@@ -12,6 +12,12 @@ export type RowsProps = {
     items: RowColumnItemProps[]
 }
 
+export type ColumnTitleProps = {
+    name: string
+    className?: string
+}
+
+
 type Props = {
     heading?: string
     subHeading?: string
@@ -19,10 +25,7 @@ type Props = {
         text: string,
         onClick: () => void
     },
-    columnTitles: {
-        name: string
-        className?: string
-    }[],
+    columnTitles: ColumnTitleProps[],
     rowData: RowsProps[]
     /**allows for a row to be clicked and hovered over */
     onRowClick?: (index: number) => void

@@ -27,7 +27,7 @@ type Story = StoryObj<typeof FileUpload>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Main: Story = {
   args: {
-    onChange: fn()
+    onChange: console.log
   },
 };
 

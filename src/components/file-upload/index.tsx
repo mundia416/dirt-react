@@ -8,7 +8,7 @@ type Props = {
     fileTypeString?: string,
     // maximum file size in mb
     maxFileSize?: number
-    onChange: (files: FileList) => void
+    onChange: (files: File[]) => void
 }
 
 export default function FileUpload({
@@ -19,6 +19,20 @@ export default function FileUpload({
     maxFileSize = 10,
     onChange
 }: Props) {
+
+    const handleFilesSelected = (files: FileList) => {
+        const filesResponse: File[] = []
+        for (let i = 0; i < files.length; i++) {
+            const file = files.item(i)
+            if (file) {
+                filesResponse.push(file)
+            }
+        }
+
+        onChange(filesResponse)
+    }
+
+
     return (
         <div>
             {label &&
@@ -36,7 +50,7 @@ export default function FileUpload({
                         >
                             <span>Upload {multiple ? "files" : "a file"}</span>
                             <input
-                                onChange={(item) => item.target.files && onChange(item.target.files)}
+                                onChange={(item) => item.target.files && handleFilesSelected(item.target.files)}
                                 id="file-upload" name="file-upload" type={type} className="sr-only" multiple={multiple} />
                         </label>
                         <p className="pl-1">or drag and drop</p>

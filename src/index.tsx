@@ -16,6 +16,8 @@ import Stat from "./components/stat"
 import Table from "./components/table"
 import SidebarLayout from './layouts/sidebar-layout'
 import stringUtils from './utils/string-utils'
+import dateUtils from './utils/date-utils'
+
 import BrandedSelect from "./components/branded-select"
 
 
@@ -43,5 +45,6 @@ export {
   SidebarLayout,
 
   //utils
-  stringUtils
+  stringUtils,
+  dateUtils
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 type Option = {
@@ -10,6 +10,7 @@ type Option = {
 }
 
 type Props = {
+    label?: string
     options: Option[]
     onSelect: (value: Option) => void
     className?: string
@@ -22,6 +23,17 @@ export default function Select(props: Props) {
     return (
         <Listbox value={selected} onChange={setSelected}>
             <div className={"relative"}>
+
+                {props.label &&
+                    < div className='w-full flex justify-between mb-2'>
+                        <label
+                            className={`flex flex-col text-gray-700 text-sm leading-6 font-semibold`}
+                        >{props.label}
+                        </label>
+
+                    </div>
+                }
+
                 <ListboxButton className={"relative cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6 " + props.className}>
                     <span className="block truncate">{selected.title}</span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

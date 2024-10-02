@@ -62,3 +62,24 @@ export const CustomClassname: Story = {
     className: 'w-full py-6'
   },
 };
+
+
+export const Label: Story = {
+  args: {
+    label: "First Name",
+    options: [
+      {
+        id: 'b',
+        title: 'Draft',
+      }, {
+        id: 'a',
+        title: "Published",
+      },
+      {
+        id: 'c',
+        title: 'Draft Part 2'
+      },
+    ],
+    onSelect: fn(),
+  },
+};

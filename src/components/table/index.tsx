@@ -4,7 +4,7 @@ import Card from '../card'
 type RowColumnItemProps = {
     value: string | number | ReactNode
     // whether to show the text as bold
-    bold?: boolean
+    className?: string
 }
 
 
@@ -21,8 +21,11 @@ type Props = {
     },
     columnTitles: {
         name: string
+        className?: string
     }[],
     rowData: RowsProps[]
+    /**allows for a row to be clicked and hovered over */
+    onRowClick?: (index: number) => void
 }
 
 export default function Table({
@@ -30,7 +33,8 @@ export default function Table({
     subHeading,
     actionButton,
     columnTitles,
-    rowData = []
+    rowData = [],
+    onRowClick
 }: Props) {
 
     return (
@@ -58,7 +62,7 @@ export default function Table({
 
             <div className="mt-8 flow-root">
                 <Card
-                className='p-4'>
+                    className='p-4 overflow-hidden'>
 
                     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -66,7 +70,7 @@ export default function Table({
                                 <thead>
                                     <tr>
                                         {columnTitles.map((item, index) =>
-                                            <th key={index} scope="col" className={`${index === 0 ? 'pl-4 pr-3 sm:pl-0' : 'px-3'} py-3.5  text-left text-sm font-semibold text-gray-900 `}>
+                                            <th key={index} scope="col" className={`${index === 0 ? 'pl-4 pr-3 sm:pl-0' : 'px-3'} py-3.5  text-left text-sm font-semibold text-gray-900 ${item.className}`}>
                                                 {item.name}
                                             </th>
                                         )}
@@ -76,14 +80,12 @@ export default function Table({
                                 <tbody className="divide-y divide-gray-200">
                                     {rowData.map((row, index) => (
 
-                                        <tr key={index}>
+                                        <tr
+                                            onClick={() => onRowClick && onRowClick(index)}
+                                            className={`${onRowClick && 'cursor-pointer hover:bg-indigo-50'}`}
+                                            key={index}>
                                             {row.items.map((item, itemIndex) => (
-                                                <td key={itemIndex} className={`whitespace-nowrap ${itemIndex === 0 ? 'py-4 pl-4 pr-3 sm:pl-0' : 'px-3 py-4'} text-sm ${item.bold ? 'font-medium text-gray-900' : 'text-gray-500'}`}>{item.value}</td>
-                                                // <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                                //     <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                                //         Edit<span className="sr-only">, {person.name}</span>
-                                                //     </a>
-                                                // </td>
+                                                <td key={itemIndex} className={`${item.className ? item.className : 'whitespace-nowrap text-gray-500'}  ${itemIndex === 0 ? 'py-4 pl-4 pr-3 sm:pl-0' : 'px-3 py-4'} text-sm`}>{item.value}</td>
                                             ))}
                                         </tr>
                                     ))}

@@ -16,11 +16,63 @@ const people = [
 ];
 
 
+const borrowers = [
+  { id: 'a', email: null, name: 'John Do', nrc: null, phone: null, activeLoansDue: 0, activeLoansPaid: 0 },
+  { id: 'b', email: null, name: 'John Do', nrc: '416896sgsdfgsfd2/10/01', phone: '0974179979', activeLoansDue: 0, activeLoansPaid: 200 },
+  { id: 'c', email: 'dev.johndomathastewardecljjohndomathastewardeclj@gmail.com', name: 'John Martha Muleleko Joe', nrc: null, phone: null, activeLoansDue: 23000, activeLoansPaid: 0 },
+  { id: 'd', email: null, name: 'John Do', nrc: null, phone: null, activeLoansDue: 0, activeLoansPaid: 40000 },
+
+]
+
+const borrowerColumnTitles = [{
+  name: 'Email'
+}, {
+  name: 'Name'
+}, {
+  name: 'ID'
+}, {
+  name: 'Phone'
+}, {
+  name: 'Active Loans Due'
+}, {
+  name: 'Active Loans Paid'
+},
+]
+
+const borrowerRowData: RowsProps[] = borrowers.map(borrower => {
+  return {
+    items: [{
+      value: borrower.email || '--',
+      className: 'break-words max-w-44 text-gray-900'
+    },
+    {
+      value: borrower.name || '--',
+    }, {
+      value: borrower.nrc || '--',
+    }, {
+      value: borrower.phone || '--',
+    }, {
+      value: borrower.activeLoansDue || '--',
+    }, {
+      value: borrower.activeLoansPaid || '--',
+    }, {
+      value: <div>
+        <Button
+          size='extra-small'
+          className='text-indigo-500'
+          variant='text'
+        >Edit</Button>
+      </div>
+    }]
+  }
+})
+
+
 const rowData: RowsProps[] = people.map(person => {
   return {
     items: [{
       value: person.name,
-      bold: true
+      className: 'text-gray-900 font-semibold'
     },
     {
       value: person.title,
@@ -106,6 +158,35 @@ export const ActionButton: Story = {
     },
     columnTitles,
     rowData
+  },
+};
+
+
+export const CustomDatacellClassName: Story = {
+  args: {
+    heading: 'Users',
+    subHeading: 'A list of all the users in your account including their name, title, email and role.',
+    actionButton: {
+      text: 'Add Users',
+      onClick: fn()
+    },
+    columnTitles: borrowerColumnTitles,
+    rowData: borrowerRowData,
+  },
+};
+
+
+export const ClickableRow: Story = {
+  args: {
+    heading: 'Users',
+    subHeading: 'A list of all the users in your account including their name, title, email and role.',
+    actionButton: {
+      text: 'Add Users',
+      onClick: fn()
+    },
+    columnTitles,
+    rowData,
+    onRowClick: fn()
   },
 };
 

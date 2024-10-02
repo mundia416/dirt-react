@@ -5,7 +5,7 @@ import React from 'react';
 export interface Props {
     testid?: string,
     pattern?: any,
-    type?: string,
+    type?: React.HTMLInputTypeAttribute | undefined,
     placeholder?: string,
     className?: string,
     padding?: boolean,

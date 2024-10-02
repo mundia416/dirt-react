@@ -56,9 +56,36 @@ export const TrailingIcon: Story = {
   },
 };
 
+export const LeadingText: Story = {
+  args: {
+    leadingText: '+260'
+  },
+};
+
+export const TrailingText: Story = {
+  args: {
+    trailingText: '.com'
+  },
+};
+
 export const Error: Story = {
   args: {
     error: true,
     helpText: 'This field cannot be empty'
   },
 };
+
+export const DatePicker: Story = {
+  args: {
+    type: 'date'
+  },
+};
+
+export const CornerHelpText: Story = {
+  args: {
+    cornerHelpText: 'Optional',
+    label: 'Email'
+  },
+};
+
+

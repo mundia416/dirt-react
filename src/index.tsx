@@ -19,6 +19,7 @@ import stringUtils from './utils/string-utils'
 import dateUtils from './utils/date-utils'
 
 import BrandedSelect from "./components/branded-select"
+import Select from "./components/select"
 
 
 
@@ -39,6 +40,7 @@ export {
   Stat,
   Table,
   BrandedSelect,
+  Select,
 
   //layouts
   StackedLayout,

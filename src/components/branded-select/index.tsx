@@ -42,7 +42,7 @@ export default function BrandedSelect(props: Props) {
                 >
                     {props.options.map((option) => (
                         <ListboxOption
-                            key={option.title}
+                            key={option.id}
                             value={option}
                             className="group cursor-default select-none p-4 text-sm text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white"
                         >

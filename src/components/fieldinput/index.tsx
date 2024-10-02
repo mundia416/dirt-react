@@ -27,14 +27,12 @@ interface Props extends TextInputProps {
     cornerHelpText?: string,
     inputClassName?: string,
     helpText?: string,
-    trailingContent?: any,
+    trailingText?: string,
     leadingText?: string,
-    type?: string,
     pattern?: string,
     label?: string,
     name?: string,
     error?: boolean,
-    leadingClassName?: string,
     leadingIcon?: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
         title?: string;
         titleId?: string;
@@ -52,9 +50,9 @@ interface Props extends TextInputProps {
  */
 const FieldInput = (props: Props) => {
 
-    const { testid, pattern, label, leadingText, trailingContent, className, error,
+    const { testid, pattern, label, leadingText, trailingText, className, error,
         helpText, inputClassName, cornerHelpText, placeholder, type, variant, id,
-        disabled, onChange, onFilesChange, step, value, element = 'input', name, onFocus, onBlur, aff, max, min, required, leadingClassName,
+        disabled, onChange, onFilesChange, step, value, element = 'input', name, onFocus, onBlur, aff, max, min, required,
         formProps } = props
 
     const isDarkVariant = (variant === 'dark')
@@ -73,15 +71,16 @@ const FieldInput = (props: Props) => {
                     >{cornerHelpText}</Text>
                 </div>
             }
-            <div className='flex items-center relative'>
+            <div className={`flex relative ${!leadingText && !trailingText && 'items-center '}`}>
                 {props.leadingIcon &&
                     <props.leadingIcon className='ml-1 text-gray-500 absolute  h-6 w-6 ' />
                 }
 
-                <span className={`absolute  z-10 text-gray-600 sm:text-sm sm:leading-5 ${leadingClassName}`}>
-                    {leadingText}
-                </span>
-
+                {leadingText &&
+                    <span className=" inline-flex items-center rounded-l-md border border-r-0 border-gray-300 px-3 text-gray-500 sm:text-sm leading-6">
+                        {leadingText}
+                    </span>
+                }
                 <Input
                     formProps={formProps}
                     required={required}
@@ -105,7 +104,7 @@ const FieldInput = (props: Props) => {
                     error={error}
                     step={step}
                     element={element}
-                    className={` ${leadingText && 'pl-0'} ${props.leadingIcon && 'pl-8'}
+                    className={` ${leadingText && ' rounded-l-none '} ${trailingText && ' rounded-r-none '}  ${props.leadingIcon && 'pl-8'}
                      ${(props.trailingIcon || error) && 'pr-10'} w-full
                       ${error ? 'text-red-900 ' +
                             (!isDarkVariant && ' border-red-300 border-px focus:border-red-300') :
@@ -113,9 +112,11 @@ const FieldInput = (props: Props) => {
                        ${!isDarkVariant && 'focus:shadow-outline'} ${inputClassName}  `}
                 />
 
-
-                {trailingContent}
-
+                {trailingText &&
+                    <span className=" inline-flex items-center rounded-r-md border border-l-0 border-gray-300 pl-2 pr-3 text-gray-500 sm:text-sm leading-6">
+                        {trailingText}
+                    </span>
+                }
 
                 {(props.trailingIcon || error) && (error ? <ExclamationCircleIcon className='text-red-600 h-8 w-8 p-1  absolute right-0' /> : props.trailingIcon && <props.trailingIcon className='text-gray-500 h-8 w-8 p-1  absolute right-0' />)}
 

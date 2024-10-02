@@ -16,9 +16,9 @@ import Table from "./components/table"
 import SidebarLayout from './layouts/sidebar-layout'
 import stringUtils from './utils/string-utils'
 import dateUtils from './utils/date-utils'
-
 import BrandedSelect from "./components/branded-select"
 import Select from "./components/select"
+import FileUpload from './components/file-upload'
 
 
 
@@ -39,7 +39,7 @@ export {
   Table,
   BrandedSelect,
   Select,
-
+  FileUpload,
   //layouts
   StackedLayout,
   SidebarLayout,

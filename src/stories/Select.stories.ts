@@ -33,6 +33,7 @@ export const Primary: Story = {
       }, {
         id: 'a',
         title: "Published",
+        secondaryText: 'danny@gmail.com'
       },
       {
         id: 'c',
@@ -40,6 +41,8 @@ export const Primary: Story = {
       },
     ],
     onSelect: fn(),
+    className: 'min-w-44'
+
   },
 };
 
@@ -59,7 +62,7 @@ export const CustomClassname: Story = {
       },
     ],
     onSelect: fn(),
-    className: 'w-full py-6'
+    className: 'w-full py-6 min-w-44'
   },
 };
 
@@ -81,5 +84,32 @@ export const Label: Story = {
       },
     ],
     onSelect: fn(),
+    className: 'min-w-44'
+
+  },
+};
+
+export const Search: Story = {
+  args: {
+    label: "First Name",
+    onSearchChange: fn(),
+    options: [
+      {
+        id: 'b',
+        title: 'Draft',
+      }, {
+        id: 'a',
+        title: "Published",
+        secondaryText: "published with ease"
+      },
+      {
+        id: 'c',
+        title: 'Draft Part 2'
+      },
+    ],
+    onSelect: fn(),
+    className: 'min-w-60',
+    search: true
+
   },
 };

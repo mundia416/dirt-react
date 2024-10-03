@@ -23,7 +23,6 @@ type Props = {
 }
 
 export default function Select(props: Props) {
-    const [isOpen, setIsOpen] = useState(false);
 
     const [selected, setSelected] = useState(props.options[0])
 
@@ -32,15 +31,15 @@ export default function Select(props: Props) {
 
     useEffect(() => {
         setOptions(props.options)
-    }, [props.options, isOpen])
+    }, [props.options])
 
     const handleSearchChange = (text: string) => {
         props.onSearchChange && props.onSearchChange(text)
 
-        setOptions(existingOptions => {
+        setOptions(() => {
             if (text.trim() === "") {
                 // If the search bar is empty, show all options
-                return existingOptions;
+                return props.options;
             }
 
             const lowercasedText = text.toLowerCase().trim();

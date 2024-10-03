@@ -19,6 +19,7 @@ import dateUtils from './utils/date-utils'
 import BrandedSelect from "./components/branded-select"
 import Select from "./components/select"
 import FileUpload from './components/file-upload'
+import DescriptionList from "./components/description-list"
 
 
 
@@ -40,6 +41,7 @@ export {
   BrandedSelect,
   Select,
   FileUpload,
+  DescriptionList,
   //layouts
   StackedLayout,
   SidebarLayout,

@@ -20,6 +20,7 @@ import BrandedSelect from "./components/branded-select"
 import Select from "./components/select"
 import FileUpload from './components/file-upload'
 import DescriptionList from "./components/description-list"
+import Dialog from "./components/dialog"
 
 
 
@@ -42,6 +43,8 @@ export {
   Select,
   FileUpload,
   DescriptionList,
+  Dialog,
+
   //layouts
   StackedLayout,
   SidebarLayout,

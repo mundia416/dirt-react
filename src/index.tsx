@@ -21,6 +21,8 @@ import Select from "./components/select"
 import FileUpload from './components/file-upload'
 import DescriptionList from "./components/description-list"
 import Dialog from "./components/dialog"
+import Drawer from "./components/drawer"
+
 
 
 
@@ -44,6 +46,7 @@ export {
   FileUpload,
   DescriptionList,
   Dialog,
+  Drawer,
 
   //layouts
   StackedLayout,

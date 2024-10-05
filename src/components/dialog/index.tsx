@@ -1,4 +1,4 @@
-import {  DialogBackdrop, Dialog as DialogComponent, DialogPanel, DialogTitle } from '@headlessui/react'
+import { DialogBackdrop, Dialog as DialogComponent, DialogPanel, DialogTitle } from '@headlessui/react'
 import { CheckIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 
@@ -23,7 +23,7 @@ function Dialog({
     <>
 
 
-      <DialogComponent open={isOpen} onClose={onClose} className="relative z-10">
+      <DialogComponent open={isOpen} onClose={onClose} className="relative z-50">
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"

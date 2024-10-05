@@ -22,6 +22,7 @@ import FileUpload from './components/file-upload'
 import DescriptionList from "./components/description-list"
 import Dialog from "./components/dialog"
 import Drawer from "./components/drawer"
+import Tabs from "./components/tabs"
 
 
 
@@ -47,6 +48,7 @@ export {
   DescriptionList,
   Dialog,
   Drawer,
+  Tabs,
 
   //layouts
   StackedLayout,

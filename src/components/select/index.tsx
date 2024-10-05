@@ -20,11 +20,12 @@ type Props = {
     onSearchChange?: (text: string) => void
     search?: boolean
     searchPlaceholder?: string
+    defaultValue?: Option
 }
 
 export default function Select(props: Props) {
 
-    const [selected, setSelected] = useState(props.options[0])
+    const [selected, setSelected] = useState(props.defaultValue || props.options[0])
 
     const [options, setOptions] = useState(props.options)
 

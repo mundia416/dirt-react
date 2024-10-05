@@ -8,7 +8,7 @@ type Props = {
     children: React.ReactNode,
     isOpen: boolean
     onClose: () => void
-    width?: 'md' | 'lg' | 'xl' | '2xl' | '3xl'
+    width?: 'md' | 'lg' | 'xl' 
 }
 export default function Drawer({
     title, children, isOpen, onClose,

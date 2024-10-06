@@ -23,6 +23,8 @@ import DescriptionList from "./components/description-list"
 import Dialog from "./components/dialog"
 import Drawer from "./components/drawer"
 import Tabs from "./components/tabs"
+import TimezoneSelect from "./components/timezone-select"
+import CurrencySelect from "./components/currency-select"
 
 
 
@@ -49,6 +51,8 @@ export {
   Dialog,
   Drawer,
   Tabs,
+  TimezoneSelect,
+  CurrencySelect,
 
   //layouts
   StackedLayout,

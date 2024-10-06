@@ -1,14 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Tabs } from '..';
+import { CurrencySelect } from '..';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof Tabs> = {
-  title: 'Components/Tabs',
-  component: Tabs,
+const meta: Meta<typeof CurrencySelect> = {
+  title: 'Components/CurrencySelect',
+  component: CurrencySelect,
   parameters: {
-
+    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
+    layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   //   tags: ['autodocs'],
@@ -20,22 +21,18 @@ const meta: Meta<typeof Tabs> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Tabs>;
+type Story = StoryObj<typeof CurrencySelect>;
 
 
 export const Main: Story = {
   args: {
-    tabs: [{
-      id: 'a',
-      name: "General"
-    }, {
-      id: 'b',
-      name: "Team"
-    }, {
-      id: 'c',
-      name: "Site"
-    },],
-    activeTabId: 'b',
-    onTabClick: fn()
+    onChange: fn()
+  },
+};
+
+export const WithLabel: Story = {
+  args: {
+    label: "Select Currency",
+    onChange: fn()
   },
 };

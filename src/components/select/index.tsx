@@ -58,7 +58,10 @@ export default function Select(props: Props) {
             onClick={() => setOptions(props.options)}
         >
             <Listbox
-                value={selected} onChange={setSelected}>
+                value={selected} onChange={value => {
+                    setSelected(value)
+                    props.onSelect && props.onSelect(value)
+                }}>
                 <div
                     className='relative'>
 

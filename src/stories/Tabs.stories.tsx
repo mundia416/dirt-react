@@ -15,6 +15,7 @@ const meta: Meta<typeof Tabs> = {
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
     // size: { control: 'color' },
+    onTabClick: fn()
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
 };
@@ -36,6 +37,6 @@ export const Main: Story = {
       name: "Site"
     },],
     activeTabId: 'b',
-    onTabClick: fn()
+    onTabClick: (id) => console.log("tab click ", id)
   },
 };

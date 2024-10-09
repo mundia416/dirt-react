@@ -1,22 +1,23 @@
 import React from 'react'
 import { PhotoIcon } from '@heroicons/react/24/solid'
+import Label from '../label'
 
 type Props = {
     label?: string
-    type?: React.HTMLInputTypeAttribute | undefined
     multiple?: boolean,
     fileTypeString?: string,
     // maximum file size in mb
     maxFileSize?: number
-    onChange: (files: File[]) => void
+    onChange: (files: File[]) => void,
+    accept?: string
 }
 
 export default function FileUpload({
     label,
-    type = 'file',
     multiple,
     fileTypeString = 'PNG, JPG, GIF',
     maxFileSize = 10,
+    accept,
     onChange
 }: Props) {
 
@@ -36,9 +37,7 @@ export default function FileUpload({
     return (
         <div>
             {label &&
-                <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">
-                    {label}
-                </label>
+                <Label>{label}</Label>
             }
             <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div className="text-center">
@@ -51,7 +50,7 @@ export default function FileUpload({
                             <span>Upload {multiple ? "files" : "a file"}</span>
                             <input
                                 onChange={(item) => item.target.files && handleFilesSelected(item.target.files)}
-                                id="file-upload" name="file-upload" type={type} className="sr-only" multiple={multiple} />
+                                id="file-upload" name="file-upload" accept={accept} type={'file'} className="sr-only" multiple={multiple} />
                         </label>
                         <p className="pl-1">or drag and drop</p>
                     </div>

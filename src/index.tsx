@@ -28,6 +28,7 @@ import CurrencySelect from "./components/currency-select"
 import timezoneUtils from './utils/timezone-utils'
 import Label from "./components/label"
 import currencyUtils from './utils/currency-utils'
+import Toggle from "./components/toggle"
 
 
 
@@ -56,6 +57,7 @@ export {
   TimezoneSelect,
   CurrencySelect,
   Label,
+  Toggle,
 
   //layouts
   StackedLayout,

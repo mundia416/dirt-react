@@ -1,57 +1,31 @@
 import React, { useState } from 'react'
 import currencies from './currencies'
-import Select, { Option } from '../select'
+import Select from '../select'
+import CurrencyType from './CurrencyType'
+import currencyUtils from '../../utils/currency-utils'
 
 
 
-export type CurrencyProps = {
-    code: string
-    symbol: string
-    name: string
-}
-
-export function getInitialCurrency(): CurrencyProps {
-    const currency = { "cc": "ZAR", "symbol": "R", "name": "South African rand" }
 
 
-    return {
-        code: currency.cc,
-        name: currency.name,
-        symbol: currency.symbol,
-    }
 
-}
 
-function getCurrencies(): Option[] {
-    return processCurrencies(currencies)
-}
 
-function processCurrencies(currencies: any): Option[] {
-    const processedCurrencies = currencies.map(({ cc, name }: any) => (
-        {
-            id: cc,
-            title: name,
-            secondaryText: cc,
-        }
-    ))
-
-    return processedCurrencies
-}
 
 type Props = {
     label?: string
-    defaultValue?: CurrencyProps
-    onChange: (currency: CurrencyProps) => void
+    defaultValue?: CurrencyType
+    onChange: (currency: CurrencyType) => void
 }
 
 
 function CurrencySelect({
     label,
-    defaultValue = getInitialCurrency(),
+    defaultValue = currencyUtils.getInitialCurrency(),
     onChange
 }: Props) {
 
-    const [currencyOptions, setCurrencyOptions] = useState(getCurrencies())
+    const [currencyOptions, setCurrencyOptions] = useState(currencyUtils.getCurrencies())
 
 
     const handleSearchCurrency = (text: string) => {
@@ -71,7 +45,7 @@ function CurrencySelect({
             return matches
         })
 
-        setCurrencyOptions(processCurrencies(filteredCurrencies))
+        setCurrencyOptions(currencyUtils.processCurrencies(filteredCurrencies))
     }
 
     const handleSelect = (id: string) => {

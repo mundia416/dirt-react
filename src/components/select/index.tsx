@@ -5,6 +5,7 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import FieldInput from '../fieldinput'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import Label from '../label'
 
 export type Option = {
     id: string
@@ -63,11 +64,7 @@ export default function Select(props: Props) {
 
                     {props.label &&
                         < div className='w-full flex justify-between mb-2'>
-                            <label
-                                className={`flex flex-col text-gray-700 text-sm leading-6 font-semibold`}
-                            >{props.label}
-                            </label>
-
+                            <Label>{props.label}</Label>
                         </div>
                     }
 

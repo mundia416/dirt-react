@@ -1,6 +1,7 @@
 import React from 'react'
 import TimeZone from 'react-timezone-select'
 import timezoneUtils from '../../utils/timezone-utils'
+import Label from '../label'
 
 
 type Props = {
@@ -21,11 +22,7 @@ function TimezoneSelect({
         <div>
             {showLabel &&
                 < div className='w-full flex justify-between mb-2'>
-                    <label
-                        className={`flex flex-col text-gray-700 text-sm leading-6 font-semibold`}
-                    >{label}
-                    </label>
-
+                    <Label>{label}</Label>
                 </div>
             }
 

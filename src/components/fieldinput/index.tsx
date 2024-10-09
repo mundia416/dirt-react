@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Text from '../text';
 import { Props as TextInputProps } from '../textinput'
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+import Label from '../label';
 
 const errorFocus = (theme: any) => {
 
@@ -61,11 +62,7 @@ const FieldInput = (props: Props) => {
         <div className={className}>
             {(label || cornerHelpText) &&
                 < div className='w-full flex justify-between mb-2'>
-                    <label
-                        className={`flex flex-col text-gray-700 text-sm leading-6 font-semibold`}
-                    >{label}
-                    </label>
-
+                    <Label>{label}</Label>
                     <Text
                         type='text-small'
                     >{cornerHelpText}</Text>

@@ -25,6 +25,7 @@ import Drawer from "./components/drawer"
 import Tabs from "./components/tabs"
 import TimezoneSelect from "./components/timezone-select"
 import CurrencySelect from "./components/currency-select"
+import timezoneUtils from './utils/timezone-utils'
 
 
 
@@ -60,5 +61,6 @@ export {
 
   //utils
   stringUtils,
-  dateUtils
+  dateUtils,
+  timezoneUtils
 }

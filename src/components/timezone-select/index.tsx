@@ -1,10 +1,7 @@
 import React from 'react'
 import TimeZone from 'react-timezone-select'
+import timezoneUtils from '../../utils/timezone-utils'
 
-
-export const getDefaultTimezone = () => {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone
-}
 
 type Props = {
     label?: string
@@ -14,7 +11,7 @@ type Props = {
 }
 
 function TimezoneSelect({
-    selectedTimezone = getDefaultTimezone(),
+    selectedTimezone = timezoneUtils.getDefaultTimezone(),
     onChange,
     showLabel = true,
     label = "Timezone"

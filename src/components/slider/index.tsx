@@ -9,13 +9,15 @@ type Props = {
     value?: number
     thumbColor?: string
     activeColor?: string
+    className?: string
 }
 
 function Slider({ min, max, step, onChange, value,
     thumbColor = '#00bcd4',
-    activeColor = '#00acc1' }: Props) {
+    activeColor = '#00acc1',
+    className }: Props) {
     return (
-        <div className='w-full mb-2 py-2'>
+        <div className={`w-full mb-2 py-2 ${className}`}>
             <SliderComponent
                 axis='x'
                 x={value}
@@ -23,7 +25,7 @@ function Slider({ min, max, step, onChange, value,
                 xmax={max}
                 xstep={step}
                 onChange={({ x }) => onChange && onChange(x)}
-
+                
                 styles={{
                     active: {
                         backgroundColor: activeColor

@@ -55,7 +55,7 @@ type Props = {
         imageUrl?: string
     },
     sidebar?: 'wide' | 'thin'
-    logoSrc: string,
+    logoSrc?: string,
     settingsNavItem?: {
         name?: string
         href?: string

@@ -95,6 +95,7 @@
     "appwrite": "^15.0.0",
     "autoprefixer": "^10.4.20",
     "next": "^14.2.6",
+    "react-input-slider": "^6.0.1",
     "react-spinkit": "^3.0.0",
     "react-timezone-select": "^3.2.8",
     "react-tooltip": "^5.28.0",

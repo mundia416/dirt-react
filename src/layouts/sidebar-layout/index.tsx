@@ -20,6 +20,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { usePathname } from 'next/navigation';
+import { Text } from '@mundia/dirt-react'
 
 
 export type NavItemProps = {
@@ -53,6 +54,7 @@ type Props = {
         name: string,
         imageUrl?: string
     },
+    sidebar?: 'wide' | 'thin'
     logoSrc: string,
     settingsNavItem?: {
         name?: string
@@ -80,19 +82,13 @@ export default function SidebarLayout({
     user,
     logoSrc,
     children,
+    sidebar = 'wide',
     customHeaderContent,
     showNotificationIcon = true,
     settingsNavItem }: Props) {
+
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    // const [activeNavItem, setActiveNavItem] = useState<NavItemProps>()
-
     const pathname = usePathname();
-
-    // useEffect(() => {
-    //     navigationGroups?.forEach(navOptions => {
-    //         setActiveNavItem(navOptions?.navigationOptions?.filter(item => item.href === pathname)[0])
-    //     })
-    // }, [pathname, navigationGroups])
 
     return (
         <>
@@ -120,11 +116,7 @@ export default function SidebarLayout({
                             {/* Sidebar component, swap this element with another sidebar if you like */}
                             <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
                                 <div className="flex h-16 shrink-0 items-center">
-                                    {/* <img
-                                        alt="Your Company"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                        className="h-8 w-auto"
-                                    /> */}
+
                                     {logoSrc &&
                                         <>
                                             <img
@@ -132,8 +124,6 @@ export default function SidebarLayout({
                                                 src={logoSrc}
                                                 className="block h-8 w-auto "
                                             />
-
-
                                         </>
                                     }
                                 </div>
@@ -185,15 +175,10 @@ export default function SidebarLayout({
                 </Dialog>
 
                 {/* Static sidebar for desktop */}
-                <div className="hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex lg:w-72 lg:flex-col">
+                <div className={`hidden lg:fixed lg:inset-y-0 lg:z-40 lg:flex ${sidebar === 'thin' ? 'lg:w-24' : 'lg:w-72'} lg:flex-col`}>
                     {/* Sidebar component, swap this element with another sidebar if you like */}
                     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
                         <div className="flex h-16 shrink-0 items-center">
-                            {/* <img
-                                alt="Your Company"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                                className="h-8 w-auto"
-                            /> */}
                             {logoSrc &&
                                 <>
                                     <img
@@ -213,20 +198,38 @@ export default function SidebarLayout({
                                         {heading && <div className="text-xs font-semibold leading-6 text-gray-400">{heading}</div>}
                                         <ul role="list" className="-mx-2 space-y-1">
                                             {navigationOptions?.map((item) => (
-                                                <li key={item.name}>
-                                                    <a
-                                                        href={item.href}
-                                                        className={classNames(
-                                                            pathname === item.href
-                                                                ? 'bg-gray-800 text-white'
-                                                                : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                                            'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
-                                                        )}
-                                                    >
-                                                        <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
-                                                        {item.name}
-                                                    </a>
-                                                </li>
+                                                sidebar === 'thin' ?
+                                                    <li key={item.name}>
+                                                        <a
+                                                            href={item.href}
+                                                            className={classNames(
+                                                                pathname === item.href ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                'group flex  flex-col items-center justify-center gap-x-3 rounded-md p-3 text-sm font-semibold leading-6',
+                                                            )}
+                                                        >
+                                                            <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
+                                                            <Text
+                                                                color
+                                                                className={`hover:text-gray-100 ${pathname === item.href ? 'text-gray-100' : 'text-gray-200'}`}
+                                                                type='text-small'
+                                                            >{item.name}</Text>
+                                                        </a>
+                                                    </li>
+                                                    :
+                                                    <li key={item.name}>
+                                                        <a
+                                                            href={item.href}
+                                                            className={classNames(
+                                                                pathname === item.href
+                                                                    ? 'bg-gray-800 text-white'
+                                                                    : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
+                                                            )}
+                                                        >
+                                                            <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
+                                                            {item.name}
+                                                        </a>
+                                                    </li>
                                             ))}
                                         </ul>
                                     </li>
@@ -250,7 +253,7 @@ export default function SidebarLayout({
                     </div>
                 </div>
 
-                <div className="lg:pl-72">
+                <div className="lg:pl-24">
                     <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
                         <button type="button" onClick={() => setSidebarOpen(true)} className="-m-2.5 p-2.5 text-gray-700 lg:hidden">
                             <span className="sr-only">Open sidebar</span>
@@ -301,11 +304,6 @@ export default function SidebarLayout({
                                 <Menu as="div" className="relative">
                                     <MenuButton className="-m-1.5 flex items-center p-1.5">
                                         <span className="sr-only">Open user menu</span>
-                                        {/* <img
-                                            alt=""
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                            className="h-8 w-8 rounded-full bg-gray-50"
-                                        /> */}
 
                                         {user?.imageUrl ?
                                             <img

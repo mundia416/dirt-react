@@ -662,6 +662,10 @@ video {
   left: 0px;
 }
 
+.left-20 {
+  left: 5rem;
+}
+
 .left-full {
   left: 100%;
 }
@@ -672,6 +676,10 @@ video {
 
 .top-0 {
   top: 0px;
+}
+
+.top-16 {
+  top: 4rem;
 }
 
 .z-0 {
@@ -1014,6 +1022,10 @@ video {
   width: 2rem;
 }
 
+.w-96 {
+  width: 24rem;
+}
+
 .w-auto {
   width: auto;
 }
@@ -1341,6 +1353,10 @@ video {
   border-left-width: 4px;
 }
 
+.border-r {
+  border-right-width: 1px;
+}
+
 .border-r-0 {
   border-right-width: 0px;
 }
@@ -1654,6 +1670,10 @@ video {
   padding-bottom: 2rem;
 }
 
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
 .pb-3 {
   padding-bottom: 0.75rem;
 }
@@ -1851,6 +1871,11 @@ video {
 .text-gray-100 {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+
+.text-gray-200 {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 
 .text-gray-300 {
@@ -2819,8 +2844,16 @@ video {
     bottom: 0px;
   }
 
+  .lg\:left-0 {
+    left: 0px;
+  }
+
   .lg\:z-40 {
     z-index: 40;
+  }
+
+  .lg\:z-50 {
+    z-index: 50;
   }
 
   .lg\:-mx-8 {
@@ -2844,6 +2877,14 @@ video {
     height: 1.5rem;
   }
 
+  .lg\:w-20 {
+    width: 5rem;
+  }
+
+  .lg\:w-24 {
+    width: 6rem;
+  }
+
   .lg\:w-72 {
     width: 18rem;
   }
@@ -2865,6 +2906,15 @@ video {
          column-gap: 1.5rem;
   }
 
+  .lg\:overflow-y-auto {
+    overflow-y: auto;
+  }
+
+  .lg\:bg-gray-900 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+  }
+
   .lg\:bg-gray-900\/10 {
     background-color: rgb(17 24 39 / 0.1);
   }
@@ -2879,15 +2929,36 @@ video {
     padding-right: 2rem;
   }
 
-  .lg\:pl-72 {
-    padding-left: 18rem;
+  .lg\:py-6 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .lg\:pb-4 {
+    padding-bottom: 1rem;
+  }
+
+  .lg\:pl-20 {
+    padding-left: 5rem;
+  }
+
+  .lg\:pl-24 {
+    padding-left: 6rem;
   }
 }
 
 @media (min-width: 1280px) {
+  .xl\:block {
+    display: block;
+  }
+
   .xl\:px-64 {
     padding-left: 16rem;
     padding-right: 16rem;
+  }
+
+  .xl\:pl-96 {
+    padding-left: 24rem;
   }
 }
 

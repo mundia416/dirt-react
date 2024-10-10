@@ -26,6 +26,7 @@ export default meta;
 type Story = StoryObj<typeof SidebarLayout>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+
 export const Main: Story = {
   args: {
     navigationGroups: [
@@ -74,9 +75,41 @@ export const Main: Story = {
       // email: 'jack@gmail.com',
       imageUrl: ''
     },
-    logoSrc: 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
+    logoSrc: 'https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500'
   },
 };
+
+export const ThinSidebar: Story = {
+  args: {
+    sidebar: 'thin',
+    navigationGroups: [
+      {
+        navigationOptions: [{
+          name: 'Home',
+          href: '/',
+          icon: HomeIcon
+        }, {
+          name: 'User',
+          href: '/',
+          icon: UserIcon
+        }]
+      },
+    ],
+    userDropdownOptions: [{
+      name: 'Logout',
+      // href: '/logout',
+      onClick: fn(),
+    }],
+    user: {
+      name: 'Jack Lane',
+      // email: 'jack@gmail.com',
+      imageUrl: ''
+    },
+    logoSrc: 'https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500',
+    children: <div className='w-full h-full bg-red-500'>text content</div>
+  },
+};
+
 
 export const CustomHeaderContent: Story = {
   args: {
@@ -135,7 +168,7 @@ export const CustomHeaderContent: Story = {
       // email: 'jack@gmail.com',
       imageUrl: ''
     },
-    logoSrc: 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
+    logoSrc: 'https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500'
   },
 };
 

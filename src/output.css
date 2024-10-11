@@ -2904,6 +2904,10 @@ video {
   .lg\:pl-24 {
     padding-left: 6rem;
   }
+
+  .lg\:pl-72 {
+    padding-left: 18rem;
+  }
 }
 
 @media (min-width: 1280px) {

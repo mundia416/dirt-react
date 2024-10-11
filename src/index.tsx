@@ -31,6 +31,8 @@ import currencyUtils from './utils/currency-utils'
 import Toggle from "./components/toggle"
 import Slider from "./components/slider"
 import Badge from "./components/badge"
+import Checkbox from "./components/checkbox"
+
 
 
 
@@ -62,7 +64,7 @@ export {
   Toggle,
   Slider,
   Badge,
-
+  Checkbox,
   //layouts
   StackedLayout,
   SidebarLayout,

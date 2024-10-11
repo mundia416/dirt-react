@@ -3,7 +3,6 @@ import React from 'react';
 
 
 export interface Props {
-    testid?: string,
     pattern?: any,
     type?: React.HTMLInputTypeAttribute | undefined,
     placeholder?: string,
@@ -28,10 +27,11 @@ export interface Props {
     aff?: any,
     required?: boolean
     formProps?: any
+    rows?: number
 }
 
 export default function TextInput({
-    testid,
+    rows,
     pattern,
     type,
     placeholder,
@@ -116,7 +116,7 @@ export default function TextInput({
                 required={required}
                 id={id}
                 dir={dir}
-                data-testid={testid}
+                rows={rows}
                 disabled={disabled}
                 onClick={(e) => e.stopPropagation()}
                 name={name}
@@ -136,7 +136,7 @@ export default function TextInput({
                 required={required}
                 id={id}
                 dir={dir}
-                data-testid={testid}
+                rows={rows}
                 onFocus={onFocus}
                 onBlur={onBlur}
                 onClick={(e) => e.stopPropagation()}

@@ -30,6 +30,7 @@ import Label from "./components/label"
 import currencyUtils from './utils/currency-utils'
 import Toggle from "./components/toggle"
 import Slider from "./components/slider"
+import Badge from "./components/badge"
 
 
 
@@ -60,6 +61,7 @@ export {
   Label,
   Toggle,
   Slider,
+  Badge,
 
   //layouts
   StackedLayout,

@@ -51,9 +51,10 @@ interface Props extends TextInputProps {
  */
 const FieldInput = (props: Props) => {
 
-    const { testid, pattern, label, leadingText, trailingText, className, error,
+    const { pattern, label, leadingText, trailingText, className, error,
         helpText, inputClassName, cornerHelpText, placeholder, type, variant, id,
-        disabled, onChange, onFilesChange, step, value, element = 'input', name, onFocus, onBlur, aff, max, min, required,
+        disabled, onChange, onFilesChange, step, value, element = 'input',
+        name, onFocus, onBlur, aff, max, min, required, rows,
         formProps } = props
 
     const isDarkVariant = (variant === 'dark')
@@ -81,7 +82,6 @@ const FieldInput = (props: Props) => {
                 <Input
                     formProps={formProps}
                     required={required}
-                    testid={testid}
                     disabled={disabled}
                     onFocus={onFocus}
                     onBlur={onBlur}
@@ -90,6 +90,7 @@ const FieldInput = (props: Props) => {
                     onChange={onChange}
                     onFilesChange={onFilesChange}
                     id={id}
+                    rows={rows}
                     focus
                     min={min}
                     max={max}

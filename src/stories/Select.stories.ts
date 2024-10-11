@@ -105,6 +105,28 @@ export const Search: Story = {
       {
         id: 'c',
         title: 'Draft Part 2'
+      }, {
+        id: 'b',
+        title: 'Draft',
+      }, {
+        id: 'a',
+        title: "Published",
+        secondaryText: "published with ease"
+      },
+      {
+        id: 'c',
+        title: 'Draft Part 2'
+      }, {
+        id: 'b',
+        title: 'Draft',
+      }, {
+        id: 'a',
+        title: "Published",
+        secondaryText: "published with ease"
+      },
+      {
+        id: 'c',
+        title: 'Draft Part 2'
       },
     ],
     onSelect: fn(),

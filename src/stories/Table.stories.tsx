@@ -190,6 +190,26 @@ export const ClickableRow: Story = {
   },
 };
 
+export const Pagination: Story = {
+  args: {
+    heading: 'Users',
+    subHeading: 'A list of all the users in your account including their name, title, email and role.',
+    actionButton: {
+      text: 'Add Users',
+      onClick: fn()
+    },
+    columnTitles,
+    rowData,
+    onRowClick: fn(),
+    pagination: {
+      onPageClick: fn(),
+      page: 10,
+      total: 402,
+      perPage: 25
+    }
+  },
+};
+
 
 
 

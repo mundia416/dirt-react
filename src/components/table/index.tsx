@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import Card from '../card'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 
 type RowColumnItemProps = {
     value: string | number | ReactNode
@@ -28,7 +29,16 @@ type Props = {
     columnTitles: ColumnTitleProps[],
     rowData: RowsProps[]
     /**allows for a row to be clicked and hovered over */
-    onRowClick?: (index: number) => void
+    onRowClick?: (index: number) => void,
+    pagination?: {
+        //the total pages
+        total: number
+        //the current page
+        page: number
+        //the number of items per page
+        perPage: number
+        onPageClick: (page: number) => void
+    }
 }
 
 export default function Table({
@@ -37,7 +47,8 @@ export default function Table({
     actionButton,
     columnTitles,
     rowData = [],
-    onRowClick
+    onRowClick,
+    pagination
 }: Props) {
 
     return (
@@ -97,6 +108,112 @@ export default function Table({
                             </table>
                         </div>
                     </div>
+
+
+
+                    {/* pagination*/}
+                    {pagination && (
+                        <div className="w-full  flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 ">
+                            <div className="w-full flex flex-1 justify-between sm:hidden">
+                                <a
+                                    onClick={() => pagination.page > 1 && pagination.onPageClick(pagination.page - 1)}
+                                    className={`cursor-pointer relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${pagination.page === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                >
+                                    Previous
+                                </a>
+                                <a
+                                    onClick={() => pagination.page < Math.ceil(pagination.total / pagination.perPage) && pagination.onPageClick(pagination.page + 1)}
+                                    className={`cursor-pointer relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${pagination.page === Math.ceil(pagination.total / pagination.perPage) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                >
+                                    Next
+                                </a>
+                            </div>
+                            <div className="  w-full hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                                <div>
+                                    <p className="text-sm text-gray-700">
+                                        Showing{' '}
+                                        <span className="font-medium">
+                                            {Math.min((pagination.page - 1) * pagination.perPage + 1, pagination.total)}
+                                        </span>{' '}
+                                        to{' '}
+                                        <span className="font-medium">
+                                            {Math.min(pagination.page * pagination.perPage, pagination.total)}
+                                        </span>{' '}
+                                        of <span className="font-medium">{pagination.total}</span> results
+                                    </p>
+                                </div>
+                                <div className=''>
+                                    <nav aria-label="Pagination" className="justify-end  isolate inline-flex -space-x-px rounded-md shadow-sm">
+                                        <a
+                                            onClick={() => pagination.page > 1 && pagination.onPageClick(pagination.page - 1)}
+                                            className={` cursor-pointer relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ${pagination.page === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        >
+                                            <span className="sr-only">Previous</span>
+                                            <ChevronLeftIcon aria-hidden="true" className="h-5 w-5" />
+                                        </a>
+
+                                        {
+                                            (() => {
+                                                const totalPages = Math.ceil(pagination.total / pagination.perPage);
+                                                const currentPage = pagination.page;
+                                                const pageNumbers = [];
+
+                                                // Show the first 5 pages, the last 3 pages, and the current page
+                                                const firstPages = Math.min(2, totalPages); // Ensure to not exceed total pages
+                                                const lastPages = Math.max(totalPages - 1, firstPages + 1); // Ensure at least 3 pages in total
+
+                                                for (let i = 1; i <= totalPages; i++) {
+                                                    if (
+                                                        i <= firstPages || // First  pages
+                                                        i >= lastPages ||  // Last pages
+                                                        (i >= currentPage - 1 && i <= currentPage + 1) // Current page and neighbors
+                                                    ) {
+                                                        pageNumbers.push(
+                                                            <a
+                                                                key={i}
+                                                                onClick={() => pagination.onPageClick(i)}
+                                                                className={`cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-semibold ${pagination.page === i
+                                                                    ? 'bg-indigo-600 text-white'
+                                                                    : 'text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
+                                                                    } focus:z-20 focus:outline-offset-0`}
+                                                            >
+                                                                {i}
+                                                            </a>
+                                                        );
+                                                    } else if (
+                                                        i === firstPages + 1 || // After first 5 pages
+                                                        i === lastPages - 1      // Before last 5 pages
+                                                    ) {
+                                                        pageNumbers.push(
+                                                            <span
+                                                                key={`ellipsis-${i}`}
+                                                                className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300"
+                                                            >
+                                                                ...
+                                                            </span>
+                                                        );
+                                                    }
+                                                }
+
+                                                return pageNumbers;
+                                            })()
+                                        }
+
+
+                                        <a
+                                            onClick={() => pagination.page < Math.ceil(pagination.total / pagination.perPage) && pagination.onPageClick(pagination.page + 1)}
+                                            className={`cursor-pointer relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ${pagination.page === Math.ceil(pagination.total / pagination.perPage) ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        >
+                                            <span className="sr-only">Next</span>
+                                            <ChevronRightIcon aria-hidden="true" className="h-5 w-5" />
+                                        </a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+
                 </Card>
             </div>
 

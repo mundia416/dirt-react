@@ -3,11 +3,11 @@ import CurrencyType from "../../components/currency-select/CurrencyType"
 import { Option } from "../../components/select"
 
 function getInitialCurrency(): CurrencyType {
-    const currency = { "cc": "ZAR", "symbol": "R", "name": "South African rand" }
+    const currency = { "code": "ZAR", "symbol": "R", "name": "South African rand" }
 
 
     return {
-        code: currency.cc,
+        code: currency.code,
         name: currency.name,
         symbol: currency.symbol,
     }

@@ -42,7 +42,7 @@ function ContentController({
                     <>
                         {error ?
                             <div
-                                className={` flex w-full h-full justify-center items-center ${errorFullscreen && 'h-screen'}`}>
+                                className={` px-8 md:px-12 lg:px-24 flex w-full h-full justify-center items-center ${errorFullscreen && 'h-screen'}`}>
                                 <ErrorAlert
                                     isShown={error}
                                 />

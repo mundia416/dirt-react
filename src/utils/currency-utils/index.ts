@@ -19,11 +19,11 @@ function getCurrencies(): Option[] {
 }
 
 function processCurrencies(currencies: { code: string, symbol: string, name: string }[]): Option[] {
-    const processedCurrencies = currencies.map(({ cc, name }: any) => (
+    const processedCurrencies = currencies.map(({ code, name }: any) => (
         {
-            id: cc,
+            id: code,
             title: name,
-            secondaryText: cc,
+            secondaryText: code,
         }
     ))
 

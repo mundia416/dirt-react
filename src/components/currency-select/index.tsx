@@ -35,7 +35,7 @@ function CurrencySelect({
             matches = option.name.toLowerCase().includes(text.toLowerCase())
 
             if (!matches) {
-                matches = option.cc.toLowerCase().includes(text.toLowerCase())
+                matches = option.code.toLowerCase().includes(text.toLowerCase())
             }
 
             if (!matches) {
@@ -50,10 +50,10 @@ function CurrencySelect({
 
     const handleSelect = (id: string) => {
         for (let item of currencies) {
-            if (item.cc === id) {
+            if (item.code === id) {
                 onChange({
                     ...item,
-                    code: item.cc
+                    code: item.code
                 })
 
                 return

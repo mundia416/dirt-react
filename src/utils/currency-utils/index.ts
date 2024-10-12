@@ -18,7 +18,7 @@ function getCurrencies(): Option[] {
     return processCurrencies(currencies)
 }
 
-function processCurrencies(currencies: { cc: string, symbol: string, name: string }[]): Option[] {
+function processCurrencies(currencies: { code: string, symbol: string, name: string }[]): Option[] {
     const processedCurrencies = currencies.map(({ cc, name }: any) => (
         {
             id: cc,

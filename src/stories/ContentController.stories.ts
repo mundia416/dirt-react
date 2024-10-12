@@ -8,8 +8,6 @@ const meta: Meta<typeof ContentController> = {
   title: 'Components/ContentController',
   component: ContentController,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
-    layout: 'centered',
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   //   tags: ['autodocs'],
@@ -36,9 +34,24 @@ export const Loading: Story = {
   },
 };
 
+export const LoadingFullScreen: Story = {
+  args: {
+    loading: true,
+    loadingFullscreen: true
+  },
+};
+
+
 export const Error: Story = {
   args: {
     error: true,
+  },
+};
+
+export const ErrorFullScreen: Story = {
+  args: {
+    error: true,
+    errorFullscreen: true
   },
 };
 

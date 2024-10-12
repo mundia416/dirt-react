@@ -12,6 +12,7 @@ type Props = {
     className?: string,
     loadingClassName?: string
     loadingFullscreen?: boolean
+    errorFullscreen?: boolean
 }
 
 /**
@@ -25,7 +26,8 @@ function ContentController({
     children,
     className,
     loadingClassName,
-    loadingFullscreen
+    loadingFullscreen,
+    errorFullscreen
 }: Props) {
 
     return (
@@ -40,7 +42,7 @@ function ContentController({
                     <>
                         {error ?
                             <div
-                                className=' flex w-full h-full justify-center items-center'>
+                                className={` flex w-full h-full justify-center items-center ${errorFullscreen && 'h-screen'}`}>
                                 <ErrorAlert
                                     isShown={error}
                                 />

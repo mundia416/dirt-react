@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { Button } from '..';
-import { MagnifyingGlassCircleIcon, MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof Button> = {
@@ -68,10 +68,27 @@ export const LeadingIcon: Story = {
   },
 };
 
+export const LeadingIconString: Story = {
+  args: {
+    variant: 'outline',
+    children: 'Button',
+    leadingIcon: 'https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500'
+  },
+};
+
+
 export const TrailingIcon: Story = {
   args: {
     children: 'Button',
     trailingIcon: MagnifyingGlassIcon
+  },
+};
+
+export const TrailingIconString: Story = {
+  args: {
+    variant: 'outline',
+    children: 'Button',
+    trailingIcon: 'https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500'
   },
 };
 

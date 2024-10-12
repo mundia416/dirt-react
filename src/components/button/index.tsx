@@ -19,11 +19,11 @@ export interface ButtonProps {
     loadingId?: string,
     enabled?: boolean,
     ref?: any,
-    leadingIcon?: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
+    leadingIcon?: string | ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
         title?: string;
         titleId?: string;
     } & RefAttributes<SVGSVGElement>>,
-    trailingIcon?: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
+    trailingIcon?: string | ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
         title?: string;
         titleId?: string;
     } & RefAttributes<SVGSVGElement>>,
@@ -75,7 +75,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     const darkVariant = `${shadowStyle}  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 ${!color && 'text-white'}  ${!bg && 'bg-gray-800'} 
     ${!hover && enabled && 'hover:text-gray-100 hover:bg-gray-900'}`
 
-    const outlineVariant = `${shadowStyle} ${focusStyle} ${!bg && 'bg-white'} ${!color && 'text-gray-700'} border border-gray-300 shadow ${!hover && enabled && 'hover:bg-gray-50 '}`
+    const outlineVariant = `${shadowStyle} ${focusStyle} ${!bg && 'bg-white'} ${!color && 'text-gray-700'} border border-gray-400 shadow ${!hover && enabled && 'hover:bg-gray-50 '}`
 
     const textVariant = ` ${!focus && 'focus:outline-none'} ${!bg && 'bg-transparent'}
      ${!color && 'text-gray-700'} ${!hover && enabled && 'hover:text-gray-900'}`
@@ -139,10 +139,10 @@ const Button: React.FC<ButtonProps> = (props) => {
             break
     }
 
-    const styles = ` normal-case text-center border-transparent 
+    const styles = `${variantStyle} normal-case text-center border-transparent 
             ${enabled ? 'cursor-pointer' : 'cursor-default'} justify-center transition duration-150 items-center flex  
               ${!rounded && 'rounded-md'} leading-6 font-medium 
-             ${variantStyle} ${sizeStyle} ${className}`
+              ${sizeStyle} ${className}`
 
     const button = () => <button
         type='button'
@@ -164,7 +164,16 @@ const Button: React.FC<ButtonProps> = (props) => {
             <div className='flex items-center'>
                 {props.leadingIcon &&
                     <div className={iconWrapper}>
+                          
+                          {typeof props.leadingIcon === 'string'?
+                            <img
+                            alt='leading icon'
+                            className='h-full w-full object-contain'
+                                src={props.leadingIcon}
+                            />
+                            :
                         <props.leadingIcon className='h-full w-full' />
+                          }
                     </div>
                 }
 
@@ -172,7 +181,16 @@ const Button: React.FC<ButtonProps> = (props) => {
 
                 {props.trailingIcon &&
                     <div className={iconWrapper}>
+                          
+                          {typeof props.trailingIcon === 'string'?
+                            <img
+                            alt='leading icon'
+                            className='h-full w-full object-contain'
+                                src={props.trailingIcon}
+                            />
+                            :
                         <props.trailingIcon className='h-full w-full' />
+                          }
                     </div>
                 }
             </div>
@@ -192,7 +210,17 @@ const Button: React.FC<ButtonProps> = (props) => {
                     <div className='flex items-center'>
                         {props.leadingIcon &&
                             <div className={iconWrapper}>
+                            
+                            {typeof props.leadingIcon === 'string'?
+                            <img
+                            alt='leading icon'
+                            className='h-full w-full object-contain'
+                                src={props.leadingIcon}
+                            />
+                        :
                                 <props.leadingIcon className='h-full w-full' />
+                        }
+
                             </div>
                         }
 
@@ -206,7 +234,15 @@ const Button: React.FC<ButtonProps> = (props) => {
 
                         {props.trailingIcon &&
                             <div className={iconWrapper}>
+                                 {typeof props.trailingIcon === 'string'?
+                            <img
+                            alt='trailing icon'
+                            className='h-full w-full object-contain'
+                                src={props.trailingIcon}
+                            />
+                        :
                                 <props.trailingIcon className='h-full w-full' />
+                                 }
                             </div>
                         }
                     </div>

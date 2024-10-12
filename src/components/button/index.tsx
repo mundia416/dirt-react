@@ -204,7 +204,7 @@ const Button: React.FC<ButtonProps> = (props) => {
                 :
 
                 <div
-                    className={styles}
+                    className={styles+ ' relative'}
                 >
 
                     <div className='flex items-center'>
@@ -227,7 +227,16 @@ const Button: React.FC<ButtonProps> = (props) => {
                         <input
                             ref={ref}
                             value={children}
-                            className='cursor-pointer'
+                            className='cursor-pointer  absolute z-10 left-0 top-0 bottom-0 right-0'
+                            type='submit'
+                            name="submit"
+                        />
+
+
+                        <input
+                            ref={ref}
+                            value={children}
+                            className='text-transparent'
                             type='submit'
                             name="submit"
                         />

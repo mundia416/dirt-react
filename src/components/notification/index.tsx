@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Transition } from '@headlessui/react'
 import { CheckCircleIcon } from '@heroicons/react/24/outline'
 import { XMarkIcon } from '@heroicons/react/20/solid'
@@ -12,11 +12,19 @@ type Props = {
         title?: string;
         titleId?: string;
     } & React.RefAttributes<SVGSVGElement>>
-    iconClassname?: string
+    iconClassname?: string,
+    //set a timer for when the notification should close
+    timeoutMillis?: number
 }
 
 
 export default function Notification(props: Props) {
+
+    useEffect(() => {
+        if (props.timeoutMillis) {
+            setTimeout(() => props.onClose && props.onClose(), props.timeoutMillis)
+        }
+    }, [props.open])
 
     return (
         <>

@@ -5,7 +5,7 @@ import { Switch } from '@headlessui/react'
 
 type Props = {
     value: boolean,
-    onToggle: (value: boolean) => void
+    onToggle?: (value: boolean) => void
     withIcons?: boolean,
     formProps?: {
         //control from react hook forms useForm()

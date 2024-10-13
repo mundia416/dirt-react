@@ -13,6 +13,12 @@ export type Option = {
     secondaryText?: string
 }
 
+export type FormProps = {
+    //control from react hook forms useForm()
+    control: Control<any, any>
+    name: string
+}
+
 type Props = {
     label?: string
     options: Option[]
@@ -22,11 +28,7 @@ type Props = {
     searchPlaceholder?: string
     value?: Option
     onChange?: (value: Option) => void
-    formProps?: {
-        //control from react hook forms useForm()
-        control: Control<any, any>
-        name: string
-    }
+    formProps?: FormProps
 }
 
 export default function Select(props: Props) {

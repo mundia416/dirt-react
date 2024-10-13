@@ -1,11 +1,11 @@
 'use client'
-
 import React, { useEffect, useState } from 'react'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import FieldInput from '../fieldinput'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Label from '../label'
+import { Controller, Control, FieldValues } from "react-hook-form";
 
 export type Option = {
     id: string
@@ -16,23 +16,50 @@ export type Option = {
 type Props = {
     label?: string
     options: Option[]
-    onSelect: (value: Option) => void
     className?: string
     onSearchChange?: (text: string) => void
     search?: boolean
     searchPlaceholder?: string
-    defaultValue?: Option
+    value?: Option
+    onChange?: (value: Option) => void
+    formProps?: {
+        //control from react hook forms useForm()
+        control: Control<FieldValues, any>
+        name: string
+    }
 }
 
 export default function Select(props: Props) {
+    if (props.formProps) {
+        return <Controller
+            name={props.formProps.name}
+            control={props.formProps.control}
+            render={({ field }) => (
+                <SelectContent
+                    {...props}
+                    value={field.value}
+                    onChange={field.onChange}
+                />
+            )}
+        />
+    } else {
+        return <SelectContent {...props} />
+    }
+}
 
-    const [selected, setSelected] = useState(props.defaultValue || props.options[0])
+
+export function SelectContent(props: Props) {
 
     const [options, setOptions] = useState(props.options)
 
 
     useEffect(() => {
         setOptions(props.options)
+
+        //default to first option if value is not defined
+        if (!props.value) {
+            props.onChange && props.onChange(props.options[0])
+        }
     }, [props.options])
 
     const handleSearchChange = (text: string) => {
@@ -58,10 +85,7 @@ export default function Select(props: Props) {
             onClick={() => setOptions(props.options)}
         >
             <Listbox
-                value={selected} onChange={value => {
-                    setSelected(value)
-                    props.onSelect && props.onSelect(value)
-                }}>
+                value={props.value} onChange={props.onChange}>
                 <div
                     className='relative'>
 
@@ -74,8 +98,8 @@ export default function Select(props: Props) {
                     <div className="relative mt-2">
                         <ListboxButton className={"relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6 " + props.className}>
                             <span className="inline-flex w-full truncate">
-                                <span className="truncate">{selected.title}</span>
-                                <span className="ml-2 truncate text-gray-500">{selected.secondaryText}</span>
+                                <span className="truncate">{props.value?.title}</span>
+                                <span className="ml-2 truncate text-gray-500">{props.value?.secondaryText}</span>
                             </span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                 <ChevronUpDownIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />

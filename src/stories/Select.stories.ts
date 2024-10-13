@@ -40,7 +40,7 @@ export const Primary: Story = {
         title: 'Draft Part 2'
       },
     ],
-    onSelect: fn(),
+    onChange: fn(),
     className: 'min-w-44'
 
   },
@@ -61,7 +61,7 @@ export const CustomClassname: Story = {
         title: 'Draft Part 2'
       },
     ],
-    onSelect: fn(),
+    onChange: fn(),
     className: 'w-full py-6 min-w-44'
   },
 };
@@ -83,7 +83,7 @@ export const Label: Story = {
         title: 'Draft Part 2'
       },
     ],
-    onSelect: fn(),
+    onChange: fn(),
     className: 'min-w-44'
 
   },
@@ -129,9 +129,8 @@ export const Search: Story = {
         title: 'Draft Part 2'
       },
     ],
-    onSelect: fn(),
+    onChange: fn(),
     className: 'min-w-60',
     search: true
-
   },
 };

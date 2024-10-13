@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 
@@ -13,23 +13,29 @@ type Option = {
 
 type Props = {
     options: Option[]
-    onSelect: (value: Option) => void
+    onChange?: (value: Option) => void
+    value?: Option
     className?: string
 }
 
 export default function BrandedSelect(props: Props) {
-    const [selected, setSelected] = useState(props.options[0])
+
+
+    useEffect(() => {
+        //default to first option if value is not defined
+        if (!props.value) {
+            props.onChange && props.onChange(props.options[0])
+        }
+    }, [props.options])
+
 
     return (
-        <Listbox value={selected} onChange={(value) => {
-            setSelected(value)
-            props.onSelect(value)
-        }}>
+        <Listbox value={props.value} onChange={props.onChange}>
             <div className={"relative" + props.className}>
                 <div className="inline-flex divide-x divide-indigo-700 rounded-md shadow-sm">
                     <div className="inline-flex items-center gap-x-1.5 rounded-l-md bg-indigo-600 px-3 py-2 text-white shadow-sm">
                         <CheckIcon aria-hidden="true" className="-ml-0.5 h-5 w-5" />
-                        <p className="text-sm font-semibold">{selected.title}</p>
+                        <p className="text-sm font-semibold">{props.value?.title}</p>
                     </div>
                     <ListboxButton className="inline-flex items-center rounded-l-none rounded-r-md bg-indigo-600 p-2 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:ring-offset-gray-50">
                         <ChevronDownIcon aria-hidden="true" className="h-5 w-5 text-white" />

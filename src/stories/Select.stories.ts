@@ -40,6 +40,10 @@ export const Primary: Story = {
         title: 'Draft Part 2'
       },
     ],
+    value: {
+      id: 'c',
+      title: 'Draft Part 2'
+    },
     onChange: fn(),
     className: 'min-w-44'
 

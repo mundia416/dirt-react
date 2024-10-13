@@ -1,31 +1,55 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import currencies from './currencies'
 import Select from '../select'
 import CurrencyType from './CurrencyType'
 import currencyUtils from '../../utils/currency-utils'
-
-
-
-
-
-
+import { Controller, Control, FieldValues } from "react-hook-form";
 
 
 
 type Props = {
     label?: string
-    defaultValue?: CurrencyType
-    onChange: (currency: CurrencyType) => void
+    value?: CurrencyType
+    onChange?: (currency: CurrencyType) => void
+    formProps?: {
+        //control from react hook forms useForm()
+        control: Control<FieldValues, any>
+        name: string
+    }
+}
+
+export default function CurrencySelect(props: Props) {
+    if (props.formProps) {
+        return <Controller
+            name={props.formProps.name}
+            control={props.formProps.control}
+            render={({ field }) => (
+                <CurrencySelectContent
+                    {...props}
+                    value={field.value}
+                    onChange={field.onChange}
+                />
+            )}
+        />
+    } else {
+        return <CurrencySelectContent {...props} />
+    }
 }
 
 
-function CurrencySelect({
+function CurrencySelectContent({
     label,
-    defaultValue = currencyUtils.getInitialCurrency(),
+    value,
     onChange
 }: Props) {
 
     const [currencyOptions, setCurrencyOptions] = useState(currencyUtils.getCurrencies())
+
+    useEffect(() => {
+        if (!value && currencyOptions) {
+            onChange && onChange(currencyUtils.getInitialCurrency())
+        }
+    }, [currencyOptions])
 
 
     const handleSearchCurrency = (text: string) => {
@@ -51,7 +75,7 @@ function CurrencySelect({
     const handleSelect = (id: string) => {
         for (let item of currencies) {
             if (item.code === id) {
-                onChange({
+                onChange && onChange({
                     ...item,
                     code: item.code
                 })
@@ -64,18 +88,17 @@ function CurrencySelect({
     return (
         <Select
             label={label}
-            defaultValue={defaultValue ? {
-                id: defaultValue.code,
-                title: defaultValue.name,
-                secondaryText: defaultValue.code
+            value={value ? {
+                id: value.code,
+                title: value.name,
+                secondaryText: value.code
             } : undefined}
             options={currencyOptions}
-            onSelect={option => handleSelect(option.id)}
+            onChange={option => handleSelect(option.id)}
             searchPlaceholder='Search Currency...'
             onSearchChange={handleSearchCurrency} />
     )
 }
 
 
-export default CurrencySelect
 

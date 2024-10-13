@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
+import { Controller, Control, FieldValues } from "react-hook-form";
 
 
 type Option = {
@@ -16,9 +17,32 @@ type Props = {
     onChange?: (value: Option) => void
     value?: Option
     className?: string
+    formProps?: {
+        //control from react hook forms useForm()
+        control: Control<FieldValues, any>
+        name: string
+    }
 }
 
 export default function BrandedSelect(props: Props) {
+    if (props.formProps) {
+        return <Controller
+            name={props.formProps.name}
+            control={props.formProps.control}
+            render={({ field }) => (
+                <BrandedSelectContent
+                    {...props}
+                    value={field.value}
+                    onChange={field.onChange}
+                />
+            )}
+        />
+    } else {
+        return <BrandedSelectContent {...props} />
+    }
+
+}
+export function BrandedSelectContent(props: Props) {
 
 
     useEffect(() => {

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { CurrencySelect } from '..';
+import { CurrencySelect, currencyUtils } from '..';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof CurrencySelect> = {
@@ -26,7 +26,8 @@ type Story = StoryObj<typeof CurrencySelect>;
 
 export const Main: Story = {
   args: {
-    onChange: fn()
+    onChange: fn(),
+    value: currencyUtils.getInitialCurrency()
   },
 };
 

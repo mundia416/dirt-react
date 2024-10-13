@@ -1,22 +1,52 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import TimeZone from 'react-timezone-select'
 import timezoneUtils from '../../utils/timezone-utils'
 import Label from '../label'
+import { Controller, Control, FieldValues } from "react-hook-form";
 
 
 type Props = {
     label?: string
     showLabel?: boolean
-    selectedTimezone?: string
-    onChange: (timezone: string) => void
+    value?: string
+    onChange?: (timezone: string) => void
+    formProps?: {
+        //control from react hook forms useForm()
+        control: Control<FieldValues, any>
+        name: string
+    }
 }
 
-function TimezoneSelect({
-    selectedTimezone = timezoneUtils.getDefaultTimezone(),
+export default function TimezoneSelect(props: Props) {
+    if (props.formProps) {
+        return <Controller
+            name={props.formProps.name}
+            control={props.formProps.control}
+            render={({ field }) => (
+                <TimezoneSelectContent
+                    {...props}
+                    value={field.value}
+                    onChange={field.onChange}
+                />
+            )}
+        />
+    } else {
+        return <TimezoneSelectContent {...props} />
+    }
+}
+
+function TimezoneSelectContent({
+    value,
     onChange,
     showLabel = true,
     label = "Timezone"
 }: Props) {
+
+    useEffect(() => {
+        if (!value) {
+            onChange && onChange(timezoneUtils.getDefaultTimezone())
+        }
+    }, [])
 
     return (
         <div>
@@ -27,12 +57,11 @@ function TimezoneSelect({
             }
 
             <TimeZone
-                value={selectedTimezone}
-                onChange={timezone => onChange(timezone.value)}
+                value={value || timezoneUtils.getDefaultTimezone()}
+                onChange={timezone => onChange && onChange(timezone.value)}
             />
         </div>
     )
 }
 
-export default TimezoneSelect
 

@@ -1,13 +1,39 @@
+import { Controller, Control, FieldValues } from "react-hook-form";
+
 import React from 'react'
 import { Switch } from '@headlessui/react'
 
 type Props = {
     value: boolean,
     onToggle: (value: boolean) => void
-    withIcons?: boolean
+    withIcons?: boolean,
+    formProps?: {
+        //control from react hook forms useForm()
+        control: Control<FieldValues, any>
+        name: string
+    }
 }
 
-export default function Toggle({
+export default function Toggle(props: Props) {
+
+    if (props.formProps) {
+        return <Controller
+            name={props.formProps.name}
+            control={props.formProps.control}
+            render={({ field }) => (
+                <ToggleContent
+                    {...props}
+                    value={field.value}
+                    onToggle={field.onChange}
+                />
+            )}
+        />
+    } else {
+        return <ToggleContent {...props} />
+    }
+}
+
+function ToggleContent({
     withIcons = true,
     value,
     onToggle

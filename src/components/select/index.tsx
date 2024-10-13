@@ -5,7 +5,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import FieldInput from '../fieldinput'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Label from '../label'
-import { Controller, Control, FieldValues } from "react-hook-form";
+import { Controller, Control } from "react-hook-form";
 
 export type Option = {
     id: string
@@ -24,7 +24,7 @@ type Props = {
     onChange?: (value: Option) => void
     formProps?: {
         //control from react hook forms useForm()
-        control: Control<FieldValues, any>
+        control: Control<any, any>
         name: string
     }
 }

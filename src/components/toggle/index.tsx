@@ -4,7 +4,7 @@ import React from 'react'
 import { Switch } from '@headlessui/react'
 
 type Props = {
-    value: boolean,
+    value?: boolean,
     onToggle?: (value: boolean) => void
     withIcons?: boolean,
     formProps?: {

@@ -608,6 +608,10 @@ video {
   pointer-events: auto;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .fixed {
   position: fixed;
 }
@@ -947,6 +951,10 @@ video {
 
 .max-h-60 {
   max-height: 15rem;
+}
+
+.min-h-16 {
+  min-height: 4rem;
 }
 
 .min-h-40 {

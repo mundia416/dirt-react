@@ -61,6 +61,15 @@ export const Text: Story = {
   },
 };
 
+export const Loading: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Button',
+    loading: { variant: 'three-dots' }
+  },
+};
+
+
 export const LeadingIcon: Story = {
   args: {
     children: 'Button',

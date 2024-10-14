@@ -1,5 +1,5 @@
-import Spinner from 'react-spinkit'
 import React, { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';
+import Loading, { LoadingProps } from '../loading';
 
 export interface ButtonProps {
     className?: string,
@@ -15,7 +15,7 @@ export interface ButtonProps {
     textSize?: boolean,
     rounded?: boolean,
     typeSubmit?: boolean,
-    loading?: boolean,
+    loading?: boolean | { variant?: LoadingProps['variant'] },
     loadingId?: string,
     enabled?: boolean,
     ref?: any,
@@ -49,14 +49,13 @@ const Button: React.FC<ButtonProps> = (props) => {
         rounded = false,
         typeSubmit = false,
         loading = false,
-        loadingId = "button-loading",
         enabled = true,
     } = props
 
     let iconWrapper = ``
     let variantStyle;
     let sizeStyle;
-    let spinnerColor = 'steelBlue'
+    let spinnerColor = '#fff'
 
     const extraSmallSize = ` ${!padding && 'py-1 px-4'}  ${!textSize && 'text-xs'}`
     const smallSize = ` ${!padding && 'py-2 px-4'}  ${!textSize && 'text-sm'}`
@@ -123,19 +122,23 @@ const Button: React.FC<ButtonProps> = (props) => {
     switch (variant) {
         case 'secondary':
             variantStyle = secondaryVariant
+            spinnerColor = '#4f46e5'
             break
         case 'outline':
             variantStyle = outlineVariant
+            spinnerColor = '#4f46e5'
             break
         case 'dark':
             variantStyle = darkVariant
+            spinnerColor = '#fff'
             break
         case 'text':
             variantStyle = textVariant
+            spinnerColor = '#4f46e5'
             break
         default:
             variantStyle = primaryVariant
-            spinnerColor = 'aqua'
+            spinnerColor = '#fff'
             break
     }
 
@@ -155,25 +158,28 @@ const Button: React.FC<ButtonProps> = (props) => {
             }
         }}>
         {loading ?
-            <div id={loadingId}>
+            <div>
 
-                <Spinner name="pulse" color={spinnerColor} />
+                <Loading
+                    variant={typeof loading === 'boolean' ? 'oval' : loading.variant}
+                    size='tiny'
+                    color={spinnerColor} />
 
             </div>
             :
             <div className='flex items-center'>
                 {props.leadingIcon &&
                     <div className={iconWrapper}>
-                          
-                          {typeof props.leadingIcon === 'string'?
+
+                        {typeof props.leadingIcon === 'string' ?
                             <img
-                            alt='leading icon'
-                            className='h-full w-full object-contain'
+                                alt='leading icon'
+                                className='h-full w-full object-contain'
                                 src={props.leadingIcon}
                             />
                             :
-                        <props.leadingIcon className='h-full w-full' />
-                          }
+                            <props.leadingIcon className='h-full w-full' />
+                        }
                     </div>
                 }
 
@@ -181,16 +187,16 @@ const Button: React.FC<ButtonProps> = (props) => {
 
                 {props.trailingIcon &&
                     <div className={iconWrapper}>
-                          
-                          {typeof props.trailingIcon === 'string'?
+
+                        {typeof props.trailingIcon === 'string' ?
                             <img
-                            alt='leading icon'
-                            className='h-full w-full object-contain'
+                                alt='leading icon'
+                                className='h-full w-full object-contain'
                                 src={props.trailingIcon}
                             />
                             :
-                        <props.trailingIcon className='h-full w-full' />
-                          }
+                            <props.trailingIcon className='h-full w-full' />
+                        }
                     </div>
                 }
             </div>
@@ -204,22 +210,22 @@ const Button: React.FC<ButtonProps> = (props) => {
                 :
 
                 <div
-                    className={styles+ ' relative'}
+                    className={styles + ' relative'}
                 >
 
                     <div className='flex items-center'>
                         {props.leadingIcon &&
                             <div className={iconWrapper}>
-                            
-                            {typeof props.leadingIcon === 'string'?
-                            <img
-                            alt='leading icon'
-                            className='h-full w-full object-contain'
-                                src={props.leadingIcon}
-                            />
-                        :
-                                <props.leadingIcon className='h-full w-full' />
-                        }
+
+                                {typeof props.leadingIcon === 'string' ?
+                                    <img
+                                        alt='leading icon'
+                                        className='h-full w-full object-contain'
+                                        src={props.leadingIcon}
+                                    />
+                                    :
+                                    <props.leadingIcon className='h-full w-full' />
+                                }
 
                             </div>
                         }
@@ -243,15 +249,15 @@ const Button: React.FC<ButtonProps> = (props) => {
 
                         {props.trailingIcon &&
                             <div className={iconWrapper}>
-                                 {typeof props.trailingIcon === 'string'?
-                            <img
-                            alt='trailing icon'
-                            className='h-full w-full object-contain'
-                                src={props.trailingIcon}
-                            />
-                        :
-                                <props.trailingIcon className='h-full w-full' />
-                                 }
+                                {typeof props.trailingIcon === 'string' ?
+                                    <img
+                                        alt='trailing icon'
+                                        className='h-full w-full object-contain'
+                                        src={props.trailingIcon}
+                                    />
+                                    :
+                                    <props.trailingIcon className='h-full w-full' />
+                                }
                             </div>
                         }
                     </div>

@@ -226,7 +226,11 @@ export const PaginationLoading: Story = {
       page: 10,
       total: 402,
       perPage: 25,
-      loading: true
+      loading: true,
+      loadingProps: {
+        variant: 'three-dots',
+        color: '#4f46e5'
+      }
     }
   },
 };

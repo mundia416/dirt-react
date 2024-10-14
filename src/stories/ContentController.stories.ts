@@ -31,13 +31,20 @@ export const Data: Story = {
 export const Loading: Story = {
   args: {
     loading: true,
+    loadingProps: {
+      color: '#000',
+      size: 'small'
+    }
   },
 };
 
 export const LoadingFullScreen: Story = {
   args: {
     loading: true,
-    loadingFullscreen: true
+    loadingProps: {
+      fullScreen: true,
+      variant: 'infinity-spin',
+    }
   },
 };
 
@@ -51,7 +58,9 @@ export const Error: Story = {
 export const ErrorFullScreen: Story = {
   args: {
     error: true,
-    errorFullscreen: true
+    errorProps: {
+      fullScreen: true
+    }
   },
 };
 

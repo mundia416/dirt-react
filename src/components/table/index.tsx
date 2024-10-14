@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import Card from '../card'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
-import Loading from '../loading'
+import Loading, { LoadingProps } from '../loading'
 
 type RowColumnItemProps = {
     value: string | number | ReactNode
@@ -40,6 +40,14 @@ type Props = {
         perPage: number
         onPageClick: (page: number) => void
         loading?: boolean
+        loadingProps?: {
+            fullScreen?: boolean
+            className?: string
+            color?: string
+            variant?: LoadingProps['variant']
+            size?: LoadingProps['size']
+        }
+
     }
 }
 
@@ -84,7 +92,8 @@ export default function Table({
                         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                             {pagination?.loading ?
                                 <Loading
-                                    className='w-full min-h-40'
+                                    {...pagination.loadingProps}
+                                    className={pagination.loadingProps?.className || 'w-full min-h-40'}
                                 />
                                 :
                                 <table className="min-w-full divide-y divide-gray-300">

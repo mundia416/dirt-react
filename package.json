@@ -97,7 +97,7 @@
     "next": "^14.2.6",
     "react-hook-form": "^7.53.0",
     "react-input-slider": "^6.0.1",
-    "react-spinkit": "^3.0.0",
+    "react-loader-spinner": "^6.1.6",
     "react-timezone-select": "^3.2.8",
     "react-tooltip": "^5.28.0",
     "rollup-plugin-postcss": "^4.0.2",

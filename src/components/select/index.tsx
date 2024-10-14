@@ -1,11 +1,13 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import FieldInput from '../fieldinput'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Label from '../label'
 import { Controller, Control } from "react-hook-form";
+import functionUtils from '../../utils/function-utils'
+import Loading from '../loading'
 
 export type Option = {
     id: string
@@ -23,12 +25,17 @@ type Props = {
     label?: string
     options: Option[]
     className?: string
-    onSearchChange?: (text: string) => void
-    search?: boolean
+    search?: {
+        onSearchChange?: (text: string) => void,
+        onSearchChangeDebounce?: (text: string) => void,
+        debounceDelayMillis?: number
+    }
+    loading?: boolean
     searchPlaceholder?: string
     value?: Option
     onChange?: (value: Option) => void
     formProps?: FormProps
+    onScrollToBottom?: () => void
 }
 
 export default function Select(props: Props) {
@@ -54,6 +61,40 @@ export function SelectContent(props: Props) {
 
     const [options, setOptions] = useState(props.options)
 
+    const optionsRef = useRef<HTMLUListElement | null>(null); // Explicitly type the ref
+
+
+    const debouncedScrollToBottom = useCallback(
+        functionUtils.debounce(() => {
+            props.onScrollToBottom && props.onScrollToBottom(); // Trigger pagination or load more items
+        }, 300), [])
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (optionsRef.current) {
+                const { scrollTop, scrollHeight, clientHeight } = optionsRef.current;
+
+                // Check if scrolled to the bottom
+                if (scrollTop + clientHeight >= scrollHeight) {
+                    debouncedScrollToBottom()
+                }
+            }
+        };
+
+        const optionsElement = optionsRef.current;
+
+        if (optionsElement) {
+            optionsElement.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            if (optionsElement) {
+                optionsElement.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [props.onScrollToBottom]);
+
+
 
     useEffect(() => {
         setOptions(props.options)
@@ -65,7 +106,8 @@ export function SelectContent(props: Props) {
     }, [props.options])
 
     const handleSearchChange = (text: string) => {
-        props.onSearchChange && props.onSearchChange(text)
+
+        props.search?.onSearchChange && props.search?.onSearchChange(text)
 
         setOptions(() => {
             if (text.trim() === "") {
@@ -110,37 +152,44 @@ export function SelectContent(props: Props) {
 
                         <ListboxOptions
                             transition
+                            ref={optionsRef}
                             className="absolute z-10 mt-1 max-h-60 w-full  rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
                         >
 
-                            {(props.onSearchChange || props.search) &&
+                            {props.search &&
                                 <FieldInput
                                     placeholder={props.searchPlaceholder ? props.searchPlaceholder : 'Search...'}
                                     leadingIcon={MagnifyingGlassIcon}
                                     onChange={handleSearchChange}
+                                    debounceDelayMillis={props.search.debounceDelayMillis}
+                                    onChangeDebounce={props.search.onSearchChangeDebounce}
                                     inputClassName=' rounded-b-none'
                                 />
                             }
 
                             <div className='overflow-auto max-h-44  w-full'>
-                                {options.map((option, index) => (
-                                    <ListboxOption
-                                        key={index}
-                                        value={option}
-                                        className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white"
-                                    >
-                                        <div className="flex">
-                                            <span className="truncate font-normal group-data-[selected]:font-semibold">{option.title}</span>
-                                            <span className="ml-2 truncate text-gray-500 group-data-[focus]:text-indigo-200">
-                                                {option.secondaryText}
-                                            </span>
-                                        </div>
 
-                                        <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
-                                            <CheckIcon aria-hidden="true" className="h-5 w-5" />
-                                        </span>
-                                    </ListboxOption>
-                                ))}
+                                {props.loading ?
+                                    <Loading className='min-h-16'/>
+                                    :
+                                    options.map((option, index) => (
+                                        <ListboxOption
+                                            key={index}
+                                            value={option}
+                                            className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white"
+                                        >
+                                            <div className="flex">
+                                                <span className="truncate font-normal group-data-[selected]:font-semibold">{option.title}</span>
+                                                <span className="ml-2 truncate text-gray-500 group-data-[focus]:text-indigo-200">
+                                                    {option.secondaryText}
+                                                </span>
+                                            </div>
+
+                                            <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
+                                                <CheckIcon aria-hidden="true" className="h-5 w-5" />
+                                            </span>
+                                        </ListboxOption>
+                                    ))}
                             </div>
                         </ListboxOptions>
                     </div>

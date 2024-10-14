@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
-import  ErrorAlert  from '../alert/error'
-import Loading from '../loading'
+import ErrorAlert from '../alert/error'
+import Loading, { LoadingProps } from '../loading'
 
 
 type Props = {
@@ -10,9 +10,17 @@ type Props = {
     error?: any,
     children?: any,
     className?: string,
-    loadingClassName?: string
-    loadingFullscreen?: boolean
-    errorFullscreen?: boolean
+    loadingProps?: {
+        fullScreen?: boolean
+        className?: string
+        color?: string
+        variant?: LoadingProps['variant']
+        size?: LoadingProps['size']
+    }
+    errorProps?: {
+        fullScreen?: boolean
+        className?: string
+    }
 }
 
 /**
@@ -25,25 +33,25 @@ function ContentController({
     error,
     children,
     className,
-    loadingClassName,
-    loadingFullscreen,
-    errorFullscreen
+    loadingProps,
+    errorProps
 }: Props) {
 
     return (
-        <div  className={`w-full h-full ${className}`}>
+        <div className={`w-full h-full ${className}`}>
             {
                 loading ?
                     <div
-                        className={'w-full h-full flex justify-center items-center ' + loadingClassName}>
-                        <Loading fullscreen={loadingFullscreen} />
+                        className={'w-full h-full flex justify-center items-center '}>
+                        <Loading {...loadingProps} />
                     </div>
                     :
                     <>
                         {error ?
                             <div
-                                className={`px-4 md:px-12 lg:px-24 flex w-full h-full justify-center items-center ${errorFullscreen && 'h-screen'}`}>
+                                className={`px-4 md:px-12 lg:px-24 flex w-full h-full justify-center items-center ${errorProps?.fullScreen && 'h-screen'}`}>
                                 <ErrorAlert
+                                    className={errorProps?.className}
                                     isShown={error}
                                 />
                             </div>

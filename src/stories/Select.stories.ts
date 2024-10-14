@@ -18,6 +18,15 @@ const meta: Meta<typeof Select> = {
     // size: { control: 'color' },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
+  args: {
+    onChange: fn(),
+    search: {
+      onSearchChange: fn(),
+      onSearchChangeDebounce: fn()
+
+    },
+    onScrollToBottom: fn()
+  }
 };
 
 export default meta;
@@ -45,6 +54,7 @@ export const Primary: Story = {
       title: 'Draft Part 2'
     },
     onChange: fn(),
+    onScrollToBottom: fn(),
     className: 'min-w-44'
 
   },
@@ -66,6 +76,7 @@ export const CustomClassname: Story = {
       },
     ],
     onChange: fn(),
+    onScrollToBottom: fn(),
     className: 'w-full py-6 min-w-44'
   },
 };
@@ -88,6 +99,7 @@ export const Label: Story = {
       },
     ],
     onChange: fn(),
+    onScrollToBottom: fn(),
     className: 'min-w-44'
 
   },
@@ -96,7 +108,7 @@ export const Label: Story = {
 export const Search: Story = {
   args: {
     label: "First Name",
-    onSearchChange: fn(),
+    onScrollToBottom: fn(),
     options: [
       {
         id: 'b',
@@ -135,6 +147,38 @@ export const Search: Story = {
     ],
     onChange: fn(),
     className: 'min-w-60',
-    search: true
+    search: {
+      onSearchChange: fn(),
+      onSearchChangeDebounce: fn(),
+      debounceDelayMillis: 1000
+    }
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    loading:true,
+    options: [
+      {
+        id: 'b',
+        title: 'Draft',
+      }, {
+        id: 'a',
+        title: "Published",
+        secondaryText: 'danny@gmail.com'
+      },
+      {
+        id: 'c',
+        title: 'Draft Part 2'
+      },
+    ],
+    value: {
+      id: 'c',
+      title: 'Draft Part 2'
+    },
+    onChange: fn(),
+    onScrollToBottom: fn(),
+    className: 'min-w-44'
+
   },
 };

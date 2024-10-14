@@ -53,7 +53,7 @@ const FieldInput = (props: Props) => {
 
     const { pattern, label, leadingText, trailingText, className, error,
         helpText, inputClassName, cornerHelpText, placeholder, type, variant, id,
-        disabled, onChange, onFilesChange, step, value, element = 'input',
+        disabled, onChange, onFilesChange, onChangeDebounce,debounceDelayMillis,step, value, element = 'input',
         name, onFocus, onBlur, aff, max, min, required, rows,
         formProps } = props
 
@@ -80,6 +80,8 @@ const FieldInput = (props: Props) => {
                     </span>
                 }
                 <Input
+                onChangeDebounce={onChangeDebounce}
+                debounceDelayMillis={debounceDelayMillis}
                     formProps={formProps}
                     required={required}
                     disabled={disabled}

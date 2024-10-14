@@ -33,6 +33,7 @@ import Slider from "./components/slider"
 import Badge from "./components/badge"
 import Checkbox from "./components/checkbox"
 import Notification from "./components/notification"
+import functionUtils from './utils/function-utils'
 
 
 
@@ -67,7 +68,7 @@ export {
   Badge,
   Checkbox,
   Notification,
-  
+
   //layouts
   StackedLayout,
   SidebarLayout,
@@ -76,5 +77,6 @@ export {
   stringUtils,
   dateUtils,
   timezoneUtils,
-  currencyUtils
+  currencyUtils,
+  functionUtils
 }

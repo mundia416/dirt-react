@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useCallback } from 'react';
+import functionUtils from '../../utils/function-utils';
 
 
 export interface Props {
@@ -13,6 +13,9 @@ export interface Props {
     element?: 'input' | 'text-area',
     value?: string | number,
     onChange?: (value: string) => void,
+    onChangeDebounce?: (value: string) => void
+    //the delay for the debounce
+    debounceDelayMillis?: number
     onFilesChange?: (files: FileList) => void,
     disabled?: boolean,
     id?: any,
@@ -42,6 +45,8 @@ export default function TextInput({
     element = 'input',
     value,
     onChange,
+    onChangeDebounce,
+    debounceDelayMillis = 0,
     onFilesChange,
     disabled = false,
     id,
@@ -102,11 +107,30 @@ export default function TextInput({
         }
     }
 
-    const onChangeAndValidate = (e: any, type?: string) => {
-        onChange && onChange(e.target.value);
-        onFilesChange && onFilesChange(e.target.files)
 
-        validate(e, type);
+    // Define the function that will execute after debounce delay
+    const debounced = useCallback(
+        functionUtils.debounce((value: string) => {
+            onChangeDebounce && onChangeDebounce(value)
+        }, debounceDelayMillis),
+        []
+    );
+
+    /**
+     * 
+     * @param e 
+     * @param type 
+     */
+    const onChangeAndValidate = (e: any, type?: string) => {
+        if ((typeof onChange !== 'undefined'
+            || typeof onChangeDebounce !== 'undefined'
+            || typeof onFilesChange !== 'undefined')) {
+
+            onChange && onChange(e.target.value);
+            onFilesChange && onFilesChange(e.target.files)
+            debounced(e.target.value)
+            validate(e, type);
+        }
     }
 
     return (
@@ -124,10 +148,7 @@ export default function TextInput({
                 onBlur={onBlur}
                 className={style}
                 {...valueProps}
-                onChange={(e) => {
-                    (typeof onChange !== 'undefined' || typeof onFilesChange !== 'undefined') && onChangeAndValidate(e, type)
-                }
-                }
+                onChange={onChangeAndValidate}
                 placeholder={placeholder}
                 {...formProps}
             />
@@ -147,10 +168,7 @@ export default function TextInput({
                 min={min}
                 disabled={disabled}
                 {...valueProps}
-                onChange={(e) => {
-                    (typeof onChange !== 'undefined' || typeof onFilesChange !== 'undefined') && onChangeAndValidate(e, type)
-                }
-                }
+                onChange={onChangeAndValidate}
                 className={style}
                 type={type}
                 onInvalid={(e) => validate(e, type)}

@@ -18,7 +18,7 @@ const meta: Meta<typeof TextInput> = {
     // size: { control: 'color' },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  // args: { onClick: fn() },
+  args: { onChangeDebounce: fn() },
 };
 
 export default meta;
@@ -40,6 +40,14 @@ export const TextArea: Story = {
 export const FileUpload: Story = {
   args: {
     type: 'file',
-    onFilesChange: (files)=>console.log({files})
+    onFilesChange: (files) => console.log({ files })
+  },
+};
+
+export const Debounce: Story = {
+  args: {
+    element: 'input',
+    debounceDelayMillis: 1000,
+    onChangeDebounce: fn()
   },
 };

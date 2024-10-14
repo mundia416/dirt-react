@@ -96,7 +96,10 @@ function CurrencySelectContent({
             options={currencyOptions}
             onChange={option => handleSelect(option.id)}
             searchPlaceholder='Search Currency...'
-            onSearchChange={handleSearchCurrency} />
+            search={{
+                onSearchChange: handleSearchCurrency
+            }}
+             />
     )
 }
 

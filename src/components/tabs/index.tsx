@@ -29,11 +29,11 @@ export default function Tabs(props: Props) {
                 </label>
 
                 <Select
-                    defaultValue={props.tabs.map(item => ({
+                    value={props.tabs.map(item => ({
                         id: item.id.toString(),
                         title: item.name.toString()
                     })).find((tab) => tab.id.toString() === props.activeTabId.toString())}
-                    onSelect={item => handleOptionSelected(item.id)}
+                    onChange={item => handleOptionSelected(item.id)}
                     options={props.tabs.map(item => ({
                         id: item.id.toString(),
                         title: item.name.toString()

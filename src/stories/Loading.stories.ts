@@ -30,7 +30,7 @@ export const Normal: Story = {
 
 export const FullScreen: Story = {
   args: {
-    fullscreen: true,
+    fullScreen: true,
   },
 };
 

@@ -158,6 +158,9 @@ export const Search: Story = {
 export const Loading: Story = {
   args: {
     loading:true,
+    loadingProps:{
+      size: 'small'
+    },
     options: [
       {
         id: 'b',

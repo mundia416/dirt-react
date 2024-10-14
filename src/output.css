@@ -877,6 +877,10 @@ video {
   display: flow-root;
 }
 
+.grid {
+  display: grid;
+}
+
 .hidden {
   display: none;
 }
@@ -951,10 +955,6 @@ video {
 
 .max-h-60 {
   max-height: 15rem;
-}
-
-.min-h-16 {
-  min-height: 4rem;
 }
 
 .min-h-40 {

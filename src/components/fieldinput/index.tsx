@@ -134,10 +134,5 @@ const FieldInput = (props: Props) => {
     );
 };
 
-FieldInput.defaultProps = {
-    error: false,
-    element: 'input',
-    inputPadding: false,
-}
 
 export default FieldInput;

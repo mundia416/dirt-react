@@ -7,7 +7,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import Label from '../label'
 import { Controller, Control } from "react-hook-form";
 import functionUtils from '../../utils/function-utils'
-import Loading from '../loading'
+import Loading, { LoadingProps } from '../loading'
 
 export type Option = {
     id: string
@@ -31,6 +31,13 @@ type Props = {
         debounceDelayMillis?: number
     }
     loading?: boolean
+    loadingProps?: {
+        fullScreen?: boolean
+        className?: string
+        color?: string
+        variant?: LoadingProps['variant']
+        size?: LoadingProps['size']
+    }
     searchPlaceholder?: string
     value?: Option
     onChange?: (value: Option) => void
@@ -61,38 +68,22 @@ export function SelectContent(props: Props) {
 
     const [options, setOptions] = useState(props.options)
 
-    const optionsRef = useRef<HTMLUListElement | null>(null); // Explicitly type the ref
-
 
     const debouncedScrollToBottom = useCallback(
         functionUtils.debounce(() => {
-            props.onScrollToBottom && props.onScrollToBottom(); // Trigger pagination or load more items
+            props.onScrollToBottom && props.onScrollToBottom(); // Trigger pagination
         }, 300), [])
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (optionsRef.current) {
-                const { scrollTop, scrollHeight, clientHeight } = optionsRef.current;
 
-                // Check if scrolled to the bottom
-                if (scrollTop + clientHeight >= scrollHeight) {
-                    debouncedScrollToBottom()
-                }
-            }
-        };
+    const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+        const target = event.currentTarget;
+        const { scrollTop, scrollHeight, clientHeight } = target;
 
-        const optionsElement = optionsRef.current;
-
-        if (optionsElement) {
-            optionsElement.addEventListener('scroll', handleScroll);
+        // Check if scrolled to the bottom
+        if (scrollTop + clientHeight >= scrollHeight) {
+            debouncedScrollToBottom()
         }
-
-        return () => {
-            if (optionsElement) {
-                optionsElement.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, [props.onScrollToBottom]);
+    }
 
 
 
@@ -152,7 +143,6 @@ export function SelectContent(props: Props) {
 
                         <ListboxOptions
                             transition
-                            ref={optionsRef}
                             className="absolute z-10 mt-1 max-h-60 w-full  rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
                         >
 
@@ -167,10 +157,14 @@ export function SelectContent(props: Props) {
                                 />
                             }
 
-                            <div className='overflow-auto max-h-44  w-full'>
+                            <div
+                                onScroll={handleScroll}
+                                className='overflow-auto max-h-44  w-full'>
 
                                 {props.loading ?
-                                    <Loading className='min-h-16'/>
+                                    <Loading
+                                        {...props.loadingProps}
+                                        className={props.loadingProps?.className ? props.loadingProps?.className : 'py-4'} />
                                     :
                                     options.map((option, index) => (
                                         <ListboxOption

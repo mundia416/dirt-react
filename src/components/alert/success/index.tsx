@@ -41,14 +41,5 @@ const SuccessAlert = ({
   );
 };
 
-SuccessAlert.defaultProps = {
-  fullScreen: false,
-  showDismiss: false,
-};
-SuccessAlert.propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.string,
-  isShown: PropTypes.bool,
-};
 
 export default SuccessAlert;

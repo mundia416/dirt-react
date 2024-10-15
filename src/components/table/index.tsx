@@ -53,22 +53,23 @@ type Props = {
 }
 
 
-function Container(props: {
+const Container = (props: {
     showCardContainer: boolean,
     children: React.ReactNode
-}) {
+}) => {
     return (
-        props.showCardContainer ?
+        <>
+            {props.showCardContainer ?
 
-            <div className="mt-8 flow-root">
-                <Card
-                    className='p-4 overflow-hidden'>
-                    {props.children}
-                </Card>
-            </div>
-            :
-            props.children
-
+                <div className="mt-8 flow-root">
+                    <Card
+                        className='p-4 overflow-hidden'>
+                        {props.children}
+                    </Card>
+                </div>
+                :
+                props.children}
+        </>
     )
 }
 

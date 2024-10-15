@@ -13,10 +13,9 @@ type Props = {
   secondaryBtnOnClick?: () => void
   type?: 'success' | 'confirm' | 'clean'
   children?: React.ReactNode
-  maxWidth?: 'lg' | 'xl' | '2xl' | '3xl'
 }
 function Dialog({
-  isOpen, primaryBtnText, secondaryBtnText, primaryBtnOnClick, maxWidth,
+  isOpen, primaryBtnText, secondaryBtnText, primaryBtnOnClick,
   onClose, title, secondaryBtnOnClick, children, type = 'success',
   description }: Props) {
 
@@ -34,7 +33,7 @@ function Dialog({
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className={`relative transform max-h-[90vh] overflow-y-hidden rounded-lg bg-white text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full ${maxWidth ? `sm:max-w-${maxWidth}` : 'sm:max-w-lg'} data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95`}
+              className={`relative transform max-h-[90vh] overflow-y-hidden rounded-lg bg-white text-left shadow-xl transition-all data-[closed]:translate-y-4 data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in sm:my-8 sm:w-full sm:max-w-3xl data-[closed]:sm:translate-y-0 data-[closed]:sm:scale-95`}
             >
               <div className=' relative overflow-y-auto max-h-[90vh] w-full sm:px-6 px-4 pb-4 pt-5 sm:py-6  '>
 

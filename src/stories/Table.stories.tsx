@@ -236,6 +236,15 @@ export const PaginationLoading: Story = {
 };
 
 
+export const WithoutCard: Story = {
+  args: {
+    columnTitles,
+    rowData,
+    showCardContainer: false
+  },
+};
+
+
 
 
 

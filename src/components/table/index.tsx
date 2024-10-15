@@ -27,6 +27,11 @@ type Props = {
         text: string,
         onClick: () => void
     },
+    /**
+     * whether to overflow in the x axis with a scrollbar or not
+     * useful for situations where this table needs to be nested in a container that has x axis scroll (overflow-auto)
+     */
+    overflowX?: boolean
     showCardContainer?: boolean
     columnTitles: ColumnTitleProps[],
     rowData: RowsProps[]
@@ -81,6 +86,7 @@ export default function Table({
     rowData = [],
     onRowClick,
     pagination,
+    overflowX = true,
     showCardContainer = true
 }: Props) {
 
@@ -110,7 +116,7 @@ export default function Table({
             <Container
                 showCardContainer={showCardContainer}>
 
-                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div className={`-mx-4 -my-2 ${overflowX && 'overflow-x-auto'} sm:-mx-6 lg:-mx-8`}>
                     <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                         {pagination?.loading ?
                             <Loading

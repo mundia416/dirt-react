@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import React from 'react'
-import { Dialog, Stat } from '..';
+import { Dialog, Stat, Table } from '..';
 import { UsersIcon } from '@heroicons/react/24/outline';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -73,6 +73,131 @@ export const CleanDialog: Story = {
     onClose: fn(),
     type: 'clean',
     children: <div className=' h-96 bg-red-500'> This is a custom clean dialog to put any of your content</div>
+
+  },
+};
+
+
+
+const tableData = [
+  {
+    "date": "2024-10-15T08:16:11.952Z",
+    "dueDate": "2024-10-15T08:16:11.952Z",
+    "balance": 1000,
+    "payment": 0,
+    "interest": 0,
+    "principal": 0
+  },
+  {
+    "date": "2024-10-22T08:16:11.952Z",
+    "dueDate": "2024-10-22T08:16:11.952Z",
+    "payment": 1222.22,
+    "interest": 1111.11,
+    "principal": 111.11,
+    "balance": 888.89
+  },
+  {
+    "date": "2024-10-29T08:16:11.952Z",
+    "dueDate": "2024-10-29T08:16:11.952Z",
+    "payment": 1222.22,
+    "interest": 1111.11,
+    "principal": 111.11,
+    "balance": 777.78
+  },
+  {
+    "date": "2024-11-05T08:16:11.952Z",
+    "dueDate": "2024-11-05T08:16:11.952Z",
+    "payment": 1222.22,
+    "interest": 1111.11,
+    "principal": 111.11,
+    "balance": 666.67
+  },
+  {
+    "date": "2024-11-12T08:16:11.952Z",
+    "dueDate": "2024-11-12T08:16:11.952Z",
+    "payment": 1222.22,
+    "interest": 1111.11,
+    "principal": 111.11,
+    "balance": 555.56
+  },
+  {
+    "date": "2024-11-19T08:16:11.952Z",
+    "dueDate": "2024-11-19T08:16:11.952Z",
+    "payment": 1222.22,
+    "interest": 1111.11,
+    "principal": 111.11,
+    "balance": 444.45
+  },
+  {
+    "date": "2024-11-26T08:16:11.952Z",
+    "dueDate": "2024-11-26T08:16:11.952Z",
+    "payment": 1222.22,
+    "interest": 1111.11,
+    "principal": 111.11,
+    "balance": 333.34
+  },
+  {
+    "date": "2024-12-03T08:16:11.952Z",
+    "dueDate": "2024-12-03T08:16:11.952Z",
+    "payment": 1222.22,
+    "interest": 1111.11,
+    "principal": 111.11,
+    "balance": 222.23
+  },
+  {
+    "date": "2024-12-10T08:16:11.952Z",
+    "dueDate": "2024-12-10T08:16:11.952Z",
+    "payment": 1222.22,
+    "interest": 1111.11,
+    "principal": 111.11,
+    "balance": 111.12
+  },
+  {
+    "date": "2024-12-17T08:16:11.952Z",
+    "dueDate": "2024-12-17T08:16:11.952Z",
+    "payment": 1222.22,
+    "interest": 1111.11,
+    "principal": 111.11,
+    "balance": 0
+  }
+]
+
+const tableRowData = tableData.map((item) => ({
+  items: [{
+    value: item.dueDate,
+  }, {
+    value: item.payment
+  }, {
+    value: item.principal
+  }, {
+    value: item.interest
+  }, {
+    value: item.balance
+  }]
+}
+))
+
+export const ExampleTableInDialog: Story = {
+  args: {
+    isOpen: true,
+    onClose: fn(),
+    type: 'clean',
+    children: <Table
+      overflowX={false}
+      showCardContainer={false}
+      columnTitles={[{
+        name: 'Due Date',
+      }, {
+        name: 'Repayment'
+      }, {
+        name: 'Principal',
+      }, {
+        name: 'Interest',
+      }, {
+        name: 'Balance'
+      }]}
+      rowData={tableRowData}
+    />
 
   },
 };

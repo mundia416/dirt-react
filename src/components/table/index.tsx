@@ -27,6 +27,7 @@ type Props = {
         text: string,
         onClick: () => void
     },
+    spacing?: 'normal' | 'tight'
     /**
      * whether to overflow in the x axis with a scrollbar or not
      * useful for situations where this table needs to be nested in a container that has x axis scroll (overflow-auto)
@@ -53,7 +54,6 @@ type Props = {
             variant?: LoadingProps['variant']
             size?: LoadingProps['size']
         }
-
     }
 }
 
@@ -87,7 +87,8 @@ export default function Table({
     onRowClick,
     pagination,
     overflowX = true,
-    showCardContainer = true
+    showCardContainer = true,
+    spacing = 'normal'
 }: Props) {
 
     return (
@@ -128,7 +129,7 @@ export default function Table({
                                 <thead>
                                     <tr>
                                         {columnTitles.map((item, index) =>
-                                            <th key={index} scope="col" className={`${index === 0 ? 'pl-4 pr-3 sm:pl-0' : 'md:px-3'} py-3.5  text-left text-xs md:text-sm font-semibold text-gray-900 ${item.className}`}>
+                                            <th key={index} scope="col" className={`${spacing === 'tight' ? (index === 0 ? 'pr-1 pl-2' : 'px-1') : (index === 0 ? 'pl-4 pr-3 sm:pl-0' : 'md:px-3')} py-3.5  text-left text-xs md:text-sm font-semibold text-gray-900 ${item.className}`}>
                                                 {item.name}
                                             </th>
                                         )}
@@ -144,7 +145,7 @@ export default function Table({
                                             className={`${onRowClick && 'cursor-pointer hover:bg-indigo-50'}`}
                                             key={index}>
                                             {row.items.map((item, itemIndex) => (
-                                                <td key={itemIndex} className={`${item.className ? item.className : 'whitespace-nowrap text-gray-500'}  ${itemIndex === 0 ? 'py-4 pl-4 pr-3 sm:pl-0' : 'px-1 md:px-3 py-4'} text-xs md:text-sm`}>{item.value}</td>
+                                                <td key={itemIndex} className={`${item.className ? item.className : 'whitespace-nowrap text-gray-500'}  ${spacing === 'tight' ? (itemIndex === 0 ? 'pr-1 pl-2 py-2' : 'px-1 py-2') : (itemIndex === 0 ? 'py-4 pl-4 pr-3 sm:pl-0' : 'px-1 md:px-3 py-4')} text-xs md:text-sm`}>{item.value}</td>
                                             ))}
                                         </tr>
                                     ))}

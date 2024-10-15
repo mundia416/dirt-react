@@ -1739,6 +1739,10 @@ video {
   padding-right: 0px;
 }
 
+.pr-1 {
+  padding-right: 0.25rem;
+}
+
 .pr-10 {
   padding-right: 2.5rem;
 }

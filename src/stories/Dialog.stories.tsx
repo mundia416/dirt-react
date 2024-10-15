@@ -183,6 +183,7 @@ export const ExampleTableInDialog: Story = {
     onClose: fn(),
     type: 'clean',
     children: <Table
+      spacing='tight'
       overflowX={false}
       showCardContainer={false}
       columnTitles={[{

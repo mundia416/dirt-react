@@ -162,6 +162,14 @@ export const ActionButton: Story = {
 };
 
 
+
+export const TightSpacing: Story = {
+  args: {
+    columnTitles,
+    rowData,
+    spacing: 'tight'
+  },
+};
 export const CustomDatacellClassName: Story = {
   args: {
     heading: 'Users',

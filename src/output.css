@@ -658,8 +658,8 @@ video {
   bottom: 0px;
 }
 
-.-right-32 {
-  right: -8rem;
+.-right-24 {
+  right: -6rem;
 }
 
 .bottom-0 {
@@ -855,6 +855,13 @@ video {
 
 .mt-auto {
   margin-top: auto;
+}
+
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }
 
 .block {
@@ -2836,6 +2843,10 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:left-0 {
+    left: 0px;
+  }
+
   .md\:rounded-lg {
     border-radius: 0.5rem;
   }

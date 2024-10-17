@@ -60,7 +60,7 @@ export function BrandedSelectContent(props: Props) {
                 <div className="inline-flex divide-x divide-indigo-700 rounded-md shadow-sm">
                     <div className="inline-flex items-center gap-x-1.5 rounded-l-md bg-indigo-600 px-3 py-2 text-white shadow-sm">
                         <CheckIcon aria-hidden="true" className="-ml-0.5 h-5 w-5" />
-                        <p className="text-sm font-semibold">{props.value?.title}</p>
+                        <p className="text-sm font-semibold line-clamp-1">{props.value?.title}</p>
                     </div>
                     <ListboxButton className="inline-flex items-center rounded-l-none rounded-r-md bg-indigo-600 p-2 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:ring-offset-gray-50">
                         <ChevronDownIcon aria-hidden="true" className="h-5 w-5 text-white" />
@@ -69,7 +69,7 @@ export function BrandedSelectContent(props: Props) {
 
                 <ListboxOptions
                     transition
-                    className={`${props.dropdownPosition ? props.dropdownPosition : '-right-32 lg:right-0'} absolute z-50 mt-2 w-72 origin-top-right divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in`}
+                    className={`${props.dropdownPosition ? props.dropdownPosition : '-right-24 md:left-0 lg:right-0'} absolute z-50 mt-2 w-72 origin-top-right divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in`}
                 >
                     {props.options.map((option) => (
                         <ListboxOption

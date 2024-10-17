@@ -18,6 +18,9 @@ const meta: Meta<typeof BrandedSelect> = {
     // size: { control: 'color' },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
+  args: {
+    onChange: fn()
+  }
 };
 
 export default meta;
@@ -26,9 +29,19 @@ type Story = StoryObj<typeof BrandedSelect>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
+    value:{
+      id: 'b',
+      title: 'Draft',
+      description: "the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link",
+      descriptionMaxLines: 2
+    },
     options: [
       {
         id: 'b',
+        title: 'Draft With a very long title'
+      },
+      {
+        id: 'c',
         title: 'Draft',
         description: "the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link",
         descriptionMaxLines: 2
@@ -37,11 +50,7 @@ export const Primary: Story = {
         title: "Published",
         description: "the job can be viewed by anyone with a link"
       },
-      {
-        id: 'b',
-        title: 'Draft'
-      },
     ],
-    onSelect: fn()
+    onChange: fn()
   },
 };

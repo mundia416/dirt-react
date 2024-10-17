@@ -152,11 +152,23 @@ export const CustomHeaderContent: Story = {
     customHeaderContent: <div className='flex items-center justify-start w-full relative'>
       <BrandedSelect
         className=''
+        value={{
+          id: 'c',
+          title: 'Draft With a very long title',
+          description: "the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link",
+          descriptionMaxLines: 2
+        }}
         options={[{
           id: 'abc',
           title: 'Main Branch'
+        },
+        {
+          id: 'c',
+          title: 'Draft',
+          description: "the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link",
+          descriptionMaxLines: 2
         }]}
-        onSelect={() => { }}
+        onChange={() => { }}
       /></div>,
     userDropdownOptions: [{
       name: 'Logout',

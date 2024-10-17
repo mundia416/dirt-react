@@ -22,6 +22,7 @@ type Props = {
         control: Control<FieldValues, any>
         name: string
     }
+    dropdownPosition?: string
 }
 
 export default function BrandedSelect(props: Props) {
@@ -68,7 +69,7 @@ export function BrandedSelectContent(props: Props) {
 
                 <ListboxOptions
                     transition
-                    className="absolute right-0 z-50 mt-2 w-72 origin-top-right divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in"
+                    className={`${props.dropdownPosition ? props.dropdownPosition : '-right-32 lg:right-0'} absolute z-50 mt-2 w-72 origin-top-right divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in`}
                 >
                     {props.options.map((option) => (
                         <ListboxOption

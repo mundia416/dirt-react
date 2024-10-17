@@ -658,6 +658,10 @@ video {
   bottom: 0px;
 }
 
+.-right-32 {
+  right: -8rem;
+}
+
 .bottom-0 {
   bottom: 0px;
 }
@@ -2910,6 +2914,10 @@ video {
   .lg\:inset-y-0 {
     top: 0px;
     bottom: 0px;
+  }
+
+  .lg\:right-0 {
+    right: 0px;
   }
 
   .lg\:z-40 {

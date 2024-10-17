@@ -10,6 +10,7 @@ type Props = {
     maxFileSize?: number
     onChange: (files: File[]) => void,
     accept?: string
+    disabled?: boolean
 }
 
 export default function FileUpload({
@@ -18,7 +19,8 @@ export default function FileUpload({
     fileTypeString = 'PNG, JPG, GIF',
     maxFileSize = 10,
     accept,
-    onChange
+    onChange,
+    disabled
 }: Props) {
 
     const handleFilesSelected = (files: FileList) => {
@@ -49,6 +51,7 @@ export default function FileUpload({
                         >
                             <span>Upload {multiple ? "files" : "a file"}</span>
                             <input
+                            disabled={disabled}
                                 onChange={(item) => item.target.files && handleFilesSelected(item.target.files)}
                                 id="file-upload" name="file-upload" accept={accept} type={'file'} className="sr-only" multiple={multiple} />
                         </label>

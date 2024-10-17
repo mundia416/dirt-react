@@ -18,7 +18,9 @@ const meta: Meta<typeof FileUpload> = {
     // size: { control: 'color' },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: {},
+  args: {
+    onChange: fn()
+  },
 };
 
 export default meta;
@@ -27,7 +29,7 @@ type Story = StoryObj<typeof FileUpload>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Main: Story = {
   args: {
-    onChange: console.log
+    onChange: fn()
   },
 };
 
@@ -36,5 +38,12 @@ export const Label: Story = {
     label: 'Cover Photo',
     onChange: fn()
 
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    onChange: fn(),
+    disabled: true
   },
 };

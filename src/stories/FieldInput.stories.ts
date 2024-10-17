@@ -89,3 +89,11 @@ export const CornerHelpText: Story = {
 };
 
 
+
+export const Disabled: Story = {
+  args: {
+    element: 'input',
+    label: 'Email Address',
+    disabled: true
+  },
+};

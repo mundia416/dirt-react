@@ -3,14 +3,17 @@ import React from 'react'
 type Props = {
     value: boolean,
     onToggle: (value: boolean) => void
+    disabled?: boolean
 }
 
 export default function Checkbox({
     value,
-    onToggle
+    onToggle,
+    disabled
 }: Props) {
     return (
         <input
+        disabled={disabled}
             type="checkbox"
             checked={value}
             onChange={e => onToggle(e.target.checked)}

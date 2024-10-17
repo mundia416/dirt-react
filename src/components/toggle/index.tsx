@@ -5,6 +5,7 @@ import { Switch } from '@headlessui/react'
 type Props = {
     value?: boolean,
     onToggle?: (value: boolean) => void
+    disabled?: boolean
     withIcons?: boolean,
     formProps?: {
         //control from react hook forms useForm()
@@ -35,11 +36,13 @@ export default function Toggle(props: Props) {
 function ToggleContent({
     withIcons = true,
     value,
-    onToggle
+    onToggle,
+    disabled
 }: Props) {
 
     return (
         <Switch
+            disabled={disabled}
             checked={value}
             onChange={onToggle}
             className="group relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 data-[checked]:bg-indigo-600"

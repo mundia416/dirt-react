@@ -185,3 +185,31 @@ export const Loading: Story = {
 
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    options: [
+      {
+        id: 'b',
+        title: 'Draft',
+      }, {
+        id: 'a',
+        title: "Published",
+        secondaryText: 'danny@gmail.com'
+      },
+      {
+        id: 'c',
+        title: 'Draft Part 2'
+      },
+    ],
+    value: {
+      id: 'c',
+      title: 'Draft Part 2'
+    },
+    onChange: fn(),
+    onScrollToBottom: fn(),
+    className: 'min-w-44'
+
+  },
+};

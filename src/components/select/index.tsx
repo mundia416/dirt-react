@@ -30,6 +30,7 @@ type Props = {
         onSearchChangeDebounce?: (text: string) => void,
         debounceDelayMillis?: number
     }
+    disabled?: boolean
     loading?: boolean
     loadingProps?: {
         fullScreen?: boolean
@@ -120,6 +121,7 @@ export function SelectContent(props: Props) {
             onClick={() => setOptions(props.options)}
         >
             <Listbox
+                disabled={props.disabled}
                 value={props.value} onChange={props.onChange}>
                 <div
                     className='relative'>

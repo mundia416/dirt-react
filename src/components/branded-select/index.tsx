@@ -16,6 +16,7 @@ type Props = {
     options: Option[]
     onChange?: (value: Option) => void
     value?: Option
+    disabled?: boolean
     className?: string
     formProps?: {
         //control from react hook forms useForm()
@@ -55,7 +56,9 @@ export function BrandedSelectContent(props: Props) {
 
 
     return (
-        <Listbox value={props.value} onChange={props.onChange}>
+        <Listbox
+            disabled={props.disabled}
+            value={props.value} onChange={props.onChange}>
             <div className={"relative" + props.className}>
                 <div className="inline-flex divide-x divide-indigo-700 rounded-md shadow-sm">
                     <div className="inline-flex items-center gap-x-1.5 rounded-l-md bg-indigo-600 px-3 py-2 text-white shadow-sm">

@@ -29,3 +29,12 @@ export const Main: Story = {
     onToggle: fn()
   },
 };
+
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    onToggle: fn(),
+    value: true
+  },
+};

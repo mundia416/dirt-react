@@ -36,3 +36,10 @@ export const WithoutIcons: Story = {
     withIcons: false
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    value: true
+  },
+};

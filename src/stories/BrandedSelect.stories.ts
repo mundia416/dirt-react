@@ -54,3 +54,33 @@ export const Primary: Story = {
     onChange: fn()
   },
 };
+
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    value:{
+      id: 'b',
+      title: 'Draft',
+      description: "the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link",
+      descriptionMaxLines: 2
+    },
+    options: [
+      {
+        id: 'b',
+        title: 'Draft With a very long title'
+      },
+      {
+        id: 'c',
+        title: 'Draft',
+        description: "the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link the job can be viewed by anyone with a link",
+        descriptionMaxLines: 2
+      }, {
+        id: 'a',
+        title: "Published",
+        description: "the job can be viewed by anyone with a link"
+      },
+    ],
+    onChange: fn()
+  },
+};

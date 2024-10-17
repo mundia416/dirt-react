@@ -5,7 +5,7 @@ import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Controller, Control, FieldValues } from "react-hook-form";
 
 
-type Option = {
+export type Option = {
     id: string
     title: string
     description?: string

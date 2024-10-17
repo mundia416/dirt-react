@@ -11,6 +11,7 @@ type Props = {
     label?: string
     value?: CurrencyType
     onChange?: (currency: CurrencyType) => void
+    disabled?: boolean
     formProps?: {
         //control from react hook forms useForm()
         control: Control<FieldValues, any>
@@ -40,7 +41,8 @@ export default function CurrencySelect(props: Props) {
 function CurrencySelectContent({
     label,
     value,
-    onChange
+    onChange,
+    disabled
 }: Props) {
 
     const [currencyOptions, setCurrencyOptions] = useState(currencyUtils.getCurrencies())
@@ -87,6 +89,7 @@ function CurrencySelectContent({
 
     return (
         <Select
+            disabled={disabled}
             label={label}
             value={value ? {
                 id: value.code,
@@ -99,7 +102,7 @@ function CurrencySelectContent({
             search={{
                 onSearchChange: handleSearchCurrency
             }}
-             />
+        />
     )
 }
 

@@ -36,3 +36,11 @@ export const WithLabel: Story = {
     onChange: fn()
   },
 };
+
+
+export const Disabled: Story = {
+  args: {
+    onChange: fn(),
+    disabled: true
+  },
+};

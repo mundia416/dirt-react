@@ -10,6 +10,7 @@ type Props = {
     showLabel?: boolean
     value?: string
     onChange?: (timezone: string) => void
+    disabled?: boolean
     formProps?: {
         //control from react hook forms useForm()
         control: Control<FieldValues, any>
@@ -39,7 +40,8 @@ function TimezoneSelectContent({
     value,
     onChange,
     showLabel = true,
-    label = "Timezone"
+    label = "Timezone",
+    disabled
 }: Props) {
 
     useEffect(() => {
@@ -57,6 +59,7 @@ function TimezoneSelectContent({
             }
 
             <TimeZone
+                isDisabled={disabled}
                 value={value || timezoneUtils.getDefaultTimezone()}
                 onChange={timezone => onChange && onChange(timezone.value)}
             />

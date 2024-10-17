@@ -37,3 +37,11 @@ export const WithLabel: Story = {
     onChange: fn()
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    label: "Select Currency",
+    onChange: fn(),
+    disabled: true
+  },
+};

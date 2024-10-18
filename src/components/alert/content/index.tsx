@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { useFadeAnimChild } from '../../use-fade-anim'
 import Button from '../../button'
 import { AlertProps } from '../AlertProps';
-import { ArrowRightIcon, CheckCircleIcon, ExclamationCircleIcon, ExclamationTriangleIcon, InformationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon, CheckCircleIcon, ExclamationCircleIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { InformationCircleIcon } from '@heroicons/react/24/solid';
 
 const Container = styled.div<{ fadeOut: any } >`
 ${({ fadeOut, theme }) => fadeOut ? theme.fadeOutSize : theme.fadeInSize};
@@ -19,7 +20,7 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
 
     const { close, fadeOut, onAnimationEnd } = useFadeAnimChild({ isShown, stopRender, onCloseComplete })
     let variantStyle
-    let icon: { icon: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & { title?: string | undefined; titleId?: string | undefined; } & RefAttributes<SVGSVGElement>> | undefined } | undefined = {icon: undefined}
+    let icon: { icon: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & { title?: string | undefined; titleId?: string | undefined; } & RefAttributes<SVGSVGElement>> | undefined } | undefined = { icon: undefined }
     let iconStyle
     let titleStyle
     let contentStyle
@@ -60,7 +61,7 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
         case 'info':
             variantStyle = ` bg-blue-100`
             icon.icon = InformationCircleIcon
-            iconStyle = 'text-blue-700'
+            iconStyle = 'text-blue-500'
             titleStyle = 'text-blue-900'
             contentStyle = 'text-blue-800'
             buttonStyle = 'text-blue-900 hover:text-blue-800'
@@ -89,9 +90,9 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
                     type='text-small'
                 >{content}</Text>
 
-                {positiveText || negativeText &&
 
-                    <div className='flex'>
+                <div className='flex'>
+                    {positiveText &&
                         <Button
                             color
                             size='extra-small'
@@ -100,6 +101,9 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
                             className={`tracking-tight  pl-0  ${buttonStyle}`}
                             onClick={onPositiveClick}
                         >{positiveText}</Button>
+                    }
+
+                    {negativeText &&
                         <Button
                             color
                             hover
@@ -108,9 +112,10 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
                             className={`tracking-tight ${buttonStyle}`}
                             onClick={onNegativeClick}
                         >{negativeText}</Button>
+                    }
 
-                    </div>
-                }
+                </div>
+
             </div>
 
             {link &&

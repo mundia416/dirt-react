@@ -35,7 +35,7 @@ export const Warning: Story = {
     isShown: true,
     title: 'Title',
     content: 'Content description',
-    variant: 'warning'
+    variant: 'warning',
   },
 };
 
@@ -84,7 +84,9 @@ export const WithActionButtons: Story = {
     content: 'Content description',
     variant: 'info',
     positiveText: 'Continue',
-    negativeText: 'Cancel'
+    negativeText: 'Cancel',
+    onPositiveClick: fn(),
+    onNegativeClick: fn(),
   },
 };
 

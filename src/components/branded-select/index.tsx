@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/react/20/solid'
-import { Controller, Control, FieldValues } from "react-hook-form";
+import { Controller, Control } from "react-hook-form";
 
 
 export type Option = {
@@ -20,7 +20,7 @@ type Props = {
     className?: string
     formProps?: {
         //control from react hook forms useForm()
-        control: Control<FieldValues, any>
+        control: Control<any, any>
         name: string
     }
     dropdownPosition?: string

@@ -3,7 +3,7 @@ import currencies from './currencies'
 import Select from '../select'
 import CurrencyType from './CurrencyType'
 import currencyUtils from '../../utils/currency-utils'
-import { Controller, Control, FieldValues } from "react-hook-form";
+import { Controller, Control } from "react-hook-form";
 
 
 
@@ -14,7 +14,7 @@ type Props = {
     disabled?: boolean
     formProps?: {
         //control from react hook forms useForm()
-        control: Control<FieldValues, any>
+        control: Control<any, any>
         name: string
     }
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import TimeZone from 'react-timezone-select'
 import timezoneUtils from '../../utils/timezone-utils'
 import Label from '../label'
-import { Controller, Control, FieldValues } from "react-hook-form";
+import { Controller, Control } from "react-hook-form";
 
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
     disabled?: boolean
     formProps?: {
         //control from react hook forms useForm()
-        control: Control<FieldValues, any>
+        control: Control<any, any>
         name: string
     }
 }

@@ -1,4 +1,4 @@
-import { Controller, Control, FieldValues } from "react-hook-form";
+import { Controller, Control } from "react-hook-form";
 import React from 'react'
 import { Switch } from '@headlessui/react'
 
@@ -9,7 +9,7 @@ type Props = {
     withIcons?: boolean,
     formProps?: {
         //control from react hook forms useForm()
-        control: Control<FieldValues, any>
+        control: Control<any, any>
         name: string
     }
 }

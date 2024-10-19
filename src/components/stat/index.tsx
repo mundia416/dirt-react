@@ -13,7 +13,7 @@ function classNames(...classes: any) {
 
 type Props = {
     name: string
-    value: string
+    value: string | React.ReactNode
     //an icon from heroicons, i.e UsersIcon
     icon: React.ForwardRefExoticComponent<Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
         title?: string;

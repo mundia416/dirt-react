@@ -332,7 +332,7 @@ export default function SidebarLayout({
                                                 <a
                                                     onClick={item.onClick}
                                                     href={item.href}
-                                                    className="block px-3 py-1 text-sm leading-6 text-gray-900 data-[focus]:bg-gray-50"
+                                                    className="block px-3 py-1 cursor-pointer text-sm leading-6 text-gray-900 data-[focus]:bg-gray-50"
                                                 >
                                                     {item.name}
                                                 </a>

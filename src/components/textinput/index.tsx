@@ -24,8 +24,8 @@ export interface Props {
     step?: string,
     onFocus?: () => void,
     onBlur?: () => void,
-    max?: number,
-    min?: number,
+    max?: number | string,
+    min?: number | string,
     intl?: any,
     aff?: any,
     required?: boolean

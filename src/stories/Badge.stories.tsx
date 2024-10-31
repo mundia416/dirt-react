@@ -14,6 +14,9 @@ const meta: Meta<typeof Badge> = {
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   //   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
+  args: {
+    onCancel: fn()
+  },
   argTypes: {
     // size: { control: 'color' },
   },
@@ -26,5 +29,6 @@ type Story = StoryObj<typeof Badge>;
 export const Normal: Story = {
   args: {
     children: "Badge",
+    onCancel:  ()=>console.log('on cancel')
   },
 };

@@ -79,7 +79,7 @@ export default function PhoneInput({
 
     const onCountryCodeChange = (option: Option) => {
         setCountryCode(option)
-        if (typeof onChange !== 'undefined' && value && value?.trim()?.length > 0) {
+        if (typeof onChange !== 'undefined' && defaultValue && defaultValue?.trim()?.length > 0) {
             onChange && onChange((option.title || '') + (document.getElementById(id) as HTMLInputElement)?.value);
         }
     }

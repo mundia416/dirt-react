@@ -68,9 +68,9 @@ export default function AvatarUpload({
                         <Image
                             src={typeof capturedImage === 'string' ? capturedImage : URL.createObjectURL(capturedImage)}
                             alt="Avatar"
-                            layout="fill"
-                            objectFit="cover"
-                            className={`rounded-full relative ${!disabled && 'cursor-pointer'}`}
+                            width={450}
+                            height={450}
+                            className={` object-cover  rounded-full absolute top-0 left-0 right-0 bottom-0 z-0 ${!disabled && 'cursor-pointer'} h-full w-full`}
                         />
                         :
                         <p className="text-xs leading-5 text-gray-600">Allowed {fileTypeString}<span className='block'> max size {maxFileSize}MB</span></p>

@@ -35,6 +35,7 @@ import Checkbox from "./components/checkbox"
 import Notification from "./components/notification"
 import functionUtils from './utils/function-utils'
 import PhoneInput from "./components/phone-input"
+import AvatarUpload from "./components/avatar-upload"
 
 
 
@@ -70,6 +71,7 @@ export {
   Checkbox,
   Notification,
   PhoneInput,
+  AvatarUpload,
   
   //layouts
   StackedLayout,

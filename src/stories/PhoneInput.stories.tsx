@@ -49,4 +49,12 @@ export const Error: Story = {
   },
 };
 
+export const Disabled: Story = {
+  args: {
+    onChange: fn(),
+    label: "Phone Number",
+    disabled: true
+  },
+};
+
 

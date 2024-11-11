@@ -19,6 +19,7 @@ type Props = {
     value?: string,
     placeholder?: string,
     error?: boolean
+    disabled?: boolean
 
 }
 
@@ -30,7 +31,8 @@ export default function PhoneInput({
     placeholder,
     value,
     onChange,
-    error
+    error,
+    disabled
 }: Props) {
 
     const [countryCode, setCountryCode] = useState<Option>()
@@ -88,6 +90,7 @@ export default function PhoneInput({
             <div className="relative mt-2 rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 flex items-center mb-2">
                     <Select
+                        disabled={disabled}
                         value={countryCode}
                         onChange={onCountryCodeChange}
                         className='min-w-28'
@@ -100,6 +103,7 @@ export default function PhoneInput({
                     />
                 </div>
                 <input
+                    disabled={disabled}
                     id={id}
                     name="phone-number"
                     type="tel"

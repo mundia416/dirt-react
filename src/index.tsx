@@ -34,6 +34,7 @@ import Badge from "./components/badge"
 import Checkbox from "./components/checkbox"
 import Notification from "./components/notification"
 import functionUtils from './utils/function-utils'
+import PhoneInput from "./components/phone-input"
 
 
 
@@ -68,7 +69,8 @@ export {
   Badge,
   Checkbox,
   Notification,
-
+  PhoneInput,
+  
   //layouts
   StackedLayout,
   SidebarLayout,

@@ -1076,6 +1076,10 @@ video {
   width: 100vw;
 }
 
+.min-w-28 {
+  min-width: 7rem;
+}
+
 .min-w-44 {
   min-width: 11rem;
 }
@@ -1762,6 +1766,10 @@ video {
   padding-left: 0.75rem;
 }
 
+.pl-32 {
+  padding-left: 8rem;
+}
+
 .pl-4 {
   padding-left: 1rem;
 }
@@ -2443,6 +2451,10 @@ video {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
+.focus\:ring-inset:focus {
+  --tw-ring-inset: inset;
+}
+
 .focus\:ring-gray-900:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(17 24 39 / var(--tw-ring-opacity));
@@ -2842,6 +2854,11 @@ video {
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .sm\:text-sm\/6 {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
   }
 
   .sm\:leading-6 {

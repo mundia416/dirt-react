@@ -44,6 +44,8 @@ type Props = {
     onChange?: (value: Option) => void
     formProps?: FormProps
     onScrollToBottom?: () => void
+    alignChevron?: 'left' | 'right'
+    showCheckIcon?: boolean
 }
 
 export default function Select(props: Props) {
@@ -66,6 +68,10 @@ export default function Select(props: Props) {
 
 
 export function SelectContent(props: Props) {
+    const {
+        alignChevron = 'right',
+        showCheckIcon = true
+    } = props
 
     const [options, setOptions] = useState(props.options)
 
@@ -133,14 +139,19 @@ export function SelectContent(props: Props) {
                     }
 
                     <div className="relative mt-2">
-                        <ListboxButton className={"relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6 " + props.className}>
-                            <span className="inline-flex w-full truncate">
+                        <ListboxButton className={`relative w-full cursor-default rounded-md bg-white py-1.5  ${alignChevron === 'right' ? 'pr-10  pl-3' : 'pl-10 pr-3'} text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6 ` + props.className}>
+
+
+
+                            <span className="inline-flex w-full truncate ">
                                 <span className="truncate">{props.value?.title}</span>
-                                <span className="ml-2 truncate text-gray-500">{props.value?.secondaryText}</span>
+                                {props.value?.secondaryText && <span className="ml-2 truncate text-gray-500">{props.value?.secondaryText}</span>}
                             </span>
-                            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+
+                            <span className={`pointer-events-none absolute inset-y-0 ${alignChevron === 'right' ? 'right-0 pr-2' : 'left-0 pl-2'} flex items-center `}>
                                 <ChevronUpDownIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
                             </span>
+
                         </ListboxButton>
 
                         <ListboxOptions
@@ -176,14 +187,19 @@ export function SelectContent(props: Props) {
                                         >
                                             <div className="flex">
                                                 <span className="truncate font-normal group-data-[selected]:font-semibold">{option.title}</span>
-                                                <span className="ml-2 truncate text-gray-500 group-data-[focus]:text-indigo-200">
-                                                    {option.secondaryText}
-                                                </span>
+
+                                                {option.secondaryText &&
+                                                    <span className="ml-2 truncate text-gray-500 group-data-[focus]:text-indigo-200">
+                                                        {option.secondaryText}
+                                                    </span>
+                                                }
                                             </div>
 
-                                            <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
-                                                <CheckIcon aria-hidden="true" className="h-5 w-5" />
-                                            </span>
+                                            {showCheckIcon &&
+                                                <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
+                                                    <CheckIcon aria-hidden="true" className="h-5 w-5" />
+                                                </span>
+                                            }
                                         </ListboxOption>
                                     ))}
                             </div>

@@ -18,6 +18,7 @@ type Props = {
     onChange?: (value: string) => void,
     value?: string,
     placeholder?: string,
+    error?: boolean
 
 }
 
@@ -28,7 +29,8 @@ export default function PhoneInput({
     label,
     placeholder,
     value,
-    onChange
+    onChange,
+    error
 }: Props) {
 
     const [countryCode, setCountryCode] = useState<Option>()
@@ -104,7 +106,7 @@ export default function PhoneInput({
                     value={defaultValue}
                     onChange={onChangeAndValidate}
                     placeholder={placeholder ? placeholder : '9512345678'}
-                    className="block w-full rounded-md border-0 py-1.5 pl-32 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm/6"
+                    className={`block w-full rounded-md border-0 py-1.5 pl-32 text-gray-900 ring-1 ring-inset  placeholder:text-gray-400 focus:outline-none focus:ring-2 ${error ? 'ring-red-300' : ' focus:ring-indigo-500 ring-gray-300 '} sm:text-sm/6`}
                 />
             </div>
         </div>

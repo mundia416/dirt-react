@@ -41,4 +41,12 @@ export const WithDefaultValue: Story = {
 };
 
 
+export const Error: Story = {
+  args: {
+    onChange: fn(),
+    label: "Phone Number",
+    error: true
+  },
+};
+
 

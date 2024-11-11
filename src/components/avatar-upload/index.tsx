@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { PhotoIcon } from '@heroicons/react/24/solid'
-import Label from '../label'
 import { CameraIcon } from '@heroicons/react/24/outline'
-import { useDropzone } from 'react-dropzone'
 import Image from 'next/image'
 
 type Props = {

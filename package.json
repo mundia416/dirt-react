@@ -95,7 +95,6 @@
     "appwrite": "^15.0.0",
     "autoprefixer": "^10.4.20",
     "next": "^14.2.6",
-    "react-dropzone": "^14.3.5",
     "react-hook-form": "^7.53.0",
     "react-input-slider": "^6.0.1",
     "react-loader-spinner": "^6.1.6",

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { CameraIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
 
 type Props = {
     label?: string
@@ -65,11 +64,9 @@ export default function AvatarUpload({
                         multiple={false} />
 
                     {capturedImage ?
-                        <Image
+                        <img
                             src={typeof capturedImage === 'string' ? capturedImage : URL.createObjectURL(capturedImage)}
                             alt="Avatar"
-                            width={450}
-                            height={450}
                             className={` object-cover  rounded-full absolute top-0 left-0 right-0 bottom-0 z-0 ${!disabled && 'cursor-pointer'} h-full w-full`}
                         />
                         :

@@ -16,6 +16,7 @@ import Table from "./components/table"
 import SidebarLayout from './layouts/sidebar-layout'
 import stringUtils from './utils/string-utils'
 import dateUtils from './utils/date-utils'
+import fetchUtils from './utils/fetch-utils'
 import BrandedSelect from "./components/branded-select"
 import Select from "./components/select"
 import FileUpload from './components/file-upload'
@@ -72,7 +73,7 @@ export {
   Notification,
   PhoneInput,
   AvatarUpload,
-  
+
   //layouts
   StackedLayout,
   SidebarLayout,
@@ -82,5 +83,6 @@ export {
   dateUtils,
   timezoneUtils,
   currencyUtils,
-  functionUtils
+  functionUtils,
+  fetchUtils
 }

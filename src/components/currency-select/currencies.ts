@@ -118,6 +118,7 @@ const currencies = [
     { code: "RON", "symbol": "L", "name": "Romanian leu" },
     { code: "RSD", "symbol": "din.", "name": "Serbian dinar" },
     { code: "RUB", "symbol": "R", "name": "Russian ruble" },
+    { code: "RWF", "symbol": "R₣", "name": "Rwandan franc" },
     { code: "SAR", "symbol": "SR", "name": "Saudi riyal" },
     { code: "SBD", "symbol": "$", "name": "Solomon Islands dollar" },
     { code: "SCR", "symbol": "SR", "name": "Seychellois rupee" },

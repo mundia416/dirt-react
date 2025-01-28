@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 
@@ -22,6 +22,8 @@ export const useFadeAnimParent = ({ isShown }: Props) => {
     useEffect(() => {
         if (isShown) {
             setRender(true);
+        } else {
+            setRender(true)
         }
     }, [isShown])
 

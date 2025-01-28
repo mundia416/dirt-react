@@ -23,7 +23,7 @@ export const useFadeAnimParent = ({ isShown }: Props) => {
         if (isShown) {
             setRender(true);
         } else {
-            setRender(true)
+            setRender(false)
         }
     }, [isShown])
 

@@ -15,6 +15,7 @@ const countryCodeOptions = countryCodes.map((country) => {
 
 type Props = {
     label?: string
+    inputClassName?: string,
     onChange?: (value: string) => void,
     value?: string,
     placeholder?: string,
@@ -32,7 +33,8 @@ export default function PhoneInput({
     value,
     onChange,
     error,
-    disabled
+    disabled,
+    inputClassName
 }: Props) {
 
     const [countryCode, setCountryCode] = useState<Option>()
@@ -112,7 +114,7 @@ export default function PhoneInput({
                     value={defaultValue}
                     onChange={onChangeAndValidate}
                     placeholder={placeholder ? placeholder : '9512345678'}
-                    className={`block w-full rounded-md border-0 py-1.5 pl-32 text-gray-900 ring-1 ring-inset  placeholder:text-gray-400 focus:outline-none focus:ring-2 ${error ? 'ring-red-300' : ' focus:ring-indigo-500 ring-gray-300 '} sm:text-sm/6`}
+                    className={`block w-full rounded-md border-0 py-1.5 pl-32 text-gray-900 ring-1 ring-inset  placeholder:text-gray-400 focus:outline-none focus:ring-2 ${error ? 'ring-red-300' : ' focus:ring-indigo-500 ring-gray-300 '} sm:text-sm/6 ${inputClassName}`}
                 />
             </div>
         </div>

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import React from 'react'
-import { BrandedSelect, SidebarLayout } from '..';
+import { BrandedSelect, Button, SidebarLayout } from '..';
 import { HomeIcon, UserIcon } from '@heroicons/react/24/outline';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -113,6 +113,9 @@ export const ThinSidebar: Story = {
 
 export const CustomHeaderContent: Story = {
   args: {
+    children: <div>
+      <Button>Click me</Button>
+    </div>,
     navigationGroups: [
       {
         navigationOptions: [{

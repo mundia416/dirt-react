@@ -37,6 +37,7 @@ import Notification from "./components/notification"
 import functionUtils from './utils/function-utils'
 import PhoneInput from "./components/phone-input"
 import AvatarUpload from "./components/avatar-upload"
+import AnimatedDiv from "./components/animated-div"
 
 
 
@@ -73,6 +74,7 @@ export {
   Notification,
   PhoneInput,
   AvatarUpload,
+  AnimatedDiv,
 
   //layouts
   StackedLayout,

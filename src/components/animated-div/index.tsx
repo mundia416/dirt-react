@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 interface AnimatedDivProps {
     children: React.ReactNode;
     className?: string
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 const AnimatedDiv: React.FC<AnimatedDivProps> = ({ children, className, onClick }) => {

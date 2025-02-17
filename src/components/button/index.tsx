@@ -1,5 +1,6 @@
 import React, { ForwardRefExoticComponent, RefAttributes, SVGProps } from 'react';
 import Loading, { LoadingProps } from '../loading';
+import AnimatedDiv from '../animated-div';
 
 export interface ButtonProps {
     className?: string,
@@ -147,61 +148,63 @@ const Button: React.FC<ButtonProps> = (props) => {
               ${!rounded && 'rounded-md'} leading-6 font-medium 
               ${sizeStyle} ${className}`
 
-    const button = () => <button
-        type='button'
-        ref={ref}
-        className={styles}
-        onClick={(e) => {
-            if (enabled && onClick) {
-                e.stopPropagation()
-                onClick(e)
+    const button = () => <AnimatedDiv>
+        <button
+            type='button'
+            ref={ref}
+            className={styles}
+            onClick={(e) => {
+                if (enabled && onClick) {
+                    e.stopPropagation()
+                    onClick(e)
+                }
+            }}>
+            {loading ?
+                <div>
+
+                    <Loading
+                        variant={typeof loading === 'boolean' ? 'oval' : loading.variant}
+                        size='tiny'
+                        color={spinnerColor} />
+
+                </div>
+                :
+                <div className='flex items-center'>
+                    {props.leadingIcon &&
+                        <div className={iconWrapper}>
+
+                            {typeof props.leadingIcon === 'string' ?
+                                <img
+                                    alt='leading icon'
+                                    className='h-full w-full object-contain'
+                                    src={props.leadingIcon}
+                                />
+                                :
+                                <props.leadingIcon className='h-full w-full' />
+                            }
+                        </div>
+                    }
+
+                    {children}
+
+                    {props.trailingIcon &&
+                        <div className={iconWrapper}>
+
+                            {typeof props.trailingIcon === 'string' ?
+                                <img
+                                    alt='leading icon'
+                                    className='h-full w-full object-contain'
+                                    src={props.trailingIcon}
+                                />
+                                :
+                                <props.trailingIcon className='h-full w-full' />
+                            }
+                        </div>
+                    }
+                </div>
             }
-        }}>
-        {loading ?
-            <div>
-
-                <Loading
-                    variant={typeof loading === 'boolean' ? 'oval' : loading.variant}
-                    size='tiny'
-                    color={spinnerColor} />
-
-            </div>
-            :
-            <div className='flex items-center'>
-                {props.leadingIcon &&
-                    <div className={iconWrapper}>
-
-                        {typeof props.leadingIcon === 'string' ?
-                            <img
-                                alt='leading icon'
-                                className='h-full w-full object-contain'
-                                src={props.leadingIcon}
-                            />
-                            :
-                            <props.leadingIcon className='h-full w-full' />
-                        }
-                    </div>
-                }
-
-                {children}
-
-                {props.trailingIcon &&
-                    <div className={iconWrapper}>
-
-                        {typeof props.trailingIcon === 'string' ?
-                            <img
-                                alt='leading icon'
-                                className='h-full w-full object-contain'
-                                src={props.trailingIcon}
-                            />
-                            :
-                            <props.trailingIcon className='h-full w-full' />
-                        }
-                    </div>
-                }
-            </div>
-        }
-    </button>
+        </button>
+    </AnimatedDiv>
 
     return (
         typeSubmit ?
@@ -209,7 +212,7 @@ const Button: React.FC<ButtonProps> = (props) => {
                 button()
                 :
 
-                <div
+                <AnimatedDiv
                     className={styles + ' relative'}
                 >
 
@@ -262,7 +265,7 @@ const Button: React.FC<ButtonProps> = (props) => {
                         }
                     </div>
 
-                </div>
+                </AnimatedDiv>
             :
             button()
 

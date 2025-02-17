@@ -6,6 +6,7 @@ import Button from '../../button'
 import { AlertProps } from '../AlertProps';
 import { ArrowRightIcon, CheckCircleIcon, ExclamationCircleIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { InformationCircleIcon } from '@heroicons/react/24/solid';
+import AnimatedDiv from '../../animated-div';
 
 const Container = styled.div<{ fadeOut: any } >`
 ${({ fadeOut, theme }) => fadeOut ? theme.fadeOutSize : theme.fadeInSize};
@@ -70,79 +71,82 @@ const Content = ({ showDismiss, link, variant, title, content, className, onPosi
     }
 
     return (
-        <Container
-            onAnimationEnd={onAnimationEnd}
-            fadeOut={fadeOut}
-            className={`flex p-2 rounded-md ${variantStyle} ${className}`}>
+        <AnimatedDiv>
+            <Container
+                onAnimationEnd={onAnimationEnd}
+                fadeOut={fadeOut}
+                className={`flex p-2 rounded-md ${variantStyle} ${className}`}>
 
-            {icon &&
-                <icon.icon className={`mt-4 h-6 w-6 mx-2 ${iconStyle}`} />
-            }
+                {icon &&
+                    <icon.icon className={`mt-4 h-6 w-6 mx-2 ${iconStyle}`} />
+                }
 
-            <div className='my-4 mr-4'>
-                <Text
-                    type='text-small'
-                    className={`text-gray-900 font-medium ${titleStyle}`}
-                    color>{title}</Text>
+                <div className='my-4 mr-4'>
+                    <Text
+                        type='text-small'
+                        className={`text-gray-900 font-medium ${titleStyle}`}
+                        color>{title}</Text>
 
-                <Text
-                    className={`${contentStyle}`}
-                    type='text-small'
-                >{content}</Text>
+                    <Text
+                        className={`${contentStyle}`}
+                        type='text-small'
+                    >{content}</Text>
 
 
-                <div className='flex'>
-                    {positiveText &&
-                        <Button
-                            color
-                            size='extra-small'
-                            hover
-                            variant='text'
-                            className={`tracking-tight  pl-0  ${buttonStyle}`}
-                            onClick={onPositiveClick}
-                        >{positiveText}</Button>
-                    }
+                    <div className='flex'>
+                        {positiveText &&
+                            <Button
+                                color
+                                size='extra-small'
+                                hover
+                                variant='text'
+                                className={`tracking-tight  pl-0  ${buttonStyle}`}
+                                onClick={onPositiveClick}
+                            >{positiveText}</Button>
+                        }
 
-                    {negativeText &&
-                        <Button
-                            color
-                            hover
-                            size='extra-small'
-                            variant='text'
-                            className={`tracking-tight ${buttonStyle}`}
-                            onClick={onNegativeClick}
-                        >{negativeText}</Button>
-                    }
+                        {negativeText &&
+                            <Button
+                                color
+                                hover
+                                size='extra-small'
+                                variant='text'
+                                className={`tracking-tight ${buttonStyle}`}
+                                onClick={onNegativeClick}
+                            >{negativeText}</Button>
+                        }
+
+                    </div>
 
                 </div>
 
-            </div>
-
-            {link &&
-                <Button
-                    color
-                    size='extra-small'
-                    hover
-                    variant='text'
-                    trailingIcon={ArrowRightIcon}
-                    className={`tracking-tight ml-6  ${linkStyle}`}
-                    onClick={() => console.log(/**TODO GO TO THE LINK SUPPLIED */)}
-                >{link.title}</Button>
-            }
-
-
-            {showDismiss &&
-                <div className='h-full flex items-center'>
+                {link &&
                     <Button
+                        color
+                        size='extra-small'
+                        hover
                         variant='text'
-                        leadingIcon={XMarkIcon}
-                        className={` ml-6 ${buttonStyle}`}
-                        onClick={() => close()}
-                    />
-                </div>
-            }
+                        trailingIcon={ArrowRightIcon}
+                        className={`tracking-tight ml-6  ${linkStyle}`}
+                        onClick={() => console.log(/**TODO GO TO THE LINK SUPPLIED */)}
+                    >{link.title}</Button>
+                }
 
-        </Container>
+
+                {showDismiss &&
+                    <div className='h-full flex items-center'>
+                        <Button
+                            variant='text'
+                            leadingIcon={XMarkIcon}
+                            className={` ml-6 ${buttonStyle}`}
+                            onClick={() => close()}
+                        />
+                    </div>
+                }
+
+            </Container>
+        </AnimatedDiv>
+
     );
 };
 

@@ -5,6 +5,7 @@ import {
     InfinitySpin, LineWave,
     TailSpin, RotatingLines, RotatingSquare, Rings, RevolvingDot, Radio
 } from 'react-loader-spinner'
+import AnimatedDiv from '../animated-div';
 
 export interface LoadingProps {
     className?: string,
@@ -54,7 +55,7 @@ const Loading: React.FC<LoadingProps> = ({
 
 
     return (
-        <div
+        <AnimatedDiv
             className={`w-full h-full flex ${fullScreen && 'w-screen h-screen'} items-center justify-center ${className}`}>
 
             {variant === 'tailspin' &&
@@ -214,7 +215,7 @@ const Loading: React.FC<LoadingProps> = ({
                 />
             }
 
-        </div>
+        </AnimatedDiv>
     );
 };
 

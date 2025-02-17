@@ -2,6 +2,7 @@
 import React from 'react'
 import ErrorAlert from '../alert/error'
 import Loading, { LoadingProps } from '../loading'
+import AnimatedDiv from '../animated-div'
 
 
 type Props = {
@@ -38,7 +39,7 @@ function ContentController({
 }: Props) {
 
     return (
-        <div className={`w-full h-full ${className}`}>
+        <AnimatedDiv className={`w-full h-full ${className}`}>
             {
                 loading ?
                     <div
@@ -62,7 +63,7 @@ function ContentController({
                         }
                     </>
             }
-        </div>
+        </AnimatedDiv>
 
     )
 }

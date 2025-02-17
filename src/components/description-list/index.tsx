@@ -1,4 +1,5 @@
 import React from 'react'
+import AnimatedDiv from '../animated-div'
 
 
 export type RowProps = {
@@ -14,7 +15,7 @@ type Props = {
 
 export default function DescriptionList({ data }: Props) {
     return (
-        <div className=" border-gray-100">
+        <AnimatedDiv className=" border-gray-100">
             <dl className="divide-y divide-gray-100">
                 {data.map((item, index) => (
                     <div
@@ -31,7 +32,7 @@ export default function DescriptionList({ data }: Props) {
                 ))
                 }
             </dl >
-        </div >
+        </AnimatedDiv>
 
     )
 }

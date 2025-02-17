@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { CameraIcon } from '@heroicons/react/24/outline'
+import AnimatedDiv from '../animated-div'
 
 type Props = {
     label?: string
@@ -50,7 +51,7 @@ export default function AvatarUpload({
 
 
     return (
-        <div>
+        <AnimatedDiv>
 
             <div className="mt-2 flex justify-center border border-dashed border-gray-900/25 p-2 rounded-full">
                 <div className={`text-center bg-slate-100 rounded-full h-44 w-44 relative flex flex-col items-center justify-center px-2`}>
@@ -74,7 +75,7 @@ export default function AvatarUpload({
                     }
                 </div>
             </div>
-        </div>
+        </AnimatedDiv>
 
     )
 }

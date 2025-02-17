@@ -5,6 +5,7 @@ import Text from '../text';
 import { Props as TextInputProps } from '../textinput'
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import Label from '../label';
+import AnimatedDiv from '../animated-div';
 
 const errorFocus = (theme: any) => {
 
@@ -60,7 +61,7 @@ const FieldInput = (props: Props) => {
     const isDarkVariant = (variant === 'dark')
 
     return (
-        <div className={className}>
+        <AnimatedDiv className={className}>
             {(label || cornerHelpText) &&
                 < div className='w-full flex justify-between mb-2'>
                     <Label>{label}</Label>
@@ -130,7 +131,7 @@ const FieldInput = (props: Props) => {
                     type='text-small'>{helpText}</Text>
             }
 
-        </div >
+        </AnimatedDiv >
     );
 };
 

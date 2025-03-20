@@ -1836,6 +1836,10 @@ video {
   padding-top: 0.25rem;
 }
 
+.pt-16 {
+  padding-top: 4rem;
+}
+
 .pt-2 {
   padding-top: 0.5rem;
 }
@@ -3028,6 +3032,10 @@ video {
   .lg\:-mx-8 {
     margin-left: -2rem;
     margin-right: -2rem;
+  }
+
+  .lg\:ml-2 {
+    margin-left: 0.5rem;
   }
 
   .lg\:block {

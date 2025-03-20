@@ -11,21 +11,22 @@ export type RowProps = {
 }
 type Props = {
     data: RowProps[]
+    flat?: boolean
 }
 
-export default function DescriptionList({ data }: Props) {
+export default function DescriptionList({ data, flat = false }: Props) {
     return (
         <AnimatedDiv className=" border-gray-100">
             <dl className="divide-y divide-gray-100">
                 {data.map((item, index) => (
                     <div
                         key={index}
-                        className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        className={`px-4  sm:grid-cols-3 sm:gap-4 sm:px-0 ${flat ? 'grid-cols-2 grid py-2 sm:py-4 md:py-6 ' : 'sm:grid py-6'}`}>
 
                         {typeof item.left === 'string' ? <dt className={`text-sm font-medium leading-6 text-gray-900 ${item.leftClassName}`}>{item.left}</dt> : item.left}
 
                         <div className='sm:col-span-2'>
-                            {typeof item.right === 'string' ? < dd className={`mt-1 text-sm leading-6 text-gray-700  sm:mt-0 ${item.rightClassName}`}>{item.right}</dd> : item.right}
+                            {typeof item.right === 'string' ? <dd className={`mt-1 text-sm leading-6 text-gray-700  sm:mt-0 ${item.rightClassName}`}>{item.right}</dd> : item.right}
                         </div>
 
                     </div>

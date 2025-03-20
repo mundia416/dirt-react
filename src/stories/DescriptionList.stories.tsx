@@ -51,3 +51,22 @@ export const CustomComponents: Story = {
     },]
   },
 };
+
+export const Flat: Story = {
+  args: {
+    flat: true,
+    data: [{
+      left: "Name",
+      right: "Jackson Manly with a super long right value"
+    }, {
+      left: "Age",
+      right: "34"
+    },{
+      left: "Name",
+      right: "Jackson Manly"
+    }, {
+      left: "Age",
+      right: "34"
+    },]
+  },
+};

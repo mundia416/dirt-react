@@ -35,7 +35,7 @@ type Props = {
 export default function Stat(props: Props) {
     return (
         <>
-            <Tooltip id={tooltipId} className='z-50' />
+            <Tooltip id={tooltipId} className='z-50 max-w-[90vw]' />
 
             <div
                 className={' rounded-lg bg-white shadow flex  flex-col ' + props.className}
@@ -44,15 +44,17 @@ export default function Stat(props: Props) {
                     <div
                         className="relative overflow-hidden  px-4  py-5  sm:px-6 sm:py-6"
                     >
-                        <div>
-                            <div className={`absolute rounded-md ${props.iconBackgroundColor || 'bg-indigo-500'} p-3`}>
+                        <div className='flex flex-col sm:block'>
+                            <div className='flex'> 
+                            <div className={`sm:absolute rounded-md ${props.iconBackgroundColor || 'bg-indigo-500'} p-3`}>
                                 <props.icon aria-hidden="true" className="h-6 w-6 text-white" />
                             </div>
+                            </div>
                             <div className='flex justify-between '>
-                                <p className={`ml-16  text-sm font-medium text-gray-500 ${props.wordWrap !== 'wrap' && 'truncate'}`}>{props.name}</p>
+                                <p className={`sm:ml-16 mt-3 sm:mt-0 text-sm font-medium text-gray-500 ${props.wordWrap !== 'wrap' && 'truncate'}`}>{props.name}</p>
 
                                 {props.tooltip &&
-                                    <div className='pl-2'>
+                                    <div className='pl-2 absolute top-0 pt-5 pr-4 right-0'>
                                         <InformationCircleIcon
                                             data-tooltip-id={tooltipId}
                                             data-tooltip-content={props.tooltip}
@@ -65,7 +67,7 @@ export default function Stat(props: Props) {
                             </div>
                         </div>
 
-                        <div className="ml-16 flex items-baseline   relative">
+                        <div className="sm:ml-16 flex items-baseline   relative">
                             <p className="text-2xl font-semibold text-gray-900">{props.value}</p>
                             {props.change && <>
                                 <p

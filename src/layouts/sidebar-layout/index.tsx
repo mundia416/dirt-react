@@ -68,6 +68,8 @@ type Props = {
     // change the content of where there is a search bar
     customHeaderContent?: React.ReactNode
     showNotificationIcon?: boolean
+    xmarkPadding?: string
+    logoPadding?: string
 }
 
 
@@ -85,7 +87,10 @@ export default function SidebarLayout({
     sidebar = 'wide',
     customHeaderContent,
     showNotificationIcon = true,
-    settingsNavItem }: Props) {
+    settingsNavItem,
+    xmarkPadding = 'pt-5',
+    logoPadding = ''
+}: Props) {
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const pathname = usePathname();
@@ -106,7 +111,7 @@ export default function SidebarLayout({
                             className="relative mr-16 flex w-full max-w-xs flex-1 transform transition duration-300 ease-in-out data-[closed]:-translate-x-full"
                         >
                             <TransitionChild>
-                                <div className="absolute left-full top-0 flex w-16 justify-center pt-5 duration-300 ease-in-out data-[closed]:opacity-0">
+                                <div className={`absolute left-full top-0 flex w-16 justify-center ${xmarkPadding} duration-300 ease-in-out data-[closed]:opacity-0`}>
                                     <button type="button" onClick={() => setSidebarOpen(false)} className="-m-2.5 p-2.5">
                                         <span className="sr-only">Close sidebar</span>
                                         <XMarkIcon aria-hidden="true" className="h-6 w-6 text-white" />
@@ -115,7 +120,7 @@ export default function SidebarLayout({
                             </TransitionChild>
                             {/* Sidebar component, swap this element with another sidebar if you like */}
                             <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
-                                <div className="flex h-16 shrink-0 items-center">
+                                <div className={`flex h-16 shrink-0 items-center ${logoPadding}`}>
 
                                     {logoSrc &&
                                         <>

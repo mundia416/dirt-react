@@ -1836,8 +1836,16 @@ video {
   padding-top: 0.5rem;
 }
 
+.pt-24 {
+  padding-top: 6rem;
+}
+
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pt-44 {
+  padding-top: 11rem;
 }
 
 .pt-5 {

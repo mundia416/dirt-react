@@ -183,6 +183,8 @@ export const CustomHeaderContent: Story = {
       // email: 'jack@gmail.com',
       imageUrl: ''
     },
+    xmarkPadding: 'pt-24',
+    logoPadding: 'pt-24',
     logoSrc: 'https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500'
   },
 };

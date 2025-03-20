@@ -35,14 +35,16 @@ type Story = StoryObj<typeof Select>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
+    truncateTitle: false,
+    truncateSecondaryText: false,
     options: [
       {
         id: 'b',
         title: 'Draft',
       }, {
         id: 'a',
-        title: "Published",
-        secondaryText: 'danny@gmail.com'
+        title: "Published With long title text",
+        secondaryText: 'dannyhasalongemailaddress.surnamewithlongdomain@gmail.com',
       },
       {
         id: 'c',
@@ -157,8 +159,8 @@ export const Search: Story = {
 
 export const Loading: Story = {
   args: {
-    loading:true,
-    loadingProps:{
+    loading: true,
+    loadingProps: {
       size: 'small'
     },
     options: [

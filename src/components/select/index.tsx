@@ -24,6 +24,8 @@ export type FormProps = {
 type Props = {
     label?: string
     options: Option[]
+    truncateTitle?: boolean
+    truncateSecondaryText?: boolean
     className?: string
     search?: {
         onSearchChange?: (text: string) => void,
@@ -70,7 +72,9 @@ export default function Select(props: Props) {
 export function SelectContent(props: Props) {
     const {
         alignChevron = 'right',
-        showCheckIcon = true
+        showCheckIcon = true,
+        truncateTitle = true,
+        truncateSecondaryText = true
     } = props
 
     const [options, setOptions] = useState(props.options)
@@ -185,11 +189,11 @@ export function SelectContent(props: Props) {
                                             value={option}
                                             className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white"
                                         >
-                                            <div className="flex">
-                                                <span className="truncate font-normal group-data-[selected]:font-semibold">{option.title}</span>
+                                            <div className="flex flex-col lg:flex-row">
+                                                <span className={`${truncateTitle ? 'truncate' : ''} font-normal group-data-[selected]:font-semibold`}>{option.title}</span>
 
                                                 {option.secondaryText &&
-                                                    <span className="ml-2 truncate text-gray-500 group-data-[focus]:text-indigo-200">
+                                                    <span className={`lg:ml-2 ${truncateSecondaryText ? 'truncate' : ''} text-gray-500 group-data-[focus]:text-indigo-200`}>
                                                         {option.secondaryText}
                                                     </span>
                                                 }

@@ -3058,6 +3058,10 @@ video {
     width: 1px;
   }
 
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+
   .lg\:flex-col {
     flex-direction: column;
   }

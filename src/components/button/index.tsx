@@ -75,7 +75,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     const darkVariant = `${shadowStyle}  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 ${!color && 'text-white'}  ${!bg && 'bg-gray-800'} 
     ${!hover && enabled && 'hover:text-gray-100 hover:bg-gray-900'}`
 
-    const outlineVariant = `${shadowStyle} ${focusStyle} ${!bg && 'bg-white'} ${!color && 'text-gray-700'} border border-gray-400 shadow ${!hover && enabled && 'hover:bg-gray-50 '}`
+    const outlineVariant = `${shadowStyle} ${focusStyle} ${!bg && 'bg-white'} ${!color && 'text-gray-700'} border  border-zinc-200 shadow ${!hover && enabled && 'hover:bg-gray-50 '}`
 
     const textVariant = ` ${!focus && 'focus:outline-none'} ${!bg && 'bg-transparent'}
      ${!color && 'text-gray-700'} ${!hover && enabled && 'hover:text-gray-900'}`

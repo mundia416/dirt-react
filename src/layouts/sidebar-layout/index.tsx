@@ -97,11 +97,31 @@ export default function SidebarLayout({
     logoPadding = ''
 }: Props) {
 
-    const [sidebarOpen, setSidebarOpen] = useState(false)
-    const [expandedItems, setExpandedItems] = useState<{[key: string]: boolean}>({})
     const pathname = usePathname();
+    
+    // Initialize expandedItems with submenus that should be open based on current path
+    const initialExpandedItems = React.useMemo(() => {
+        const expanded: {[key: string]: boolean} = {};
+        
+        navigationGroups?.forEach(group => {
+            group.navigationOptions?.forEach(item => {
+                if (item.subItems) {
+                    // If any subitem matches the current path, mark this menu for expansion
+                    const hasActiveSubItem = item.subItems.some(subItem => subItem.href === pathname);
+                    if (hasActiveSubItem) {
+                        expanded[item.name] = true;
+                    }
+                }
+            });
+        });
+        
+        return expanded;
+    }, [navigationGroups, pathname]);
 
-    // Auto-expand submenus when current path matches a submenu item
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [expandedItems, setExpandedItems] = useState<{[key: string]: boolean}>(initialExpandedItems)
+
+    // Keep expandedItems in sync with pathname changes, but don't override user choices
     useEffect(() => {
         const newExpandedItems: {[key: string]: boolean} = {};
         

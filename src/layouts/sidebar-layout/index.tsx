@@ -180,43 +180,32 @@ export default function SidebarLayout({
                                                                             aria-hidden="true"
                                                                         />
                                                                     </button>
-                                                                    {expandedItems[item.name] ? (
-                                                                        <div className="overflow-hidden transition-all duration-300 ease-in-out max-h-96 animate-slide-down">
-                                                                            <ul className="mt-1 pl-8 space-y-1">
-                                                                                {item.subItems.map((subItem) => (
-                                                                                    <li key={subItem.name}>
-                                                                                        <a
-                                                                                            onClick={() => setSidebarOpen(false)}
-                                                                                            href={subItem.href}
-                                                                                            className={classNames(
-                                                                                                pathname === subItem.href
-                                                                                                    ? 'bg-gray-800 text-white'
-                                                                                                    : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                                                                                'block rounded-md py-2 pl-2 text-sm',
-                                                                                            )}
-                                                                                        >
-                                                                                            {subItem.name}
-                                                                                        </a>
-                                                                                    </li>
-                                                                                ))}
-                                                                            </ul>
-                                                                        </div>
-                                                                    ) : (
-                                                                        <div className="overflow-hidden transition-all duration-300 ease-in-out max-h-0">
-                                                                            <ul className="mt-1 pl-8 space-y-1">
-                                                                                {item.subItems.map((subItem) => (
-                                                                                    <li key={subItem.name} className="invisible">
-                                                                                        <a
-                                                                                            href={subItem.href}
-                                                                                            className="block rounded-md py-2 pl-2 text-sm"
-                                                                                        >
-                                                                                            {subItem.name}
-                                                                                        </a>
-                                                                                    </li>
-                                                                                ))}
-                                                                            </ul>
-                                                                        </div>
-                                                                    )}
+                                                                    <div 
+                                                                        className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${
+                                                                            expandedItems[item.name] 
+                                                                                ? 'max-h-96 opacity-100 scale-y-100' 
+                                                                                : 'max-h-0 opacity-0 scale-y-95'
+                                                                        }`}
+                                                                    >
+                                                                        <ul className="mt-1 pl-8 space-y-1">
+                                                                            {item.subItems?.map((subItem) => (
+                                                                                <li key={subItem.name}>
+                                                                                    <a
+                                                                                        onClick={() => setSidebarOpen(false)}
+                                                                                        href={subItem.href}
+                                                                                        className={classNames(
+                                                                                            pathname === subItem.href
+                                                                                                ? 'bg-gray-800 text-white'
+                                                                                                : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                                            'block rounded-md py-2 pl-2 text-sm',
+                                                                                        )}
+                                                                                    >
+                                                                                        {subItem.name}
+                                                                                    </a>
+                                                                                </li>
+                                                                            ))}
+                                                                        </ul>
+                                                                    </div>
                                                                 </>
                                                             ) : (
                                                                 <a
@@ -327,42 +316,31 @@ export default function SidebarLayout({
                                                                         aria-hidden="true"
                                                                     />
                                                                 </button>
-                                                                {expandedItems[item.name] ? (
-                                                                    <div className="overflow-hidden transition-all duration-300 ease-in-out max-h-96 animate-slide-down">
-                                                                        <ul className="mt-1 pl-8 space-y-1">
-                                                                            {item.subItems.map((subItem) => (
-                                                                                <li key={subItem.name}>
-                                                                                    <a
-                                                                                        href={subItem.href}
-                                                                                        className={classNames(
-                                                                                            pathname === subItem.href
-                                                                                                ? 'bg-gray-800 text-white'
-                                                                                                : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                                                                            'block rounded-md py-2 pl-2 text-sm',
-                                                                                        )}
-                                                                                    >
-                                                                                        {subItem.name}
-                                                                                    </a>
-                                                                                </li>
-                                                                            ))}
-                                                                        </ul>
-                                                                    </div>
-                                                                ) : (
-                                                                    <div className="overflow-hidden transition-all duration-300 ease-in-out max-h-0">
-                                                                        <ul className="mt-1 pl-8 space-y-1">
-                                                                            {item.subItems.map((subItem) => (
-                                                                                <li key={subItem.name} className="invisible">
-                                                                                    <a
-                                                                                        href={subItem.href}
-                                                                                        className="block rounded-md py-2 pl-2 text-sm"
-                                                                                    >
-                                                                                        {subItem.name}
-                                                                                    </a>
-                                                                                </li>
-                                                                            ))}
-                                                                        </ul>
-                                                                    </div>
-                                                                )}
+                                                                <div 
+                                                                    className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${
+                                                                        expandedItems[item.name] 
+                                                                            ? 'max-h-96 opacity-100 scale-y-100' 
+                                                                            : 'max-h-0 opacity-0 scale-y-95'
+                                                                    }`}
+                                                                >
+                                                                    <ul className="mt-1 pl-8 space-y-1">
+                                                                        {item.subItems?.map((subItem) => (
+                                                                            <li key={subItem.name}>
+                                                                                <a
+                                                                                    href={subItem.href}
+                                                                                    className={classNames(
+                                                                                        pathname === subItem.href
+                                                                                            ? 'bg-gray-800 text-white'
+                                                                                            : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                                        'block rounded-md py-2 pl-2 text-sm',
+                                                                                    )}
+                                                                                >
+                                                                                    {subItem.name}
+                                                                                </a>
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                </div>
                                                             </>
                                                         ) : (
                                                             <a

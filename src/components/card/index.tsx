@@ -38,10 +38,10 @@ export default function Card({ testid, children, onClick, className, contentClas
                 <div className='p-4 border-b border-gray-200'>
                     <Text
                         color
-                        className='font-bold text-gray-800'>{header.heading}</Text>
+                        className='font-bold text-gray-800 select-none'>{header.heading}</Text>
                     <Text
                         textSize
-                        className=' text-xs'
+                        className=' text-xs select-none'
                         type='text-small'>{header.subHeading}</Text>
                 </div>
             }

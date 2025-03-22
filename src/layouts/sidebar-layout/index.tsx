@@ -18,7 +18,7 @@ import {
     UserCircleIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { ChevronDownIcon, ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { usePathname } from 'next/navigation';
 import { Text } from '@mundia/dirt-react'
 
@@ -31,7 +31,12 @@ export type NavItemProps = {
     icon: React.ForwardRefExoticComponent<Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
         title?: string;
         titleId?: string;
-    } & React.RefAttributes<SVGSVGElement>>
+    } & React.RefAttributes<SVGSVGElement>>,
+    //optional sub-items for collapsible navigation
+    subItems?: {
+        name: string,
+        href: string
+    }[]
 }
 
 
@@ -93,7 +98,20 @@ export default function SidebarLayout({
 }: Props) {
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [expandedItems, setExpandedItems] = useState<{[key: string]: boolean}>({})
     const pathname = usePathname();
+
+    const toggleExpand = (itemName: string) => {
+        setExpandedItems(prev => ({
+            ...prev,
+            [itemName]: !prev[itemName]
+        }));
+    };
+
+    const isSubItemActive = (item: NavItemProps) => {
+        if (!item.subItems) return false;
+        return item.subItems.some(subItem => subItem.href === pathname);
+    };
 
     return (
         <>
@@ -140,19 +158,63 @@ export default function SidebarLayout({
                                                 <ul role="list" className="-mx-2 space-y-1">
                                                     {navigationOptions?.map((item) => (
                                                         <li key={item.name}>
-                                                            <a
-                                                                onClick={() => setSidebarOpen(false)}
-                                                                href={item.href}
-                                                                className={classNames(
-                                                                    pathname === item.href
-                                                                        ? 'bg-gray-800 text-white'
-                                                                        : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                                                    'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
-                                                                )}
-                                                            >
-                                                                <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
-                                                                {item.name}
-                                                            </a>
+                                                            {item.subItems ? (
+                                                                <>
+                                                                    <button
+                                                                        onClick={() => toggleExpand(item.name)}
+                                                                        className={classNames(
+                                                                            isSubItemActive(item)
+                                                                                ? 'bg-gray-800 text-white'
+                                                                                : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                            'group flex w-full justify-between gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
+                                                                        )}
+                                                                    >
+                                                                        <div className="flex gap-x-3">
+                                                                            <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
+                                                                            {item.name}
+                                                                        </div>
+                                                                        {expandedItems[item.name] ? (
+                                                                            <ChevronDownIcon className="h-5 w-5" />
+                                                                        ) : (
+                                                                            <ChevronRightIcon className="h-5 w-5" />
+                                                                        )}
+                                                                    </button>
+                                                                    {expandedItems[item.name] && (
+                                                                        <ul className="mt-1 pl-8 space-y-1">
+                                                                            {item.subItems.map((subItem) => (
+                                                                                <li key={subItem.name}>
+                                                                                    <a
+                                                                                        onClick={() => setSidebarOpen(false)}
+                                                                                        href={subItem.href}
+                                                                                        className={classNames(
+                                                                                            pathname === subItem.href
+                                                                                                ? 'bg-gray-800 text-white'
+                                                                                                : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                                            'block rounded-md py-2 pl-2 text-sm',
+                                                                                        )}
+                                                                                    >
+                                                                                        {subItem.name}
+                                                                                    </a>
+                                                                                </li>
+                                                                            ))}
+                                                                        </ul>
+                                                                    )}
+                                                                </>
+                                                            ) : (
+                                                                <a
+                                                                    onClick={() => setSidebarOpen(false)}
+                                                                    href={item.href}
+                                                                    className={classNames(
+                                                                        pathname === item.href
+                                                                            ? 'bg-gray-800 text-white'
+                                                                            : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                        'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
+                                                                    )}
+                                                                >
+                                                                    <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
+                                                                    {item.name}
+                                                                </a>
+                                                            )}
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -209,32 +271,77 @@ export default function SidebarLayout({
                                                         <a
                                                             href={item.href}
                                                             className={classNames(
-                                                                pathname === item.href ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                                                'group flex  flex-col items-center justify-center gap-x-3 rounded-md p-3 text-sm font-semibold leading-6',
+                                                                pathname === item.href || isSubItemActive(item)
+                                                                    ? 'bg-gray-800 text-white' 
+                                                                    : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                'group flex flex-col items-center justify-center gap-x-3 rounded-md p-3 text-sm font-semibold leading-6',
                                                             )}
                                                         >
                                                             <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
                                                             <Text
                                                                 color
-                                                                className={`hover:text-gray-100 ${pathname === item.href ? 'text-gray-100' : 'text-gray-200'}`}
+                                                                className={`hover:text-gray-100 ${pathname === item.href || isSubItemActive(item) ? 'text-gray-100' : 'text-gray-200'}`}
                                                                 type='text-small'
                                                             >{item.name}</Text>
                                                         </a>
                                                     </li>
                                                     :
                                                     <li key={item.name}>
-                                                        <a
-                                                            href={item.href}
-                                                            className={classNames(
-                                                                pathname === item.href
-                                                                    ? 'bg-gray-800 text-white'
-                                                                    : 'text-gray-400 hover:bg-gray-800 hover:text-white',
-                                                                'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
-                                                            )}
-                                                        >
-                                                            <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
-                                                            {item.name}
-                                                        </a>
+                                                        {item.subItems ? (
+                                                            <>
+                                                                <button
+                                                                    onClick={() => toggleExpand(item.name)}
+                                                                    className={classNames(
+                                                                        isSubItemActive(item)
+                                                                            ? 'bg-gray-800 text-white'
+                                                                            : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                        'group flex w-full justify-between gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
+                                                                    )}
+                                                                >
+                                                                    <div className="flex gap-x-3">
+                                                                        <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
+                                                                        {item.name}
+                                                                    </div>
+                                                                    {expandedItems[item.name] ? (
+                                                                        <ChevronDownIcon className="h-5 w-5" />
+                                                                    ) : (
+                                                                        <ChevronRightIcon className="h-5 w-5" />
+                                                                    )}
+                                                                </button>
+                                                                {expandedItems[item.name] && (
+                                                                    <ul className="mt-1 pl-8 space-y-1">
+                                                                        {item.subItems.map((subItem) => (
+                                                                            <li key={subItem.name}>
+                                                                                <a
+                                                                                    href={subItem.href}
+                                                                                    className={classNames(
+                                                                                        pathname === subItem.href
+                                                                                            ? 'bg-gray-800 text-white'
+                                                                                            : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                                        'block rounded-md py-2 pl-2 text-sm',
+                                                                                    )}
+                                                                                >
+                                                                                    {subItem.name}
+                                                                                </a>
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                )}
+                                                            </>
+                                                        ) : (
+                                                            <a
+                                                                href={item.href}
+                                                                className={classNames(
+                                                                    pathname === item.href
+                                                                        ? 'bg-gray-800 text-white'
+                                                                        : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                                                    'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6',
+                                                                )}
+                                                            >
+                                                                <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
+                                                                {item.name}
+                                                            </a>
+                                                        )}
                                                     </li>
                                             ))}
                                         </ul>

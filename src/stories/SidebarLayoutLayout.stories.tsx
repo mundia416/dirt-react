@@ -45,12 +45,15 @@ export const Main: Story = {
         navigationOptions: [{
           name: 'Plugins',
           href: '/',
-          icon: HomeIcon
-        }, {
-          name: 'Products',
-          href: '/',
-          icon: UserIcon
-        }]
+          icon: HomeIcon,
+          subItems: [{
+            name: 'Plugin 1',
+            href: '/',
+          }, {
+            name: 'Plugin 2',
+            href: '/',
+          }]
+        }],
       },
       {
         heading: 'Borrowers',

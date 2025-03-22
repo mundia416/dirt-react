@@ -1,6 +1,6 @@
 import React from 'react'
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid'
-import { InformationCircleIcon } from '@heroicons/react/24/outline'
+// import { InformationCircleIcon } from '@heroicons/react/24/outline'
 import { Tooltip } from 'react-tooltip'
 import stringUtils from '../../utils/string-utils'
 

@@ -1,6 +1,6 @@
 'use client'
 import React, { } from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
     Dialog,
     DialogBackdrop,
@@ -100,6 +100,28 @@ export default function SidebarLayout({
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [expandedItems, setExpandedItems] = useState<{[key: string]: boolean}>({})
     const pathname = usePathname();
+
+    // Auto-expand submenus when current path matches a submenu item
+    useEffect(() => {
+        const newExpandedItems: {[key: string]: boolean} = {};
+        
+        navigationGroups?.forEach(group => {
+            group.navigationOptions?.forEach(item => {
+                if (item.subItems) {
+                    // If any subitem matches the current path, expand this menu
+                    const hasActiveSubItem = item.subItems.some(subItem => subItem.href === pathname);
+                    if (hasActiveSubItem) {
+                        newExpandedItems[item.name] = true;
+                    }
+                }
+            });
+        });
+        
+        setExpandedItems(prev => ({
+            ...prev,
+            ...newExpandedItems
+        }));
+    }, [navigationGroups, pathname]);
 
     const toggleExpand = (itemName: string) => {
         setExpandedItems(prev => ({

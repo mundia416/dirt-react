@@ -2932,6 +2932,10 @@ video {
     left: 0px;
   }
 
+  .md\:block {
+    display: block;
+  }
+
   .md\:rounded-lg {
     border-radius: 0.5rem;
   }

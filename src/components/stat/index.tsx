@@ -28,11 +28,14 @@ type Props = {
     tooltip?: string
     actionButtonOnClick?: () => void
     actionButtonText?: string
+    showActionButtonOnMobile?: boolean
     wordWrap?: 'wrap' | 'truncate'
     className?: string
 }
 
 export default function Stat(props: Props) {
+    const { showActionButtonOnMobile = true } = props
+
     return (
         <>
             <Tooltip id={tooltipId} className='z-50 max-w-[90vw]' />
@@ -92,7 +95,7 @@ export default function Stat(props: Props) {
                     </div>
                 </div>
                 {props.actionButtonOnClick &&
-                    <div className='relative flex flex-grow items-end rounded-b-lg shadow'>
+                    <div className={`relative flex flex-grow items-end rounded-b-lg shadow ${!showActionButtonOnMobile ? 'hidden md:block' : 'block'}`}>
 
                         <div className="inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6 w-full shadow rounded-b-lg">
                             <div className="text-sm">

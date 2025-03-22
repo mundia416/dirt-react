@@ -173,11 +173,11 @@ export default function SidebarLayout({
                                                                             <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
                                                                             {item.name}
                                                                         </div>
-                                                                        {expandedItems[item.name] ? (
-                                                                            <ChevronDownIcon className="h-5 w-5" />
-                                                                        ) : (
-                                                                            <ChevronRightIcon className="h-5 w-5" />
-                                                                        )}
+                                                                        <ChevronRightIcon 
+                                                                            className={`h-5 w-5 transform transition-transform duration-200 ease-in-out ${
+                                                                                expandedItems[item.name] ? 'rotate-90' : ''
+                                                                            }`} 
+                                                                        />
                                                                     </button>
                                                                     {expandedItems[item.name] && (
                                                                         <ul className="mt-1 pl-8 space-y-1">
@@ -302,11 +302,11 @@ export default function SidebarLayout({
                                                                         <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
                                                                         {item.name}
                                                                     </div>
-                                                                    {expandedItems[item.name] ? (
-                                                                        <ChevronDownIcon className="h-5 w-5" />
-                                                                    ) : (
-                                                                        <ChevronRightIcon className="h-5 w-5" />
-                                                                    )}
+                                                                    <ChevronRightIcon 
+                                                                        className={`h-5 w-5 transform transition-transform duration-200 ease-in-out ${
+                                                                            expandedItems[item.name] ? 'rotate-90' : ''
+                                                                        }`} 
+                                                                    />
                                                                 </button>
                                                                 {expandedItems[item.name] && (
                                                                     <ul className="mt-1 pl-8 space-y-1">

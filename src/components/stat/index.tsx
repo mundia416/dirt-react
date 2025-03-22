@@ -50,7 +50,7 @@ export default function Stat(props: Props) {
                         <div className='flex flex-col sm:block'>
                             <div className='flex'> 
                             <div className={`sm:absolute rounded-md ${props.iconBackgroundColor || 'bg-indigo-500'} p-3`}>
-                                <props.icon aria-hidden="true" className="h-6 w-6 text-white fill-current" />
+                                <props.icon aria-hidden="true" className="h-6 w-6 text-white " />
                             </div>
                             </div>
                             <div className='flex justify-between '>

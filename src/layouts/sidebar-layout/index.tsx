@@ -141,6 +141,7 @@ export default function SidebarLayout({
                                                     {navigationOptions?.map((item) => (
                                                         <li key={item.name}>
                                                             <a
+                                                                onClick={() => setSidebarOpen(false)}
                                                                 href={item.href}
                                                                 className={classNames(
                                                                     pathname === item.href

@@ -32,7 +32,7 @@ export const Main: Story = {
     notification: {
       enabled: true,
       unreadCount: 10,
-      content: <div>
+      content: <div className='h-[1000px]'>
         <p>No messages yet</p>
       </div>
     },

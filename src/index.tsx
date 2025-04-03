@@ -10,7 +10,6 @@ import Alert from "./components/alert"
 import SuccessAlert from "./components/alert/success"
 import FieldInput from './components/fieldinput'
 import StackedLayout from './layouts/stacked-layout'
-import useAuth from './hooks/useAuth'
 import Stat from "./components/stat"
 import Table from "./components/table"
 import SidebarLayout from './layouts/sidebar-layout'
@@ -54,7 +53,6 @@ export {
   Alert,
   SuccessAlert,
   FieldInput,
-  useAuth,
   Stat,
   Table,
   BrandedSelect,

@@ -662,8 +662,16 @@ video {
   bottom: 0px;
 }
 
+.-right-1 {
+  right: -0.25rem;
+}
+
 .-right-24 {
   right: -6rem;
+}
+
+.-top-1 {
+  top: -0.25rem;
 }
 
 .bottom-0 {
@@ -1070,6 +1078,10 @@ video {
 
 .w-8 {
   width: 2rem;
+}
+
+.w-\[calc\(100vw-2rem\)\] {
+  width: calc(100vw - 2rem);
 }
 
 .w-auto {
@@ -2810,6 +2822,10 @@ video {
 
   .sm\:w-10 {
     width: 2.5rem;
+  }
+
+  .sm\:w-80 {
+    width: 20rem;
   }
 
   .sm\:w-auto {

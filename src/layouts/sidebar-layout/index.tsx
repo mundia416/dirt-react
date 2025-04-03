@@ -72,7 +72,11 @@ type Props = {
     },
     // change the content of where there is a search bar
     customHeaderContent?: React.ReactNode
-    showNotificationIcon?: boolean
+    notification?: {
+        enabled: boolean,
+        content: React.ReactNode,
+        unreadCount?: number
+    }
     xmarkPadding?: string
     logoPadding?: string
 }
@@ -91,7 +95,7 @@ export default function SidebarLayout({
     children,
     sidebar = 'wide',
     customHeaderContent,
-    showNotificationIcon = true,
+    notification,
     settingsNavItem,
     xmarkPadding = 'pt-5',
     logoPadding = ''
@@ -460,11 +464,26 @@ export default function SidebarLayout({
                             }
                             <div className="flex items-center gap-x-4 lg:gap-x-6">
 
-                                {showNotificationIcon &&
-                                    <button type="button" className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
-                                        <span className="sr-only">View notifications</span>
-                                        <BellIcon aria-hidden="true" className="h-6 w-6" />
-                                    </button>
+                                {notification?.enabled &&
+                                    <Menu as="div" className="relative">
+                                        <MenuButton className="flex items-center justify-center p-2 text-gray-400 hover:text-gray-500 relative">
+                                            <span className="sr-only">View notifications</span>
+                                            <BellIcon aria-hidden="true" className="h-6 w-6" />
+                                            {notification.unreadCount !== undefined && notification.unreadCount > 0 && (
+                                                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-medium text-white">
+                                                    {notification.unreadCount > 99 ? '99+' : notification.unreadCount}
+                                                </span>
+                                            )}
+                                        </MenuButton>
+                                        <MenuItems
+                                            transition
+                                            className="absolute right-0 z-10 mt-2.5 w-[calc(100vw-2rem)] sm:w-80 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                        >
+                                            <div className="px-4 py-2">
+                                                {notification.content}
+                                            </div>
+                                        </MenuItems>
+                                    </Menu>
                                 }
                                 {/* Separator */}
                                 <div aria-hidden="true" className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" />

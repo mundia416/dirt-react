@@ -29,6 +29,13 @@ type Story = StoryObj<typeof SidebarLayout>;
 
 export const Main: Story = {
   args: {
+    notification: {
+      enabled: true,
+      unreadCount: 10,
+      content: <div>
+        <p>No messages yet</p>
+      </div>
+    },
     navigationGroups: [
       {
         navigationOptions: [{

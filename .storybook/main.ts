@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
+import { dirname, join } from 'path';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -9,26 +10,22 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-styling-webpack',
-    ({
+    {
       name: "@storybook/addon-styling-webpack",
-
       options: {
         rules: [{
           test: /\.css$/,
           sideEffects: true,
           use: [
-            require.resolve("style-loader"),
+            "style-loader",
             {
-              loader: require.resolve("css-loader"),
-              options: {
-
-
-              },
+              loader: "css-loader",
+              options: {},
             },
           ],
-        },],
+        }],
       }
-    })
+    }
   ],
   framework: {
     name: '@storybook/react-webpack5',

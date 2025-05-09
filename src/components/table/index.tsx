@@ -13,6 +13,10 @@ type RowColumnItemProps = {
 
 export type RowsProps = {
     items: RowColumnItemProps[]
+    /**
+     * Optional: a view to show when this row is hovered. Will be rendered in a fixed position following the mouse.
+     */
+    hoverView?: ReactNode
 }
 
 export type ColumnTitleProps = {
@@ -91,6 +95,20 @@ export default function Table({
     showCardContainer = true,
     spacing = 'normal'
 }: Props) {
+    // State for hovered row and mouse position
+    const [hoveredRow, setHoveredRow] = React.useState<number | null>(null);
+    const [mousePos, setMousePos] = React.useState<{ x: number, y: number } | null>(null);
+
+    // Handler for mouse move on row
+    const handleRowMouseMove = (index: number) => (e: React.MouseEvent) => {
+        setHoveredRow(index);
+        setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    // Handler for mouse leave
+    const handleRowMouseLeave = () => {
+        setHoveredRow(null);
+        setMousePos(null);
+    };
 
     return (
         <AnimatedDiv className="">
@@ -140,9 +158,10 @@ export default function Table({
 
                                 <tbody className="divide-y divide-gray-200">
                                     {rowData.map((row, index) => (
-
                                         <tr
                                             onClick={() => onRowClick && onRowClick(index)}
+                                            onMouseMove={row.hoverView ? handleRowMouseMove(index) : undefined}
+                                            onMouseLeave={row.hoverView ? handleRowMouseLeave : undefined}
                                             className={`${onRowClick && 'cursor-pointer hover:bg-indigo-50'}`}
                                             key={index}>
                                             {row.items.map((item, itemIndex) => (
@@ -262,6 +281,28 @@ export default function Table({
                 )}
 
             </Container>
+
+            {/* Hover View Overlay */}
+            {hoveredRow !== null && rowData[hoveredRow]?.hoverView && mousePos && (
+                <div
+                    style={{
+                        position: 'fixed',
+                        left: mousePos.x + 16, // offset from cursor
+                        top: mousePos.y + 16,
+                        zIndex: 1000,
+                        pointerEvents: 'none',
+                        minWidth: 200,
+                        minHeight: 60,
+                        maxWidth: 320,
+                        background: 'white',
+                        boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+                        borderRadius: 8,
+                        padding: 12,
+                    }}
+                >
+                    {rowData[hoveredRow].hoverView}
+                </div>
+            )}
         </AnimatedDiv>
     )
 }

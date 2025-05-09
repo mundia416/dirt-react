@@ -252,6 +252,59 @@ export const WithoutCard: Story = {
   },
 };
 
+// Example hoverView for demonstration
+const hoverExample = (
+  <div style={{ minWidth: 180, minHeight: 60, color: '#333', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <strong>Hovered Row Details</strong>
+    <span>This is extra info shown on hover!</span>
+  </div>
+);
+
+const rowDataWithHover: RowsProps[] = people.map((person, idx) => {
+  return {
+    items: [
+      {
+        value: person.name,
+        className: 'text-gray-900 font-semibold'
+      },
+      {
+        value: person.title,
+      },
+      {
+        value: person.email,
+      },
+      {
+        value: person.role,
+      },
+      {
+        value: <div>
+          <Button
+            size='extra-small'
+            className='text-indigo-500'
+            variant='text'
+          >Edit</Button>
+        </div>
+      }
+    ],
+    hoverView: (
+      <div style={{ minWidth: 180, minHeight: 60, color: '#333', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <strong>{person.name}</strong>
+        <span>This is a custom hover view for row {idx + 1}!</span>
+        <span style={{ fontSize: 12, color: '#666' }}>{person.email}</span>
+      </div>
+    )
+  }
+});
+
+export const WithHoverView: Story = {
+  args: {
+    heading: 'Users',
+    subHeading: 'Hover over the first row to see a custom hover view.',
+    columnTitles,
+    rowData: rowDataWithHover
+  },
+};
+
 
 
 

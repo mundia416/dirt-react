@@ -98,6 +98,21 @@ export default function Table({
     // State for hovered row and mouse position
     const [hoveredRow, setHoveredRow] = React.useState<number | null>(null);
     const [mousePos, setMousePos] = React.useState<{ x: number, y: number } | null>(null);
+    // State for dynamic overlay height
+    const [overlayHeight, setOverlayHeight] = React.useState<number>(0);
+    const overlayRef = React.useRef<HTMLDivElement>(null);
+
+    // Measure overlay height when hoverView changes
+    React.useEffect(() => {
+        if (
+            hoveredRow !== null &&
+            rowData[hoveredRow] &&
+            rowData[hoveredRow].hoverView &&
+            overlayRef.current
+        ) {
+            setOverlayHeight(overlayRef.current.offsetHeight);
+        }
+    }, [hoveredRow, rowData, hoveredRow !== null ? rowData[hoveredRow]?.hoverView : undefined]);
 
     // Handler for mouse move on row
     const handleRowMouseMove = (index: number) => (e: React.MouseEvent) => {
@@ -284,24 +299,39 @@ export default function Table({
 
             {/* Hover View Overlay */}
             {hoveredRow !== null && rowData[hoveredRow]?.hoverView && mousePos && (
-                <div
-                    style={{
-                        position: 'fixed',
-                        left: mousePos.x + 16, // offset from cursor
-                        top: mousePos.y + 16,
-                        zIndex: 1000,
-                        pointerEvents: 'none',
-                        minWidth: 200,
-                        minHeight: 60,
-                        maxWidth: 320,
-                        background: 'white',
-                        boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
-                        borderRadius: 8,
-                        padding: 12,
-                    }}
-                >
-                    {rowData[hoveredRow].hoverView}
-                </div>
+                (() => {
+                    const overlayOffset = 6; // px offset from cursor
+                    const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
+                    // Use measured overlayHeight, fallback to 120 if not measured yet
+                    const height = overlayHeight || 120;
+                    // If not enough space below, show above
+                    const showAbove = (mousePos.y + overlayOffset + height) > windowHeight;
+                    const top = showAbove
+                        ? Math.max(mousePos.y - height - overlayOffset, 8)
+                        : mousePos.y + overlayOffset;
+                    return (
+                        <div
+                            ref={overlayRef}
+                            className='shadow-lg animate-in fade-in zoom-in-95 duration-200 z-50'
+                            style={{
+                                position: 'fixed',
+                                left: mousePos.x + overlayOffset, // offset from cursor
+                                top,
+                                zIndex: 1000,
+                                pointerEvents: 'none',
+                                minWidth: 200,
+                                minHeight: 60,
+                                maxWidth: 320,
+                                background: 'white',
+                                boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+                                borderRadius: 8,
+                                visibility: overlayHeight === 0 ? 'hidden' : 'visible', // Hide until measured
+                            }}
+                        >
+                            {rowData[hoveredRow].hoverView}
+                        </div>
+                    );
+                })()
             )}
         </AnimatedDiv>
     )

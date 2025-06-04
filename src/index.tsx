@@ -37,6 +37,7 @@ import functionUtils from './utils/function-utils'
 import PhoneInput from "./components/phone-input"
 import AvatarUpload from "./components/avatar-upload"
 import AnimatedDiv from "./components/animated-div"
+import AmountInput from "./components/amountinput"
 
 
 
@@ -73,6 +74,7 @@ export {
   PhoneInput,
   AvatarUpload,
   AnimatedDiv,
+  AmountInput,
 
   //layouts
   StackedLayout,

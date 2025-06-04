@@ -38,8 +38,13 @@ function AmountInput<T extends FieldValues = FieldValues>({
         min={min}
         max={max}
         onChange={val => {
-          // Only allow numbers
-          const numericOnly = val.replace(/[^\d]/g, '');
+          // Allow numbers and a single decimal point
+          let numericOnly = val.replace(/[^\d.]/g, '');
+          // Prevent multiple decimal points
+          const parts = numericOnly.split('.');
+          if (parts.length > 2) {
+            numericOnly = parts[0] + '.' + parts.slice(1).join('');
+          }
           // Remove commas before updating form state (should be redundant, but safe)
           const numericValue = functionUtils.unformatNumber(numericOnly);
           onChange(numericValue);
@@ -79,8 +84,13 @@ function AmountInput<T extends FieldValues = FieldValues>({
             min={min}
             max={max}
             onChange={val => {
-              // Only allow numbers
-              const numericOnly = val.replace(/[^\d]/g, '');
+              // Allow numbers and a single decimal point
+              let numericOnly = val.replace(/[^\d.]/g, '');
+              // Prevent multiple decimal points
+              const parts = numericOnly.split('.');
+              if (parts.length > 2) {
+                numericOnly = parts[0] + '.' + parts.slice(1).join('');
+              }
               // Remove commas before updating form state (should be redundant, but safe)
               const numericValue = functionUtils.unformatNumber(numericOnly);
               onChange(numericValue);

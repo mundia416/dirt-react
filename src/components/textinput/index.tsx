@@ -124,6 +124,9 @@ export default function TextInput({
         []
     );
 
+    // Extract onChange and onBlur from formProps for react-hook-form compatibility
+    const { onChange: rhfOnChange, onBlur: rhfOnBlur, ...restFormProps } = formProps || {};
+
     /**
      * 
      * @param e 
@@ -132,7 +135,8 @@ export default function TextInput({
     const onChangeAndValidate = (e: any, type?: string) => {
         if ((typeof onChange !== 'undefined'
             || typeof onChangeDebounce !== 'undefined'
-            || typeof onFilesChange !== 'undefined')) {
+            || typeof onFilesChange !== 'undefined'
+            || typeof rhfOnChange !== 'undefined')) {
 
             let rawValue = e.target.value;
             if (formatAmount && element === 'input') {
@@ -144,12 +148,26 @@ export default function TextInput({
                 onFilesChange && onFilesChange(e.target.files)
                 debounced(numericValue)
                 validate(e, 'number'); // Always validate as number
+                // Call react-hook-form's onChange with the unformatted value
+                if (rhfOnChange) {
+                    rhfOnChange({
+                        ...e,
+                        target: {
+                            ...e.target,
+                            value: numericValue,
+                        },
+                    });
+                }
                 return;
             }
             onChange && onChange(rawValue);
             onFilesChange && onFilesChange(e.target.files)
             debounced(rawValue)
             validate(e, type);
+            // Call react-hook-form's onChange with the raw value
+            if (rhfOnChange) {
+                rhfOnChange(e);
+            }
         }
     }
 
@@ -165,12 +183,15 @@ export default function TextInput({
                 onClick={(e) => e.stopPropagation()}
                 name={name}
                 onFocus={onFocus}
-                onBlur={onBlur}
+                onBlur={(e) => {
+                    onBlur && onBlur();
+                    rhfOnBlur && rhfOnBlur(e);
+                }}
                 className={style}
                 {...valueProps}
                 onChange={onChangeAndValidate}
                 placeholder={placeholder}
-                {...formProps}
+                {...restFormProps}
             />
             :
             <input
@@ -179,7 +200,10 @@ export default function TextInput({
                 dir={dir}
                 rows={rows}
                 onFocus={onFocus}
-                onBlur={onBlur}
+                onBlur={(e) => {
+                    onBlur && onBlur();
+                    rhfOnBlur && rhfOnBlur(e);
+                }}
                 onClick={(e) => e.stopPropagation()}
                 pattern={pattern}
                 step={step}
@@ -191,9 +215,10 @@ export default function TextInput({
                 onChange={onChangeAndValidate}
                 className={style}
                 type={formatAmount ? 'text' : type}
+                inputMode={formatAmount ? 'decimal' : undefined}
                 onInvalid={(e) => validate(e, type)}
                 placeholder={placeholder}
-                {...formProps}
+                {...restFormProps}
             />
 
     )

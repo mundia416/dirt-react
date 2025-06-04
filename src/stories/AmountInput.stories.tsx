@@ -135,4 +135,22 @@ export const MinMaxValue = () => {
       <button type="submit" style={{ marginTop: 12 }}>Submit</button>
     </form>
   );
+};
+
+export const Controlled = () => {
+  const [amount, setAmount] = React.useState('123456');
+  return (
+    <div>
+      <AmountInput
+        label="Controlled Amount"
+        placeholder="Enter amount"
+        value={amount}
+        onChange={setAmount}
+        helpText="This is a controlled input using value and onChange."
+      />
+      <div style={{ marginTop: 12 }}>
+        <strong>Raw value:</strong> {amount}
+      </div>
+    </div>
+  );
 }; 

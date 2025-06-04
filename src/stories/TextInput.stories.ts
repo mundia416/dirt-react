@@ -51,3 +51,13 @@ export const Debounce: Story = {
     onChangeDebounce: fn()
   },
 };
+
+export const AmountWithCommas: Story = {
+  args: {
+    element: 'input',
+    formatAmount: true,
+    value: '5000000',
+    onChange: (val: string) => console.log('Raw value:', val),
+    placeholder: 'Enter amount'
+  },
+};

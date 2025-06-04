@@ -31,6 +31,7 @@ export interface Props {
     required?: boolean
     formProps?: any
     rows?: number
+    formatAmount?: boolean
 }
 
 export default function TextInput({
@@ -60,7 +61,8 @@ export default function TextInput({
     intl,
     aff,
     required,
-    formProps = {}
+    formProps = {},
+    formatAmount = false
 }: Props) {
 
 
@@ -87,8 +89,14 @@ export default function TextInput({
         value?: string | number
     } | null
 
+    // Format value for display if formatAmount is enabled and element is input
+    let displayValue = value;
+    if (formatAmount && element === 'input') {
+        displayValue = functionUtils.formatNumberWithCommas(value ?? '');
+    }
+
     valueProps = {
-        value: value
+        value: displayValue
     }
 
     if (typeof valueProps === 'undefined') { valueProps = null }
@@ -126,9 +134,21 @@ export default function TextInput({
             || typeof onChangeDebounce !== 'undefined'
             || typeof onFilesChange !== 'undefined')) {
 
-            onChange && onChange(e.target.value);
+            let rawValue = e.target.value;
+            if (formatAmount && element === 'input') {
+                // Only allow numbers and commas in the input
+                rawValue = rawValue.replace(/[^\d,]/g, '');
+                // Remove commas for the value passed to onChange/onChangeDebounce
+                const numericValue = functionUtils.unformatNumber(rawValue);
+                onChange && onChange(numericValue);
+                onFilesChange && onFilesChange(e.target.files)
+                debounced(numericValue)
+                validate(e, 'number'); // Always validate as number
+                return;
+            }
+            onChange && onChange(rawValue);
             onFilesChange && onFilesChange(e.target.files)
-            debounced(e.target.value)
+            debounced(rawValue)
             validate(e, type);
         }
     }
@@ -170,7 +190,7 @@ export default function TextInput({
                 {...valueProps}
                 onChange={onChangeAndValidate}
                 className={style}
-                type={type}
+                type={formatAmount ? 'text' : type}
                 onInvalid={(e) => validate(e, type)}
                 placeholder={placeholder}
                 {...formProps}

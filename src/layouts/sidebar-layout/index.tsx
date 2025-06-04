@@ -481,7 +481,7 @@ export default function SidebarLayout({
                                         </MenuButton>
                                         <MenuItems
                                             transition
-                                            className="fixed sm:absolute right-0 top-16 sm:top-auto sm:mt-2.5 w-full sm:w-80 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                            className="fixed z-50 sm:absolute right-0 top-16 sm:top-auto sm:mt-2.5 w-full sm:w-80 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                                         >
                                             <div className="max-h-96 overflow-y-auto">
                                                 <div className="px-4 py-2">

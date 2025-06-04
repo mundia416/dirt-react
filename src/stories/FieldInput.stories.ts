@@ -97,3 +97,14 @@ export const Disabled: Story = {
     disabled: true
   },
 };
+
+export const AmountWithCommas: Story = {
+  args: {
+    element: 'input',
+    label: 'Amount',
+    formatAmount: true,
+    value: '5000000',
+    onChange: (val: string) => console.log('Raw value:', val),
+    helpText: 'Try typing a large number. Value in onChange will not have commas.'
+  },
+};

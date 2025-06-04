@@ -43,12 +43,15 @@ interface Props extends TextInputProps {
         title?: string;
         titleId?: string;
     } & RefAttributes<SVGSVGElement>>,
+    formatAmount?: boolean
 }
 
 /**
  * 
  *  when adding leading and trailing content, adjust the padding in the x-axis using tailwind to move
  * the input to fit the content you are adding 
+ *
+ *  formatAmount: if true, displays numbers with commas (e.g., 5,000,000), but onChange/onChangeDebounce receive the raw value (no commas)
  */
 const FieldInput = (props: Props) => {
 
@@ -105,6 +108,7 @@ const FieldInput = (props: Props) => {
                     error={error}
                     step={step}
                     element={element}
+                    formatAmount={props.formatAmount}
                     className={` ${leadingText && ' rounded-l-none '} ${trailingText && ' rounded-r-none '}  ${props.leadingIcon && 'pl-8'}
                      ${(props.trailingIcon || error) && 'pr-10'} w-full
                       ${error ? 'text-red-900 ' +

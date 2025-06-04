@@ -68,4 +68,71 @@ export const WithHelpText = () => {
       helpText="This is a custom help text for the amount input."
     />
   );
+};
+
+export const MinValue = () => {
+  const { control, handleSubmit, formState } = useForm<FormValues>({
+    defaultValues: { amount: '' },
+  });
+  const onSubmit: SubmitHandler<FormValues> = data => alert(JSON.stringify(data));
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <AmountInput
+        name="amount"
+        control={control}
+        label="Amount (Min 1000)"
+        placeholder="Enter amount"
+        min={1000}
+      />
+      {formState.errors.amount && (
+        <div style={{ color: 'red' }}>{formState.errors.amount.message}</div>
+      )}
+      <button type="submit" style={{ marginTop: 12 }}>Submit</button>
+    </form>
+  );
+};
+
+export const MaxValue = () => {
+  const { control, handleSubmit, formState } = useForm<FormValues>({
+    defaultValues: { amount: '' },
+  });
+  const onSubmit: SubmitHandler<FormValues> = data => alert(JSON.stringify(data));
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <AmountInput
+        name="amount"
+        control={control}
+        label="Amount (Max 5000)"
+        placeholder="Enter amount"
+        max={5000}
+      />
+      {formState.errors.amount && (
+        <div style={{ color: 'red' }}>{formState.errors.amount.message}</div>
+      )}
+      <button type="submit" style={{ marginTop: 12 }}>Submit</button>
+    </form>
+  );
+};
+
+export const MinMaxValue = () => {
+  const { control, handleSubmit, formState } = useForm<FormValues>({
+    defaultValues: { amount: '' },
+  });
+  const onSubmit: SubmitHandler<FormValues> = data => alert(JSON.stringify(data));
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <AmountInput
+        name="amount"
+        control={control}
+        label="Amount (Min 1000, Max 5000)"
+        placeholder="Enter amount"
+        min={1000}
+        max={5000}
+      />
+      {formState.errors.amount && (
+        <div style={{ color: 'red' }}>{formState.errors.amount.message}</div>
+      )}
+      <button type="submit" style={{ marginTop: 12 }}>Submit</button>
+    </form>
+  );
 }; 

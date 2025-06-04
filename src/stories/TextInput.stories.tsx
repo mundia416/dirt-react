@@ -1,4 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import type { Meta, StoryObj, StoryFn } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { TextInput } from '..';
@@ -49,15 +51,5 @@ export const Debounce: Story = {
     element: 'input',
     debounceDelayMillis: 1000,
     onChangeDebounce: fn()
-  },
-};
-
-export const AmountWithCommas: Story = {
-  args: {
-    element: 'input',
-    formatAmount: true,
-    value: '5000000',
-    onChange: (val: string) => console.log('Raw value:', val),
-    placeholder: 'Enter amount'
   },
 };

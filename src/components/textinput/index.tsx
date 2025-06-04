@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { HTMLAttributes, useCallback } from 'react';
 import functionUtils from '../../utils/function-utils';
 
 
@@ -30,8 +30,8 @@ export interface Props {
     aff?: any,
     required?: boolean
     formProps?: any
-    rows?: number
-    formatAmount?: boolean
+    rows?: number,
+    inputMode?: HTMLAttributes<HTMLInputElement>['inputMode']
 }
 
 export default function TextInput({
@@ -62,7 +62,7 @@ export default function TextInput({
     aff,
     required,
     formProps = {},
-    formatAmount = false
+    inputMode
 }: Props) {
 
 
@@ -85,21 +85,8 @@ export default function TextInput({
     const style = `leading-6 text-sm ${!padding && 'px-3 py-1'}  rounded 
           outline-none transition duration-150 ${variantStyle} ${className}`
 
-    let valueProps: {
-        value?: string | number
-    } | null
 
-    // Format value for display if formatAmount is enabled and element is input
-    let displayValue = value;
-    if (formatAmount && element === 'input') {
-        displayValue = functionUtils.formatNumberWithCommas(value ?? '');
-    }
-
-    valueProps = {
-        value: displayValue
-    }
-
-    if (typeof valueProps === 'undefined') { valueProps = null }
+  
 
     const validate = ({ target }: any, type?: string) => {
         if (type === 'email') {
@@ -138,33 +125,10 @@ export default function TextInput({
             || typeof onFilesChange !== 'undefined'
             || typeof rhfOnChange !== 'undefined')) {
 
-            let rawValue = e.target.value;
-            if (formatAmount && element === 'input') {
-                // Only allow numbers and commas in the input
-                rawValue = rawValue.replace(/[^\d,]/g, '');
-                // Remove commas for the value passed to onChange/onChangeDebounce
-                const numericValue = functionUtils.unformatNumber(rawValue);
-                onChange && onChange(numericValue);
-                onFilesChange && onFilesChange(e.target.files)
-                debounced(numericValue)
-                validate(e, 'number'); // Always validate as number
-                // Call react-hook-form's onChange with the unformatted value
-                if (rhfOnChange) {
-                    rhfOnChange({
-                        ...e,
-                        target: {
-                            ...e.target,
-                            value: numericValue,
-                        },
-                    });
-                }
-                return;
-            }
-            onChange && onChange(rawValue);
+            onChange && onChange(e.target.value);
             onFilesChange && onFilesChange(e.target.files)
-            debounced(rawValue)
+            debounced(e.target.value)
             validate(e, type);
-            // Call react-hook-form's onChange with the raw value
             if (rhfOnChange) {
                 rhfOnChange(e);
             }
@@ -188,7 +152,7 @@ export default function TextInput({
                     rhfOnBlur && rhfOnBlur(e);
                 }}
                 className={style}
-                {...valueProps}
+                value={value}
                 onChange={onChangeAndValidate}
                 placeholder={placeholder}
                 {...restFormProps}
@@ -204,6 +168,7 @@ export default function TextInput({
                     onBlur && onBlur();
                     rhfOnBlur && rhfOnBlur(e);
                 }}
+                inputMode={inputMode}
                 onClick={(e) => e.stopPropagation()}
                 pattern={pattern}
                 step={step}
@@ -211,11 +176,10 @@ export default function TextInput({
                 max={max}
                 min={min}
                 disabled={disabled}
-                {...valueProps}
+                value={value}
                 onChange={onChangeAndValidate}
                 className={style}
-                type={formatAmount ? 'text' : type}
-                inputMode={formatAmount ? 'decimal' : undefined}
+                type={type}
                 onInvalid={(e) => validate(e, type)}
                 placeholder={placeholder}
                 {...restFormProps}

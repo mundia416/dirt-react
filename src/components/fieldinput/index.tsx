@@ -42,16 +42,16 @@ interface Props extends TextInputProps {
     trailingIcon?: ForwardRefExoticComponent<Omit<SVGProps<SVGSVGElement>, "ref"> & {
         title?: string;
         titleId?: string;
-    } & RefAttributes<SVGSVGElement>>,
-    formatAmount?: boolean
+    } & RefAttributes<SVGSVGElement>>
 }
+
+export type FieldInputProps = Props;
 
 /**
  * 
  *  when adding leading and trailing content, adjust the padding in the x-axis using tailwind to move
  * the input to fit the content you are adding 
  *
- *  formatAmount: if true, displays numbers with commas (e.g., 5,000,000), but onChange/onChangeDebounce receive the raw value (no commas)
  */
 const FieldInput = (props: Props) => {
 
@@ -59,7 +59,7 @@ const FieldInput = (props: Props) => {
         helpText, inputClassName, cornerHelpText, placeholder, type, variant, id,
         disabled, onChange, onFilesChange, onChangeDebounce,debounceDelayMillis,step, value, element = 'input',
         name, onFocus, onBlur, aff, max, min, required, rows,
-        formProps } = props
+        formProps, inputMode } = props
 
     const isDarkVariant = (variant === 'dark')
 
@@ -107,8 +107,8 @@ const FieldInput = (props: Props) => {
                     type={type}
                     error={error}
                     step={step}
+                    inputMode={inputMode}
                     element={element}
-                    formatAmount={props.formatAmount}
                     className={` ${leadingText && ' rounded-l-none '} ${trailingText && ' rounded-r-none '}  ${props.leadingIcon && 'pl-8'}
                      ${(props.trailingIcon || error) && 'pr-10'} w-full
                       ${error ? 'text-red-900 ' +

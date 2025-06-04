@@ -26,7 +26,7 @@ function AmountInput<T extends FieldValues = FieldValues>({
   ...rest
 }: AmountInputProps<T>) {
   // If value and onChange are provided, use controlled mode
-  if (typeof value !== 'undefined' && typeof onChange === 'function') {
+  if (typeof onChange === 'function') {
     // Format value for display
     const displayValue = functionUtils.formatNumberWithCommas(value ?? '');
     return (

@@ -30,7 +30,7 @@ import AddonLibrary from "./assets/addon-library.png";
     npm install @mundia/dirt-react @tailwindcss/forms @heroicons/react
     ```
 
-    Update your tailwind.config.js buy adding the following to content:
+    create a tailwind.config.js in the root directory and add the following to content:
 
     ```
 // tailwind.config.js
@@ -50,6 +50,11 @@ module.exports = {
 }
 
     ```
+
+in your globals.css file, add the following line of code
+```
+@config "../tailwind.config.js";
+```
 
   </div>
   </div>

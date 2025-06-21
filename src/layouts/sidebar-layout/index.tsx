@@ -20,7 +20,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { usePathname } from 'next/navigation';
-import { Text } from '@mundia/dirt-react'
+import { Text } from '../..'
 
 
 export type NavItemProps = {
@@ -103,11 +103,11 @@ export default function SidebarLayout({
 }: Props) {
 
     const pathname = usePathname();
-    
+
     // Initialize expandedItems with submenus that should be open based on current path
     const initialExpandedItems = React.useMemo(() => {
-        const expanded: {[key: string]: boolean} = {};
-        
+        const expanded: { [key: string]: boolean } = {};
+
         navigationGroups?.forEach(group => {
             group.navigationOptions?.forEach(item => {
                 if (item.subItems) {
@@ -119,17 +119,17 @@ export default function SidebarLayout({
                 }
             });
         });
-        
+
         return expanded;
     }, [navigationGroups, pathname]);
 
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    const [expandedItems, setExpandedItems] = useState<{[key: string]: boolean}>(initialExpandedItems)
+    const [expandedItems, setExpandedItems] = useState<{ [key: string]: boolean }>(initialExpandedItems)
 
     // Keep expandedItems in sync with pathname changes, but don't override user choices
     useEffect(() => {
-        const newExpandedItems: {[key: string]: boolean} = {};
-        
+        const newExpandedItems: { [key: string]: boolean } = {};
+
         navigationGroups?.forEach(group => {
             group.navigationOptions?.forEach(item => {
                 if (item.subItems) {
@@ -141,7 +141,7 @@ export default function SidebarLayout({
                 }
             });
         });
-        
+
         setExpandedItems(prev => ({
             ...prev,
             ...newExpandedItems
@@ -220,19 +220,17 @@ export default function SidebarLayout({
                                                                             <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
                                                                             {item.name}
                                                                         </div>
-                                                                        <ChevronRightIcon 
-                                                                            className={`h-5 w-5 transform transition-all duration-200 ease-in-out ${
-                                                                                expandedItems[item.name] ? 'rotate-90' : 'rotate-0'
-                                                                            }`} 
+                                                                        <ChevronRightIcon
+                                                                            className={`h-5 w-5 transform transition-all duration-200 ease-in-out ${expandedItems[item.name] ? 'rotate-90' : 'rotate-0'
+                                                                                }`}
                                                                             aria-hidden="true"
                                                                         />
                                                                     </button>
-                                                                    <div 
-                                                                        className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${
-                                                                            expandedItems[item.name] 
-                                                                                ? 'max-h-96 opacity-100 scale-y-100' 
+                                                                    <div
+                                                                        className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${expandedItems[item.name]
+                                                                                ? 'max-h-96 opacity-100 scale-y-100'
                                                                                 : 'max-h-0 opacity-0 scale-y-95'
-                                                                        }`}
+                                                                            }`}
                                                                     >
                                                                         <ul className="mt-1 pl-8 space-y-1">
                                                                             {item.subItems?.map((subItem) => (
@@ -326,7 +324,7 @@ export default function SidebarLayout({
                                                             href={item.href}
                                                             className={classNames(
                                                                 pathname === item.href || isSubItemActive(item)
-                                                                    ? 'bg-gray-800 text-white' 
+                                                                    ? 'bg-gray-800 text-white'
                                                                     : 'text-gray-400 hover:bg-gray-800 hover:text-white',
                                                                 'group flex flex-col items-center justify-center gap-x-3 rounded-md p-3 text-sm font-semibold leading-6',
                                                             )}
@@ -356,19 +354,17 @@ export default function SidebarLayout({
                                                                         <item.icon aria-hidden="true" className="h-6 w-6 shrink-0" />
                                                                         {item.name}
                                                                     </div>
-                                                                    <ChevronRightIcon 
-                                                                        className={`h-5 w-5 transform transition-all duration-200 ease-in-out ${
-                                                                            expandedItems[item.name] ? 'rotate-90' : 'rotate-0'
-                                                                        }`} 
+                                                                    <ChevronRightIcon
+                                                                        className={`h-5 w-5 transform transition-all duration-200 ease-in-out ${expandedItems[item.name] ? 'rotate-90' : 'rotate-0'
+                                                                            }`}
                                                                         aria-hidden="true"
                                                                     />
                                                                 </button>
-                                                                <div 
-                                                                    className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${
-                                                                        expandedItems[item.name] 
-                                                                            ? 'max-h-96 opacity-100 scale-y-100' 
+                                                                <div
+                                                                    className={`overflow-hidden transition-all duration-300 ease-in-out origin-top ${expandedItems[item.name]
+                                                                            ? 'max-h-96 opacity-100 scale-y-100'
                                                                             : 'max-h-0 opacity-0 scale-y-95'
-                                                                    }`}
+                                                                        }`}
                                                                 >
                                                                     <ul className="mt-1 pl-8 space-y-1">
                                                                         {item.subItems?.map((subItem) => (
@@ -467,7 +463,7 @@ export default function SidebarLayout({
 
                                 {notification?.enabled &&
                                     <Menu as="div" className="relative">
-                                        <MenuButton 
+                                        <MenuButton
                                             className="flex items-center justify-center p-2 text-gray-400 hover:text-gray-500 relative"
                                             onClick={() => notification.onOpen?.()}
                                         >

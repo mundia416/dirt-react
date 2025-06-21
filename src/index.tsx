@@ -38,7 +38,7 @@ import PhoneInput from "./components/phone-input"
 import AvatarUpload from "./components/avatar-upload"
 import AnimatedDiv from "./components/animated-div"
 import AmountInput from "./components/amountinput"
-
+import ScrollingTable from "./components/scrolling-table"
 
 
 
@@ -75,6 +75,7 @@ export {
   AvatarUpload,
   AnimatedDiv,
   AmountInput,
+  ScrollingTable,
 
   //layouts
   StackedLayout,

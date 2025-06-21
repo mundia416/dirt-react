@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react'
 import Card from '../card'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import Loading, { LoadingProps } from '../loading'
 import AnimatedDiv from '../animated-div'
 

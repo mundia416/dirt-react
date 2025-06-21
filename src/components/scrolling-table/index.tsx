@@ -110,12 +110,12 @@ export default function ScrollingTable({
         );
 
         if (observerTarget.current) {
-            observer.observe(observerTarget.current);
+            observer.observe(observerTarget.current as any);
         }
 
         return () => {
             if (observerTarget.current) {
-                observer.unobserve(observerTarget.current);
+                observer.unobserve(observerTarget.current as any);
             }
         };
     }, [pagination?.hasMore, pagination?.isLoading, pagination?.onLoadMore]);

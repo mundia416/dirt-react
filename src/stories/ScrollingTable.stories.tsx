@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
 import { Button, ScrollingTable } from '..';
-import { RowsProps } from '../components/table';
+import { RowsProps } from '../components/scrolling-table';
 
 const people = [
   { name: 'Lindsay Walton', title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
@@ -137,6 +137,44 @@ export const Empty: Story = {
       text: 'Add Users',
       onClick: fn()
     },
+  },
+};
+
+
+// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
+export const CustomRow: Story = {
+  args: {
+    rowData: rowData.slice(0, 5),
+    heading: 'Users',
+    onRowClick: fn(),
+    subHeading: 'A list of all the users in your account including their name, title, email and role.',
+    actionButton: {
+      text: 'Add Users',
+      onClick: fn()
+    },
+    renderCustomView: ({ items }) => {
+      const name = items[0].value;
+      const email = items[2].value;
+      return (
+        <div className='p-4'>
+          <div className='flex items-center'>
+            <div className='ml-4'>
+              <div className='font-semibold text-gray-900'>{name as string}</div>
+              <div className='text-gray-500'>{email as string}</div>
+            </div>
+            <div className='ml-auto'>
+              <Button
+                size='extra-small'
+                className='text-indigo-500'
+                variant='text'
+              >
+                View
+              </Button>
+            </div>
+          </div>
+        </div>
+      )
+    }
   },
 };
 

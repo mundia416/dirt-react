@@ -38,10 +38,11 @@ type Props = {
      */
     overflowX?: boolean
     showCardContainer?: boolean
-    columnTitles: ColumnTitleProps[],
+    columnTitles?: ColumnTitleProps[],
     rowData: RowsProps[]
     /**allows for a row to be clicked and hovered over */
     onRowClick?: (index: number) => void,
+    renderCustomView?: (props: { items: RowColumnItemProps[], rowIndex: number }) => ReactNode;
     pagination?: {
         onLoadMore: () => void;
         hasMore: boolean;
@@ -86,7 +87,8 @@ export default function ScrollingTable({
     pagination,
     overflowX = true,
     showCardContainer = true,
-    spacing = 'normal'
+    spacing = 'normal',
+    renderCustomView
 }: Props) {
     // State for hovered row and mouse position
     const [hoveredRow, setHoveredRow] = React.useState<number | null>(null);
@@ -178,16 +180,17 @@ export default function ScrollingTable({
                             />
                             :
                             <table className="min-w-full divide-y divide-gray-300">
-                                <thead>
-                                    <tr>
-                                        {columnTitles.map((item, index) =>
-                                            <th key={index} scope="col" className={`${spacing === 'tight' ? (index === 0 ? 'pr-1 pl-2' : 'px-1') : (index === 0 ? 'pl-4 pr-3 sm:pl-0' : 'md:px-3')} py-3.5  text-left text-xs md:text-sm font-semibold text-gray-900 ${item.className}`}>
-                                                {item.name}
-                                            </th>
-                                        )}
-                                    </tr>
-                                </thead>
-
+                                {columnTitles && columnTitles?.length > 0 &&
+                                    <thead>
+                                        <tr>
+                                            {columnTitles.map((item, index) =>
+                                                <th key={index} scope="col" className={`${spacing === 'tight' ? (index === 0 ? 'pr-1 pl-2' : 'px-1') : (index === 0 ? 'pl-4 pr-3 sm:pl-0' : 'md:px-3')} py-3.5  text-left text-xs md:text-sm font-semibold text-gray-900 ${item.className}`}>
+                                                    {item.name}
+                                                </th>
+                                            )}
+                                        </tr>
+                                    </thead>
+                                }
 
                                 <tbody className="divide-y divide-gray-200">
                                     {rowData.map((row, index) => (
@@ -198,9 +201,15 @@ export default function ScrollingTable({
                                             onMouseLeave={row.hoverView ? handleRowMouseLeave : undefined}
                                             className={`${onRowClick && 'cursor-pointer hover:bg-indigo-50'}`}
                                             key={index}>
-                                            {row.items.map((item, itemIndex) => (
-                                                <td key={itemIndex} className={`${item.className ? item.className : 'whitespace-nowrap text-gray-500'}  ${spacing === 'tight' ? (itemIndex === 0 ? 'pr-1 pl-2 py-2' : 'px-1 py-2') : (itemIndex === 0 ? 'py-4 pl-4 pr-3 sm:pl-0' : 'px-1 md:px-3 py-4')} text-xs md:text-sm`}>{item.value}</td>
-                                            ))}
+                                            {renderCustomView ?
+                                                <td colSpan={columnTitles?.length || 1}>
+                                                    {renderCustomView({ items: row.items, rowIndex: index })}
+                                                </td>
+                                                :
+                                                row.items.map((item, itemIndex) => (
+                                                    <td key={itemIndex} className={`${item.className ? item.className : 'whitespace-nowrap text-gray-500'}  ${spacing === 'tight' ? (itemIndex === 0 ? 'pr-1 pl-2 py-2' : 'px-1 py-2') : (itemIndex === 0 ? 'py-4 pl-4 pr-3 sm:pl-0' : 'px-1 md:px-3 py-4')} text-xs md:text-sm`}>{item.value}</td>
+                                                ))
+                                            }
                                         </tr>
                                     ))}
 

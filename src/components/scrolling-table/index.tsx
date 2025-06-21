@@ -215,7 +215,7 @@ export default function ScrollingTable({
                 {/* pagination loading indicator*/}
                 {(pagination?.isLoading && rowData.length > 0) && (
                     <div className="flex justify-center p-4">
-                        <Loading size="small" />
+                        <Loading size="small" {...pagination.loadingProps} />
                     </div>
                 )}
 

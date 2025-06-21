@@ -100,10 +100,11 @@ export const Main: Story = {
     pagination: {
       onLoadMore: fn(),
       hasMore: true,
-      isLoading: false,
+      isLoading: true,
       loadingProps: {
-        color: 'indigo',
-        size: 'tiny'
+        size: 'tiny',
+        color: '#1d4ed8',
+        variant: 'three-dots',
       }
     },
     heading: 'Users',

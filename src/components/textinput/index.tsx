@@ -178,27 +178,11 @@ export default function TextInput({
                 <DatePicker
                     id={id}
                     name={name}
-                    selected={value ? new Date(value) : null}
+                    selected={(restFormProps.value || value) ? new Date(restFormProps.value || value) : null}
                     onChange={(date: Date | null) => {
-                        const dateValue = date ? date.toISOString().split('T')[0] : '';
-                        if (onChange) onChange(dateValue);
-                        if (onChangeDebounce) debounced(dateValue);
-                        if (rhfOnChange) {
-                            // Create a proper synthetic event for react-hook-form
-                            const syntheticEvent = {
-                                target: {
-                                    name: name,
-                                    value: dateValue,
-                                    type: 'date'
-                                },
-                                currentTarget: {
-                                    name: name,
-                                    value: dateValue,
-                                    type: 'date'
-                                }
-                            };
-                            rhfOnChange(syntheticEvent);
-                        }
+                        if (onChange) onChange(date ? date.toISOString().split('T')[0] : '');
+                        if (onChangeDebounce) debounced(date ? date.toISOString().split('T')[0] : '');
+                        if (rhfOnChange) rhfOnChange({ target: { value: date ? date.toISOString().split('T')[0] : '' } });
                     }}
                     dateFormat={mapPatternToDateFormat(pattern)}
                     className={style}
@@ -207,24 +191,9 @@ export default function TextInput({
                     required={required}
                     minDate={min ? new Date(min) : undefined}
                     maxDate={max ? new Date(max) : undefined}
-                    onBlur={(_) => {
+                    onBlur={(e) => {
                         onBlur && onBlur();
-                        if (rhfOnBlur) {
-                            // Create a proper synthetic event for react-hook-form onBlur
-                            const syntheticBlurEvent = {
-                                target: {
-                                    name: name,
-                                    value: value || '',
-                                    type: 'date'
-                                },
-                                currentTarget: {
-                                    name: name,
-                                    value: value || '',
-                                    type: 'date'
-                                }
-                            };
-                            rhfOnBlur(syntheticBlurEvent);
-                        }
+                        rhfOnBlur && rhfOnBlur(e);
                     }}
                     {...restFormProps}
                 />

@@ -825,6 +825,10 @@ video {
   margin-left: 1.5rem;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .mr-0 {
   margin-right: 0px;
 }

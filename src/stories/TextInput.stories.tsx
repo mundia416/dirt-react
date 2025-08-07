@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import type { Meta, StoryObj, StoryFn } from '@storybook/react';
 import { fn } from '@storybook/test';
@@ -51,5 +51,31 @@ export const Debounce: Story = {
     element: 'input',
     debounceDelayMillis: 1000,
     onChangeDebounce: fn()
+  },
+};
+
+export const DateFormat: Story = {
+  args: {
+    type: 'date',
+    pattern: 'yyyy-mm-dd',
+  },
+  render: (args) => {
+    const [dateValue, setDateValue] = useState<string>('');
+    
+    return (
+      <div>
+        <TextInput
+          {...args}
+          value={dateValue}
+          onChange={(value) => {
+            setDateValue(value);
+            console.log('Date changed:', value);
+          }}
+        />
+        <div style={{ marginTop: '10px', fontSize: '14px', color: '#666' }}>
+          Selected date: {dateValue || 'None'}
+        </div>
+      </div>
+    );
   },
 };

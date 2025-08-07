@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
@@ -77,9 +78,29 @@ export const Error: Story = {
 
 export const DatePicker: Story = {
   args: {
-    type: 'date'
+    type: 'date',
+    pattern: 'yyyy-mm-dd',
   },
-};
+  render: (args) => {
+    const [dateValue, setDateValue] = useState<string>('');
+    
+    return (
+      <div>
+        <FieldInput
+          {...args}
+          value={dateValue}
+          onChange={(value) => {
+            setDateValue(value);
+            console.log('Date changed:', value);
+          }}
+        />
+        <div style={{ marginTop: '10px', fontSize: '14px', color: '#666' }}>
+          Selected date: {dateValue || 'None'}
+        </div>
+      </div>
+    );
+  },
+}
 
 export const CornerHelpText: Story = {
   args: {

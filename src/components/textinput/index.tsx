@@ -1,9 +1,11 @@
 import React, { HTMLAttributes, useCallback } from 'react';
 import functionUtils from '../../utils/function-utils';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 export interface Props {
-    pattern?: any,
+    pattern?: 'yyyy/mm/dd' | 'dd/mm/yyyy' | 'mm/dd/yyyy' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd',
     type?: React.HTMLInputTypeAttribute | undefined,
     placeholder?: string,
     className?: string,
@@ -34,6 +36,19 @@ export interface Props {
     inputMode?: HTMLAttributes<HTMLInputElement>['inputMode']
 }
 
+// Utility to map pattern to date-fns format
+const mapPatternToDateFormat = (pattern?: string) => {
+    switch (pattern) {
+        case 'yyyy/mm/dd': return 'yyyy/MM/dd';
+        case 'dd/mm/yyyy': return 'dd/MM/yyyy';
+        case 'mm/dd/yyyy': return 'MM/dd/yyyy';
+        case 'dd-mm-yyyy': return 'dd-MM-yyyy';
+        case 'mm-dd-yyyy': return 'MM-dd-yyyy';
+        case 'yyyy-mm-dd': return 'yyyy-MM-dd';
+        default: return 'yyyy-MM-dd';
+    }
+}
+
 export default function TextInput({
     rows,
     pattern,
@@ -62,7 +77,8 @@ export default function TextInput({
     aff,
     required,
     formProps = {},
-    inputMode
+    inputMode,
+    
 }: Props) {
 
 
@@ -158,6 +174,30 @@ export default function TextInput({
                 {...restFormProps}
             />
             :
+            type === 'date' ? (
+                <DatePicker
+                    id={id}
+                    name={name}
+                    selected={value ? new Date(value) : null}
+                    onChange={(date: Date | null) => {
+                        if (onChange) onChange(date ? date.toISOString().split('T')[0] : '');
+                        if (onChangeDebounce) debounced(date ? date.toISOString().split('T')[0] : '');
+                        if (rhfOnChange) rhfOnChange({ target: { value: date ? date.toISOString().split('T')[0] : '' } });
+                    }}
+                    dateFormat={mapPatternToDateFormat(pattern)}
+                    className={style}
+                    placeholderText={placeholder || pattern}
+                    disabled={disabled}
+                    required={required}
+                    minDate={min ? new Date(min) : undefined}
+                    maxDate={max ? new Date(max) : undefined}
+                    onBlur={(e) => {
+                        onBlur && onBlur();
+                        rhfOnBlur && rhfOnBlur(e);
+                    }}
+                    {...restFormProps}
+                />
+            ) :
             <input
                 required={required}
                 id={id}

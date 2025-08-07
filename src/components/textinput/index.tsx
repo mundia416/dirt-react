@@ -6,7 +6,8 @@ import { CalendarIcon } from '@heroicons/react/24/outline';
 
 
 export interface Props {
-    pattern?: 'd MMMM, yyyy' | 'yyyy/mm/dd' | 'dd/mm/yyyy' | 'mm/dd/yyyy' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd',
+    pattern?: string,
+    dateFormat?: 'd MMMM, yyyy' | 'yyyy/mm/dd' | 'dd/mm/yyyy' | 'mm/dd/yyyy' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd',
     type?: React.HTMLInputTypeAttribute | undefined,
     placeholder?: string,
     className?: string,
@@ -39,7 +40,7 @@ export interface Props {
 
 export default function TextInput({
     rows,
-    pattern = 'd MMMM, yyyy',
+    pattern,
     type,
     placeholder,
     className,
@@ -66,7 +67,7 @@ export default function TextInput({
     required,
     formProps = {},
     inputMode,
-
+    dateFormat = 'd MMMM, yyyy'
 }: Props) {
 
 
@@ -176,10 +177,10 @@ export default function TextInput({
                         if (onChangeDebounce) debounced(date ? date.toISOString().split('T')[0] : '');
                         if (rhfOnChange) rhfOnChange({ target: { value: date ? date.toISOString().split('T')[0] : '' } });
                     }}
-                    
-                    dateFormat={pattern}
+
+                    dateFormat={dateFormat}
                     className={style}
-                    placeholderText={placeholder || pattern}
+                    placeholderText={placeholder || dateFormat}
                     disabled={disabled}
                     required={required}
                     minDate={min ? new Date(min) : undefined}

@@ -56,8 +56,8 @@ const FieldInput = (props: Props) => {
 
     const { pattern, label, leadingText, trailingText, className, error,
         helpText, inputClassName, cornerHelpText, placeholder, type, variant, id,
-        disabled, onChange, onFilesChange, onChangeDebounce,debounceDelayMillis,step, value, element = 'input',
-        name, onFocus, onBlur, aff, max, min, required, rows,
+        disabled, onChange, onFilesChange, onChangeDebounce, debounceDelayMillis, step, value, element = 'input',
+        name, onFocus, onBlur, aff, max, min, required, rows, dateFormat,
         formProps, inputMode } = props
 
     const isDarkVariant = (variant === 'dark')
@@ -83,8 +83,9 @@ const FieldInput = (props: Props) => {
                     </span>
                 }
                 <Input
-                onChangeDebounce={onChangeDebounce}
-                debounceDelayMillis={debounceDelayMillis}
+                    dateFormat={dateFormat}
+                    onChangeDebounce={onChangeDebounce}
+                    debounceDelayMillis={debounceDelayMillis}
                     formProps={formProps}
                     required={required}
                     disabled={disabled}

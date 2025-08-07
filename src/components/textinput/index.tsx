@@ -51,7 +51,7 @@ const mapPatternToDateFormat = (pattern?: string) => {
 
 export default function TextInput({
     rows,
-    pattern,
+    pattern = 'dd/mm/yyyy',
     type,
     placeholder,
     className,

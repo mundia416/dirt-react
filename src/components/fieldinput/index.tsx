@@ -31,7 +31,6 @@ interface Props extends TextInputProps {
     helpText?: string,
     trailingText?: string,
     leadingText?: string,
-    pattern?: string,
     label?: string,
     name?: string,
     error?: boolean,

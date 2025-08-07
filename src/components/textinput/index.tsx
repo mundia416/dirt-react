@@ -207,7 +207,7 @@ export default function TextInput({
                     required={required}
                     minDate={min ? new Date(min) : undefined}
                     maxDate={max ? new Date(max) : undefined}
-                    onBlur={(e) => {
+                    onBlur={(_) => {
                         onBlur && onBlur();
                         if (rhfOnBlur) {
                             // Create a proper synthetic event for react-hook-form onBlur

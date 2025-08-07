@@ -3,6 +3,7 @@ import functionUtils from '../../utils/function-utils';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CalendarIcon } from '@heroicons/react/24/outline';
+import { format } from 'date-fns';
 
 
 export interface Props {
@@ -173,9 +174,10 @@ export default function TextInput({
                     name={name}
                     selected={(value) ? new Date(value) : null}
                     onChange={(date: Date | null) => {
-                        if (onChange) onChange(date ? date.toISOString().split('T')[0] : '');
-                        if (onChangeDebounce) debounced(date ? date.toISOString().split('T')[0] : '');
-                        if (rhfOnChange) rhfOnChange({ target: { value: date ? date.toISOString().split('T')[0] : '' } });
+                        const formattedDate = date ? format(date, 'yyyy-MM-dd') : '';
+                        if (onChange) onChange(formattedDate);
+                        if (onChangeDebounce) debounced(formattedDate);
+                        if (rhfOnChange) rhfOnChange({ target: { value: formattedDate } });
                     }}
 
                     dateFormat={dateFormat}

@@ -2,10 +2,11 @@ import React, { HTMLAttributes, useCallback } from 'react';
 import functionUtils from '../../utils/function-utils';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { CalendarIcon } from '@heroicons/react/24/outline';
 
 
 export interface Props {
-    pattern?: 'yyyy/mm/dd' | 'dd/mm/yyyy' | 'mm/dd/yyyy' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd',
+    pattern?: 'd MMMM, yyyy' | 'yyyy/mm/dd' | 'dd/mm/yyyy' | 'mm/dd/yyyy' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd' | 'dd-mm-yyyy' | 'mm-dd-yyyy' | 'yyyy-mm-dd',
     type?: React.HTMLInputTypeAttribute | undefined,
     placeholder?: string,
     className?: string,
@@ -36,22 +37,9 @@ export interface Props {
     inputMode?: HTMLAttributes<HTMLInputElement>['inputMode']
 }
 
-// Utility to map pattern to date-fns format
-const mapPatternToDateFormat = (pattern?: string) => {
-    switch (pattern) {
-        case 'yyyy/mm/dd': return 'yyyy/MM/dd';
-        case 'dd/mm/yyyy': return 'dd/MM/yyyy';
-        case 'mm/dd/yyyy': return 'MM/dd/yyyy';
-        case 'dd-mm-yyyy': return 'dd-MM-yyyy';
-        case 'mm-dd-yyyy': return 'MM-dd-yyyy';
-        case 'yyyy-mm-dd': return 'yyyy-MM-dd';
-        default: return 'yyyy-MM-dd';
-    }
-}
-
 export default function TextInput({
     rows,
-    pattern = 'dd/mm/yyyy',
+    pattern = 'd MMMM, yyyy',
     type,
     placeholder,
     className,
@@ -78,7 +66,7 @@ export default function TextInput({
     required,
     formProps = {},
     inputMode,
-    
+
 }: Props) {
 
 
@@ -102,7 +90,7 @@ export default function TextInput({
           outline-none transition duration-150 ${variantStyle} ${className}`
 
 
-  
+
 
     const validate = ({ target }: any, type?: string) => {
         if (type === 'email') {
@@ -176,15 +164,20 @@ export default function TextInput({
             :
             type === 'date' ? (
                 <DatePicker
+                    // showIcon
+                    // toggleCalendarOnIconClick
+                    icon={<CalendarIcon />}
+                    wrapperClassName={className}
                     id={id}
                     name={name}
-                    selected={(restFormProps.value || value) ? new Date(restFormProps.value || value) : null}
+                    selected={(value) ? new Date(value) : null}
                     onChange={(date: Date | null) => {
                         if (onChange) onChange(date ? date.toISOString().split('T')[0] : '');
                         if (onChangeDebounce) debounced(date ? date.toISOString().split('T')[0] : '');
                         if (rhfOnChange) rhfOnChange({ target: { value: date ? date.toISOString().split('T')[0] : '' } });
                     }}
-                    dateFormat={mapPatternToDateFormat(pattern)}
+                    
+                    dateFormat={pattern}
                     className={style}
                     placeholderText={placeholder || pattern}
                     disabled={disabled}
@@ -198,32 +191,32 @@ export default function TextInput({
                     {...restFormProps}
                 />
             ) :
-            <input
-                required={required}
-                id={id}
-                dir={dir}
-                rows={rows}
-                onFocus={onFocus}
-                onBlur={(e) => {
-                    onBlur && onBlur();
-                    rhfOnBlur && rhfOnBlur(e);
-                }}
-                inputMode={inputMode}
-                onClick={(e) => e.stopPropagation()}
-                pattern={pattern}
-                step={step}
-                name={name}
-                max={max}
-                min={min}
-                disabled={disabled}
-                value={value}
-                onChange={onChangeAndValidate}
-                className={style}
-                type={type}
-                onInvalid={(e) => validate(e, type)}
-                placeholder={placeholder}
-                {...restFormProps}
-            />
+                <input
+                    required={required}
+                    id={id}
+                    dir={dir}
+                    rows={rows}
+                    onFocus={onFocus}
+                    onBlur={(e) => {
+                        onBlur && onBlur();
+                        rhfOnBlur && rhfOnBlur(e);
+                    }}
+                    inputMode={inputMode}
+                    onClick={(e) => e.stopPropagation()}
+                    pattern={pattern}
+                    step={step}
+                    name={name}
+                    max={max}
+                    min={min}
+                    disabled={disabled}
+                    value={value}
+                    onChange={onChangeAndValidate}
+                    className={style}
+                    type={type}
+                    onInvalid={(e) => validate(e, type)}
+                    placeholder={placeholder}
+                    {...restFormProps}
+                />
 
     )
 

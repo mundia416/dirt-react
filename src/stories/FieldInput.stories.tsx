@@ -79,13 +79,15 @@ export const Error: Story = {
 export const DatePicker: Story = {
   args: {
     type: 'date',
-    pattern: 'yyyy-mm-dd',
+    // pattern: 'yyyy-mm-dd',
+    // className: 'w-full',
+    // inputClassName: 'w-full'
   },
   render: (args) => {
     const [dateValue, setDateValue] = useState<string>('');
     
     return (
-      <div>
+      <div className='bg-red-500 w-[600px]'>
         <FieldInput
           {...args}
           value={dateValue}

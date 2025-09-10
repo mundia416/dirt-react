@@ -110,7 +110,7 @@ export default function TextInput({
 
     // values for DatePicker custom header
     const currentYear = getYear(new Date());
-    const years = Array.from({ length: currentYear - 1990 + 1 }, (_, index) => 1990 + index);
+    const years = Array.from({ length: 101 }, (_, index) => (currentYear - 100) + index);
     const months = [
         'January',
         'February',
@@ -191,6 +191,7 @@ export default function TextInput({
                     id={id}
                     name={name}
                     selected={(value) ? new Date(value) : null}
+                    openToDate={(value) ? new Date(value) : new Date()}
                     onChange={(date: Date | null) => {
                         const formattedDate = date ? format(date, 'yyyy-MM-dd') : '';
                         if (onChange) onChange(formattedDate);

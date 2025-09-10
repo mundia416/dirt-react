@@ -3,7 +3,7 @@ import functionUtils from '../../utils/function-utils';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CalendarIcon } from '@heroicons/react/24/outline';
-import { format } from 'date-fns';
+import { format, getMonth, getYear } from 'date-fns';
 
 
 export interface Props {
@@ -108,6 +108,24 @@ export default function TextInput({
         }
     }
 
+    // values for DatePicker custom header
+    const currentYear = getYear(new Date());
+    const years = Array.from({ length: currentYear - 1990 + 1 }, (_, index) => 1990 + index);
+    const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ];
+
 
     // Define the function that will execute after debounce delay
     const debounced = useCallback(
@@ -191,6 +209,44 @@ export default function TextInput({
                         onBlur && onBlur();
                         rhfOnBlur && rhfOnBlur(e);
                     }}
+                    renderCustomHeader={({
+                        date,
+                        changeYear,
+                        changeMonth,
+                        decreaseMonth,
+                        increaseMonth,
+                        prevMonthButtonDisabled,
+                        nextMonthButtonDisabled
+                    }) => (
+                        <div style={{ margin: 10, display: 'flex', justifyContent: 'center', gap: 8, alignItems: 'center' }}>
+                            <button type="button" onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+                                {'<'}
+                            </button>
+                            <select
+                                value={getYear(date)}
+                                onChange={({ target: { value } }) => changeYear(Number(value))}
+                            >
+                                {years.map((option) => (
+                                    <option key={option} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                            <select
+                                value={months[getMonth(date)]}
+                                onChange={({ target: { value } }) => changeMonth(months.indexOf(value))}
+                            >
+                                {months.map((option) => (
+                                    <option key={option} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                            <button type="button" onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+                                {'>'}
+                            </button>
+                        </div>
+                    )}
                     {...restFormProps}
                 />
             ) :
